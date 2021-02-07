@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>KERBEROS详解 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="KERBEROS详解">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 05:15" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">KERBEROS详解</h1>
+            
+            <div class="markdown-body">
+              <h1 id="KERBEROS详解"><a href="#KERBEROS详解" class="headerlink" title="KERBEROS详解"></a>KERBEROS详解</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在Kerberos协议中主要是有三个角色的存在：</p>
+<ol>
+<li>访问服务的Client(以下表述为Client 或者用户)</li>
+<li> 提供服务的Server(以下表述为服务)</li>
+<li>KDC（Key Distribution Center）密钥分发中心 kerberos 测试工具介绍</li>
+</ol>
+<p>其中KDC服务默认会安装在一个域的域控中，而Client和Server为域内的用户或者是服务，如HTTP服务，SQL服务。在Kerberos中Client是否有权限访问Server端的服务由KDC发放的票据来决定。</p>
+<p><img src="/img/article/image-20210126111431232.png" srcset="/img/loading.gif" alt="kerberos"></p>
+<ol>
+<li>ASREQ: Client向KDC发起ASREQ,请求凭据是Client hash加密的时间戳</li>
+<li>AS_REP: KDC使用Client hash进行解密，如果结果正确就返回用krbtgt hash加密的TGT票据，TGT里面包含PAC,PAC包含Client的sid，Client所在的组。</li>
+<li>TGSREQ: Client凭借TGT票据向KDC发起针对特定服务的TGSREQ请求</li>
+<li>TGS_REP: KDC使用krbtgt hash进行解密，如果结果正确，就返回用服务hash 加密的TGS票据(这一步不管用户有没有访问服务的权限，只要TGT正确，就返回TGS票据)</li>
+<li>AP_REQ: Client拿着TGS票据去请求服务</li>
+<li>AP_REP: 服务使用自己的hash解密TGS票据。如果解密正确，就拿着PAC去KDC那边问Client有没有访问权限，域控解密PAC。获取Client的sid，以及所在的组，再根据该服务的ACL，判断Client是否有访问服务的权限。</li>
+</ol>
+<h2 id="AS-REQ"><a href="#AS-REQ" class="headerlink" title="AS_REQ"></a>AS_REQ</h2><h3 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h3><ul>
+<li><p><strong><em>pvno</em></strong>：kerberos 版本号</p>
+</li>
+<li><p><strong><em>msg_type</em></strong>：类型，ASREQ对应的就是KRBAS_REQ(0x0a)</p>
+</li>
+<li><p><strong><em>PA_DATA</em></strong>：认证信息（在这个阶段主要关注两个字段）</p>
+<ul>
+<li><p><strong><em>ENC_TIMESTAMP</em></strong></p>
+<p> 这个是预认证，就是用用户hash加密时间戳，作为value 发送给AS服务器。然后AS服务器那边有用户hash，使用用户hash进行解密，获得时间戳，如果能解密，且时间戳在一定的范围内，则证明认证通过</p>
+</li>
+<li><p><strong><em>PAPACREQUEST</em></strong></p>
+<p>这个是启用PAC支持的扩展。PAC(Privilege Attribute Certificate)并不在原生的kerberos里面，是微软引进的扩展。详细的内容之后将有一篇文章详细介绍PAC。PAC包含在ASREQ的响应body(ASREP)。这里的value对应的是include=true或者include=false(KDC根据include的值来判断返回的票据中是否携带PAC)。</p>
+</li>
+</ul>
+</li>
+<li><p><strong><em>REQ_Body</em></strong>：flag字段</p>
+<ul>
+<li><p><strong><em>cname</em></strong>：请求的用户,这个用户名存在和不存在，返回的包有差异，可以用于<strong>枚举域内用户名</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">PrincipalName 类型。<span class="hljs-comment"># PrincipalName包含type和value。</span><br><br>KRBNTPRINCIPAL = 1 <span class="hljs-comment"># means just the name of the principal 如daizhibin</span><br>KRBNTSRV_INST = 2 <span class="hljs-comment"># service and other unique instance (krbtgt) 如krbtgt，cifs</span><br>KRBNTENTERPRISE_PRINCIPAL = 10 <span class="hljs-comment"># 如 user@domain.com</span><br></code></pre></td></tr></table></figure></li>
+<li><p><strong><em>sname</em></strong>：在ASREQ里面sname是krbtgt，类型是KRBNTSRVINST</p>
+<p>剩下的还有：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">realm</span>：域名<br><br><span class="hljs-attribute">from</span>：发送时间<br><br><span class="hljs-attribute">till</span>：到期时间，rubeus和kekeo都是<span class="hljs-number">20370913024805</span>Z，这个可以作为特征来检测工具。<br><br><span class="hljs-attribute">nonce</span>：随机生成的一个数kekeo/mimikatz nonce是<span class="hljs-number">12381973</span>，rubeus nonce是<span class="hljs-number">1818848256</span>，这个也可以用来作为特征检测工具。<br><br><span class="hljs-attribute">etype</span>：加密类型，有以下：<br>    <span class="hljs-attribute">des_cbc_crc</span> = <span class="hljs-number">1</span>,<br>    <span class="hljs-attribute">des_cbc_md4</span> = <span class="hljs-number">2</span>,<br>    <span class="hljs-attribute">des_cbc_md5</span> = <span class="hljs-number">3</span>,<br>    <span class="hljs-attribute">des3_cbc_md5</span> = <span class="hljs-number">5</span>,<br>    <span class="hljs-attribute">des3_cbc_sha1</span> = <span class="hljs-number">7</span>,<br>    <span class="hljs-attribute">dsaWithSHA1_CmsOID</span> = <span class="hljs-number">9</span>,<br>    <span class="hljs-attribute">md5WithRSAEncryption_CmsOID</span> = <span class="hljs-number">10</span>,<br>    <span class="hljs-attribute">sha1WithRSAEncryption_CmsOID</span> = <span class="hljs-number">11</span>,<br>    <span class="hljs-attribute">rc2CBC_EnvOID</span> = <span class="hljs-number">12</span>,<br>    <span class="hljs-attribute">rsaEncryption_EnvOID</span> = <span class="hljs-number">13</span>,<br>    <span class="hljs-attribute">rsaES_OAEP_ENV_OID</span> = <span class="hljs-number">14</span>,<br>    <span class="hljs-attribute">des_ede3_cbc_Env_OID</span> = <span class="hljs-number">15</span>,<br>    <span class="hljs-attribute">des3_cbc_sha1_kd</span> = <span class="hljs-number">16</span>,<br>    <span class="hljs-attribute">aes128_cts_hmac_sha1</span> = <span class="hljs-number">17</span>,<br>    <span class="hljs-attribute">aes256_cts_hmac_sha1</span> = <span class="hljs-number">18</span>,<br>    <span class="hljs-attribute">rc4_hmac</span> = <span class="hljs-number">23</span>,<br>    <span class="hljs-attribute">rc4_hmac_exp</span> = <span class="hljs-number">24</span>,<br>    <span class="hljs-attribute">subkey_keymaterial</span> = <span class="hljs-number">65</span><br></code></pre></td></tr></table></figure>
+<h2 id="AS-REP"><a href="#AS-REP" class="headerlink" title="AS_REP"></a>AS_REP</h2></li>
+</ul>
+</li>
+</ul>
+<h3 id="字段-1"><a href="#字段-1" class="headerlink" title="字段"></a>字段</h3><p>KDC使用用户 hash进行解密，如果结果正确返回用krbtgt hash加密的TGT票据，TGT里面包含PAC,PAC包含用户的sid，用户所在的组。</p>
+<ul>
+<li><p><strong><em>msg-type</em></strong>：ASREQ的响应body对应的就是KRBAS_REP(0x0b)</p>
+</li>
+<li><p><strong><em>crealm</em></strong>：域名</p>
+</li>
+<li><p><strong><em>cname</em></strong>：用户名</p>
+</li>
+<li><p><strong><em>ticket</em></strong>：这个ticket用于TGSREQ的认证（TGT）。是加密的，用户不可读取里面的内容（因为是使用krbtgt的hash进行加密的）。因此如果我们拥有krbtgt的hash就可以自己制作一个ticket，既黄金票据。</p>
+</li>
+<li><p><strong><em>enc_part</em></strong>：这部分是可以解密的，key是用户hash，解密后得到Encryptionkey，Encryptionkey里面最重要的字段是session key，作为下阶段的认证密钥</p>
+</li>
+</ul>
+<h2 id="TGT"><a href="#TGT" class="headerlink" title="TGT"></a>TGT</h2><p>凭据里面最核心的东西是session-key和加密的ticket。</p>
+<p>正常我们用工具生成的凭据是.ccache和.kirbi后缀的，用mimikatz，kekeo，rubeus生成的凭据是以.kirbi后缀的。impacket 生成的凭据的后缀是.ccache。两种票据主要包含的都是session-key和加密的ticket，因此可以相互转化。</p>
+<p>以kirbi为例介绍下该结构体。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"> KRB-CRED::= [APPLICATION <span class="hljs-number">22</span>] <span class="hljs-keyword">SEQUENCE</span> &#123;<br>   pvno[<span class="hljs-number">0</span>] <span class="hljs-type">INTEGER</span>(<span class="hljs-number">5</span>),<br>   msg-<span class="hljs-keyword">type</span>[<span class="hljs-number">1</span>] <span class="hljs-type">INTEGER</span>(<span class="hljs-number">22</span>),<br>   tickets[<span class="hljs-number">2</span>] <span class="hljs-keyword">SEQUENCE</span> <span class="hljs-keyword">OF</span> Ticket,<br>   enc-part[<span class="hljs-number">3</span>] EncryptedData <span class="hljs-comment">-- EncKrbCredPart</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其中ticket来自于KRBASREP部分的ticket</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">EncKrbCredPart  ::= [APPLICATION 29] SEQUENCE &#123;<br>   ticket-info     [0] SEQUENCE OF KrbCredInfo,  <span class="hljs-comment"># 这里就只用到这个</span><br>   nonce           [1] UInt32 OPTIONAL,<br>   timestamp       [2] KerberosTime OPTIONAL,<br>   usec            [3] Microseconds OPTIONAL,<br>   s-address       [4] HostAddress OPTIONAL,<br>   r-address       [5] HostAddress OPTIONAL<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>ticket-info部分的主要内容是session-key，来自于用户hash解密enc_part的部分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">KrbCredInfo     ::= SEQUENCE &#123;<br>  key             [0] EncryptionKey,      sessionKey<br>  prealm          [1] Realm OPTIONAL,  <span class="hljs-comment"># 对应的是realm</span><br>  pname           [2] PrincipalName OPTIONAL, <span class="hljs-comment"># 对应的是cname</span><br>  flags           [3] TicketFlags OPTIONAL, <br>  authtime        [4] KerberosTime OPTIONAL, <span class="hljs-comment"># not require</span><br>  starttime       [5] KerberosTime OPTIONAL, <br>  endtime         [6] KerberosTime OPTIONAL,<br>  renew-till      [7] KerberosTime OPTIONAL,<br>  srealm          [8] Realm OPTIONAL, <span class="hljs-comment"># 对应的是realm</span><br>  sname           [9] PrincipalName OPTIONAL, <span class="hljs-comment"># 对应的是sname</span><br>  caddr           [10] HostAddresses OPTIONAL<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="安全问题"><a href="#安全问题" class="headerlink" title="安全问题"></a>安全问题</h2><h3 id="pth-ptk"><a href="#pth-ptk" class="headerlink" title="pth/ptk"></a>pth/ptk</h3><p>在进行认证的时候，是用用户hash加密时间戳，即使在使用密码进行登录的情况下，也是先把密码加密成hash，再进行认证。因此在只有用户hash，没有明文密码的情况下也是可以进行认证的。不管是rubeus还是impacket里面的相关脚本都是支持直接使用hash进行认证。其中，如果hash的ntlm hash，然后加密方式是rc4，这种就算做是pass the hash，如果是hash是aes key(使用 <code>sekurlsa::ekeys</code> 导出来)，就算是pass the key。在很多地方，不支持rc4加密方式的时候，使用pass the key不失为一种好方法。</p>
+<h3 id="用户名枚举"><a href="#用户名枚举" class="headerlink" title="用户名枚举"></a>用户名枚举</h3><p>因为在req包中当cname字段的用户名存在与否所对应的返回值是不同的，故可用以枚举用户名</p>
+<p>用户名存在：</p>
+<p><img src="https://p0.ssl.qhimg.com/t01b3b9fcecc1102f54.png" srcset="/img/loading.gif" alt="存在"></p>
+<p>用户名不存在：</p>
+<p><img src="https://p1.ssl.qhimg.com/t014d15fa8f84842e32.png" srcset="/img/loading.gif" alt="不存在"></p>
+<h3 id="AS-REPROASTING"><a href="#AS-REPROASTING" class="headerlink" title="AS_REPROASTING"></a>AS_REPROASTING</h3><p>域用户如果设置了选项”Do not require Kerberos preauthentication”，此时向域控制器的88端口发送ASREQ请求，对收到的ASREP内容(enc-part底下的ciper，因为这部分是使用用户hash加密session-key，我们通过进行离线爆破就可以获得用户hash)重新组合，能够拼接成”Kerberos 5 AS-REP etype 23”(18200)的格式，接下来可以使用hashcat对其破解，最终获得该用户的明文口令</p>
+<p><img src="https://p2.ssl.qhimg.com/t01dfeb37003dd65380.png" srcset="/img/loading.gif" alt="返回的加密值"></p>
+<p>获取AS_REP里面enc-part部分里面的ciper，然后组装成前面32位16进制字符+$+后面的16进制字符得到repHash,然后format(“$krb5asrep$23${0}@{1}:{2}”, userName, domain, repHash)得到字符串，交给hashcat 破解就行</p>
+<h3 id="黄金票据"><a href="#黄金票据" class="headerlink" title="黄金票据"></a>黄金票据</h3><p>这就没啥好说的了吧</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="Rubeus"><a href="#Rubeus" class="headerlink" title="Rubeus"></a>Rubeus</h3><ul>
+<li><strong><em>as_reproast</em></strong>：<code>rubeus.exe asreproast</code></li>
+</ul>
+<h3 id="impacket"><a href="#impacket" class="headerlink" title="impacket"></a>impacket</h3><ul>
+<li><p><strong><em>GetNPUsers.py</em></strong>：查找设置不需要预认证的用户并列出tgt</p>
+<p><img src="https://p1.ssl.qhimg.com/t01f189332af6e09202.png" srcset="/img/loading.gif" alt="impacket"></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/AD/">AD</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AD/">AD</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Protocol/">Protocol</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/03/tips/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一些日常小tips</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/03/cve-2020-1472/">
+                        <span class="hidden-mobile">zerologon以及另一种利用方式</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

