@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      2.3k 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      28
        分钟
     </span>
   
@@ -242,11 +242,11 @@
               <h1 id="KERBEROS详解"><a href="#KERBEROS详解" class="headerlink" title="KERBEROS详解"></a>KERBEROS详解</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在Kerberos协议中主要是有三个角色的存在：</p>
 <ol>
 <li>访问服务的Client(以下表述为Client 或者用户)</li>
-<li> 提供服务的Server(以下表述为服务)</li>
+<li>提供服务的Server(以下表述为服务)</li>
 <li>KDC（Key Distribution Center）密钥分发中心 kerberos 测试工具介绍</li>
 </ol>
 <p>其中KDC服务默认会安装在一个域的域控中，而Client和Server为域内的用户或者是服务，如HTTP服务，SQL服务。在Kerberos中Client是否有权限访问Server端的服务由KDC发放的票据来决定。</p>
-<p><img src="/img/article/image-20210126111431232.png" srcset="/img/loading.gif" alt="kerberos"></p>
+<p><img src="C:\Users\Mi\AppData\Roaming\Typora\typora-user-images\image-20210126111431232.png" srcset="/img/loading.gif" alt="image-20210126111431232"></p>
 <ol>
 <li>ASREQ: Client向KDC发起ASREQ,请求凭据是Client hash加密的时间戳</li>
 <li>AS_REP: KDC使用Client hash进行解密，如果结果正确就返回用krbtgt hash加密的TGT票据，TGT里面包含PAC,PAC包含Client的sid，Client所在的组。</li>
@@ -263,10 +263,10 @@
 <li><p><strong><em>PA_DATA</em></strong>：认证信息（在这个阶段主要关注两个字段）</p>
 <ul>
 <li><p><strong><em>ENC_TIMESTAMP</em></strong></p>
-<p> 这个是预认证，就是用用户hash加密时间戳，作为value 发送给AS服务器。然后AS服务器那边有用户hash，使用用户hash进行解密，获得时间戳，如果能解密，且时间戳在一定的范围内，则证明认证通过</p>
+<p>这个是预认证，就是用用户hash加密时间戳，作为value 发送给AS服务器。然后AS服务器那边有用户hash，使用用户hash进行解密，获得时间戳，如果能解密，且时间戳在一定的范围内，则证明认证通过</p>
 </li>
 <li><p><strong><em>PAPACREQUEST</em></strong></p>
-<p>这个是启用PAC支持的扩展。PAC(Privilege Attribute Certificate)并不在原生的kerberos里面，是微软引进的扩展。详细的内容之后将有一篇文章详细介绍PAC。PAC包含在ASREQ的响应body(ASREP)。这里的value对应的是include=true或者include=false(KDC根据include的值来判断返回的票据中是否携带PAC)。</p>
+<p>这个是启用PAC支持的扩展。PAC(Privilege Attribute Certificate)并不在原生的kerberos里面，是微软引进的扩展。PAC包含在ASREQ的响应body(ASREP)。这里的value对应的是include=true或者include=false(KDC根据include的值来判断返回的票据中是否携带PAC)。</p>
 </li>
 </ul>
 </li>
@@ -302,24 +302,94 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">EncKrbCredPart  ::= [APPLICATION 29] SEQUENCE &#123;<br>   ticket-info     [0] SEQUENCE OF KrbCredInfo,  <span class="hljs-comment"># 这里就只用到这个</span><br>   nonce           [1] UInt32 OPTIONAL,<br>   timestamp       [2] KerberosTime OPTIONAL,<br>   usec            [3] Microseconds OPTIONAL,<br>   s-address       [4] HostAddress OPTIONAL,<br>   r-address       [5] HostAddress OPTIONAL<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>ticket-info部分的主要内容是session-key，来自于用户hash解密enc_part的部分</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">KrbCredInfo     ::= SEQUENCE &#123;<br>  key             [0] EncryptionKey,      sessionKey<br>  prealm          [1] Realm OPTIONAL,  <span class="hljs-comment"># 对应的是realm</span><br>  pname           [2] PrincipalName OPTIONAL, <span class="hljs-comment"># 对应的是cname</span><br>  flags           [3] TicketFlags OPTIONAL, <br>  authtime        [4] KerberosTime OPTIONAL, <span class="hljs-comment"># not require</span><br>  starttime       [5] KerberosTime OPTIONAL, <br>  endtime         [6] KerberosTime OPTIONAL,<br>  renew-till      [7] KerberosTime OPTIONAL,<br>  srealm          [8] Realm OPTIONAL, <span class="hljs-comment"># 对应的是realm</span><br>  sname           [9] PrincipalName OPTIONAL, <span class="hljs-comment"># 对应的是sname</span><br>  caddr           [10] HostAddresses OPTIONAL<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="TGSREQ"><a href="#TGSREQ" class="headerlink" title="TGSREQ"></a>TGSREQ</h2><p>TGSREQ这个阶段不需要账号密码，需要ASREP获取到的TGT凭据。需指定域控地址</p>
+<h4 id="字段-2"><a href="#字段-2" class="headerlink" title="字段"></a>字段</h4><ul>
+<li><p><strong><em>msg-type</em></strong>：类型，TGSREQ对应的就是KRBTGS_REQ(0x0c)</p>
+</li>
+<li><p><strong><em>PA-DATA</em></strong>：认证信息</p>
+<ul>
+<li><p><strong><em>AP_REQ</em></strong></p>
+<p>上一轮请求获得的TGT票据</p>
+</li>
+<li><p><strong><em>PAFORUSER</em></strong></p>
+<p>请求类型：S4U2SELF,值为请求用户的用户名</p>
+</li>
+<li><p><strong><em>PAPACOPTIONS</em></strong>：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs isbl">包含标记位如下：<br><br>— <span class="hljs-function"><span class="hljs-title">Claims</span>(<span class="hljs-number">0</span>)</span><br><br>— <span class="hljs-variable">Branch</span> <span class="hljs-function"><span class="hljs-title">Aware</span>(<span class="hljs-number">1</span>)</span><br><br>— <span class="hljs-variable">Forward</span> <span class="hljs-variable">to</span> <span class="hljs-variable">Full</span> <span class="hljs-function"><span class="hljs-title">DC</span>(<span class="hljs-number">2</span>)</span><br><br>— <span class="hljs-variable">Resource</span>-<span class="hljs-variable">based</span> <span class="hljs-variable">Constrained</span> <span class="hljs-variable">Delegation</span> (<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+<p>基于资源的约束委派需要指定Resource-based Constrained Delegation位</p>
+</li>
+</ul>
+</li>
+<li><p><strong><em>REQ_BODY</em></strong></p>
+<ul>
+<li><p><strong><em>sname</em></strong></p>
+<p>请求的服务名（返回的tgs是使用服务用户的hash进行加密的）</p>
+</li>
+<li><p><strong><em>AddtionTicket</em></strong></p>
+<p>附加票据，约束委派时，需要正常的TGT以及S4Uself获得的TGS，TGS存入additionticket</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="TGS-REP"><a href="#TGS-REP" class="headerlink" title="TGS_REP"></a>TGS_REP</h2><h4 id="字段-3"><a href="#字段-3" class="headerlink" title="字段"></a>字段</h4><ul>
+<li><p><strong><em>msg-type</em></strong>：ASREQ的响应body对应的就是KRBTGS_REQ(0x0d)</p>
+</li>
+<li><p><strong><em>ticket</em></strong>：和APREQ返回的ticket很像，使用服务用户的hash加密</p>
+</li>
+<li><p><strong><em>enc_part</em></strong>：可解密，密钥为AS_REP返回的session_key，得到encryptionkey，其中包含另一个session_key，作为下一个阶段的密钥</p>
+</li>
+</ul>
+<h2 id="S4U2SELF"><a href="#S4U2SELF" class="headerlink" title="S4U2SELF"></a>S4U2SELF</h2><p>S4U2self 使得服务可以代表用户获得针对服务自身的kerberos服务票据。这使得服务可以获得用户的授权( 可转发 的用户TGS票据)，然后将其用于后期的认证(主要是后期的s4u2proxy)，这是为了在用户以不使用 Kerberos 的方式对服务进行身份验证的情况下使用</p>
+<p><img src="https://p3.ssl.qhimg.com/t01a4905b7404536e37.png" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li><p>条件：服务拥有自己的tgt</p>
+</li>
+<li><p>前文的 <strong><em>PAFORUSER</em></strong> 类型为S4U2SELF，*<strong>cname*** 与 *</strong>snmae*** 都为服务名。若服务请求了可转发，则当</p>
+<ul>
+<li>TGT可转发</li>
+<li>服务配置了约束委派</li>
+</ul>
+<p>时，TGS设置可转发字段。</p>
+</li>
+<li><p>若用户设置了不允许委派，则S4U2SELF返回的票据是永远不可转发的。</p>
+</li>
+</ul>
+<h2 id="S4U2PROXY"><a href="#S4U2PROXY" class="headerlink" title="S4U2PROXY"></a>S4U2PROXY</h2><p>使得服务1可以使用返回的ST代表用户请求服务2的ST并访问该服务</p>
+<p><img src="https://p3.ssl.qhimg.com/t01e47d53e86539dc74.png" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>如前文所述将st放入additionkey</li>
+<li>在请求的kdc-options中设置CNAME-IN-ADDL-TKT标志</li>
+<li>同样需要请求可转发</li>
+<li>sname为服务2的spn</li>
+<li>若additionkey的票据不可转发但是服务1配置了对服务2的基于资源的约束委派，返回的票据依然可转发（<code>PA-PAC-OPTION</code>设置了<code>Resource-Based Constrained Delegation</code>标志位）</li>
+</ul>
 <h2 id="安全问题"><a href="#安全问题" class="headerlink" title="安全问题"></a>安全问题</h2><h3 id="pth-ptk"><a href="#pth-ptk" class="headerlink" title="pth/ptk"></a>pth/ptk</h3><p>在进行认证的时候，是用用户hash加密时间戳，即使在使用密码进行登录的情况下，也是先把密码加密成hash，再进行认证。因此在只有用户hash，没有明文密码的情况下也是可以进行认证的。不管是rubeus还是impacket里面的相关脚本都是支持直接使用hash进行认证。其中，如果hash的ntlm hash，然后加密方式是rc4，这种就算做是pass the hash，如果是hash是aes key(使用 <code>sekurlsa::ekeys</code> 导出来)，就算是pass the key。在很多地方，不支持rc4加密方式的时候，使用pass the key不失为一种好方法。</p>
 <h3 id="用户名枚举"><a href="#用户名枚举" class="headerlink" title="用户名枚举"></a>用户名枚举</h3><p>因为在req包中当cname字段的用户名存在与否所对应的返回值是不同的，故可用以枚举用户名</p>
 <p>用户名存在：</p>
-<p><img src="https://p0.ssl.qhimg.com/t01b3b9fcecc1102f54.png" srcset="/img/loading.gif" alt="存在"></p>
+<p><img src="https://p0.ssl.qhimg.com/t01b3b9fcecc1102f54.png" srcset="/img/loading.gif" alt="img"></p>
 <p>用户名不存在：</p>
-<p><img src="https://p1.ssl.qhimg.com/t014d15fa8f84842e32.png" srcset="/img/loading.gif" alt="不存在"></p>
+<p><img src="https://p1.ssl.qhimg.com/t014d15fa8f84842e32.png" srcset="/img/loading.gif" alt="img"></p>
 <h3 id="AS-REPROASTING"><a href="#AS-REPROASTING" class="headerlink" title="AS_REPROASTING"></a>AS_REPROASTING</h3><p>域用户如果设置了选项”Do not require Kerberos preauthentication”，此时向域控制器的88端口发送ASREQ请求，对收到的ASREP内容(enc-part底下的ciper，因为这部分是使用用户hash加密session-key，我们通过进行离线爆破就可以获得用户hash)重新组合，能够拼接成”Kerberos 5 AS-REP etype 23”(18200)的格式，接下来可以使用hashcat对其破解，最终获得该用户的明文口令</p>
-<p><img src="https://p2.ssl.qhimg.com/t01dfeb37003dd65380.png" srcset="/img/loading.gif" alt="返回的加密值"></p>
+<p><img src="https://p2.ssl.qhimg.com/t01dfeb37003dd65380.png" srcset="/img/loading.gif" alt="img"></p>
 <p>获取AS_REP里面enc-part部分里面的ciper，然后组装成前面32位16进制字符+$+后面的16进制字符得到repHash,然后format(“$krb5asrep$23${0}@{1}:{2}”, userName, domain, repHash)得到字符串，交给hashcat 破解就行</p>
 <h3 id="黄金票据"><a href="#黄金票据" class="headerlink" title="黄金票据"></a>黄金票据</h3><p>这就没啥好说的了吧</p>
+<h3 id="ptt"><a href="#ptt" class="headerlink" title="ptt"></a>ptt</h3><p>通过票据传递来通过身份认证</p>
+<h3 id="kerberoasting"><a href="#kerberoasting" class="headerlink" title="kerberoasting"></a>kerberoasting</h3><p>TGSREP返回的ticket是通过服务用户的hashs加密的，因此可以通过爆破获得服务用户的口令。而当用户向kdc请求ST时，只要TGT正确，无论用户是否有访问服务的权限，都会返回ST。因此可通过此方法爆破服务用户的口令</p>
+<ul>
+<li>TGSREQ 的 sname 为spn</li>
+<li>然后按照format(“$krb5tgs${0}$<em>{1}${2}${3}</em>${4}${5}”, encType, userName, domain, spn, cipherText.Substring(0, 32), cipherText.Substring(32))就可以拼接处hash cat(13100)能跑的hash。</li>
+</ul>
+<h3 id="白银票据"><a href="#白银票据" class="headerlink" title="白银票据"></a>白银票据</h3><p>也没什么好说的吧</p>
+<h3 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h3><p>详见委派的文章</p>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="Rubeus"><a href="#Rubeus" class="headerlink" title="Rubeus"></a>Rubeus</h3><ul>
 <li><strong><em>as_reproast</em></strong>：<code>rubeus.exe asreproast</code></li>
 </ul>
 <h3 id="impacket"><a href="#impacket" class="headerlink" title="impacket"></a>impacket</h3><ul>
 <li><p><strong><em>GetNPUsers.py</em></strong>：查找设置不需要预认证的用户并列出tgt</p>
-<p><img src="https://p1.ssl.qhimg.com/t01f189332af6e09202.png" srcset="/img/loading.gif" alt="impacket"></p>
+<p><img src="https://p1.ssl.qhimg.com/t01f189332af6e09202.png" srcset="/img/loading.gif" alt="img"></p>
 </li>
 </ul>
+<h3 id="KERBEROAST"><a href="#KERBEROAST" class="headerlink" title="KERBEROAST"></a>KERBEROAST</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 导出spn</span><br>&gt; setspn  -Q */*  <br><br><span class="hljs-comment"># 请求票据</span><br>&gt; Add-Type -AssemblyName System.IdentityModel <br>&gt; New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList <span class="hljs-string">&quot;MSSQLSvc/sqlserver.jmu.com:1433&quot;</span> <br><br><span class="hljs-comment"># 导出票据</span><br>mimikatz <span class="hljs-string">&quot;kerberos::list /export&quot;</span> <br><br><span class="hljs-comment"># 爆破</span><br>&gt; python tgsrepcrack.py wordlist.txt 1-MSSQLSvc~sql01.medin.local~1433-MYDOMAIN.LOCAL.kirbi<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
