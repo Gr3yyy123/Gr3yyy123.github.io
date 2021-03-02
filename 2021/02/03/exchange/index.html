@@ -246,17 +246,17 @@
 <li><strong><em>EBurst</em></strong> : <a target="_blank" rel="noopener" href="https://github.com/grayddq/EBurst">https://github.com/grayddq/EBurst</a></li>
 </ul>
 <h2 id="泄露信息"><a href="#泄露信息" class="headerlink" title="泄露信息"></a>泄露信息</h2><h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>直接访问owa登录页源代码即可</p>
-<p><img src="/img/article/typora-user-images%5Cimage-20201225115507399.png" srcset="/img/loading.gif" alt="image-20201225115507399"></p>
+<p><img src="/img/article/typora-user-images/image-20201225115507399.png" srcset="/img/loading.gif" alt="image-20201225115507399"></p>
 <p>小版本号对比：<a target="_blank" rel="noopener" href="https://technet.microsoft.com/en-us/library/hh135098(v=exchg.150).aspx">https://technet.microsoft.com/en-us/library/hh135098%28v=exchg.150%29.aspx</a></p>
 <h3 id="内网ip"><a href="#内网ip" class="headerlink" title="内网ip"></a>内网ip</h3><p>把HTTP协议版本修改成1.0，然后去掉http头里面的HOST参数</p>
 <p><img src="/img/article/123.jpg" srcset="/img/loading.gif" alt="图片"></p>
 <p>owa后要记得加<code>/</code></p>
 <h3 id="机器名"><a href="#机器名" class="headerlink" title="机器名"></a>机器名</h3><p>访问owa接口时访问不存在的aspx文件</p>
 <p>比如：<a target="_blank" rel="noopener" href="https://mail.xx.xx/owa/auth/logon2.aspx">https://mail.xx.xx/owa/auth/logon2.aspx</a></p>
-<p><img src="/img/article/typora-user-images%5Cimage-20201225111503509.png" srcset="/img/loading.gif" alt="image-20201225111503509"></p>
+<p><img src="/img/article/typora-user-images/image-20201225111503509.png" srcset="/img/loading.gif" alt="image-20201225111503509"></p>
 <h3 id="内网域名"><a href="#内网域名" class="headerlink" title="内网域名"></a>内网域名</h3><p>访问basic auth接口时（前面提到的可爆破接口），抓取第二次认证发送的ntlm包，base64解密可获得域名</p>
-<p><img src="/img/article/typora-user-images%5Cimage-20201225111930777.png" srcset="/img/loading.gif" alt="image-20201225111930777"></p>
-<p><img src="/img/article/typora-user-images%5Cimage-20201225112026434.png" srcset="/img/loading.gif" alt="image-20201225112026434"></p>
+<p><img src="/img/article/typora-user-images/image-20201225111930777.png" srcset="/img/loading.gif" alt="image-20201225111930777"></p>
+<p><img src="/img/article/typora-user-images/image-20201225112026434.png" srcset="/img/loading.gif" alt="image-20201225112026434"></p>
 <h2 id="导出gal（全局地址列表）"><a href="#导出gal（全局地址列表）" class="headerlink" title="导出gal（全局地址列表）"></a>导出gal（全局地址列表）</h2><h3 id="owa-接口"><a href="#owa-接口" class="headerlink" title="owa 接口"></a>owa 接口</h3><p>需要获得邮件用户的明文口令，登录OWA后，选择联系人-&gt;<code>All Users</code></p>
 <h3 id="通过-ews"><a href="#通过-ews" class="headerlink" title="通过 ews"></a>通过 ews</h3><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/exchange/client-developer/web-service-reference/findpeople-operation?redirectedfrom=MSDN">https://docs.microsoft.com/en-us/exchange/client-developer/web-service-reference/findpeople-operation?redirectedfrom=MSDN</a></p>
 <p>工具：<a target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-Python/blob/master/ewsManage.py">https://github.com/3gstudent/Homework-of-Python/blob/master/ewsManage.py</a></p>
