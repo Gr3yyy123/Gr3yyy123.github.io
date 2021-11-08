@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      822 字
+      852 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      9
        分钟
     </span>
   
@@ -245,8 +245,8 @@
 <h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>先测了一手poc，dnslog收到了请求，漏洞存在，内心狂喜。</p>
 <p><img src="/img/article2/image-20210401192029585.png" srcset="/img/loading.gif" alt="image-20210401192029585"></p>
 <p><img src="/img/article2/image-20210401192056920.png" srcset="/img/loading.gif" alt="image-20210401192056920"></p>
-<p>但是后来才发现事情没有那么简单，对方直接给/ecp/proxyLogon.ecp这个接口给删除了…</p>
-<p>估计是因为exchange这种使用量大的服务不好随意关停，很多企业或者厂商更倾向于暴力删改漏洞点而不是升级版本。</p>
+<p>但是后来才发现事情没有那么简单，访问/ecp/proxyLogon.ecp这个接口直接404…</p>
+<p>当时在现场并不知道为什么会404，后来才知道是cas与mbx的分离部署。</p>
 <h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>当下有点头疼，只能先换个思路，尝试从ews去读取邮件信息，看看能不能从邮件里发现些什么</p>
 <p>然后更诡异的事情发生了，读数量的地方没什么问题，可读取邮件itemid的时候，死活不能识别邮箱地址，明明用<code>&lt;t:EmailAddress&gt;&lt;/t:EmailAddress&gt;</code> 标签制定了，怎么试都不行，无奈放弃了这个想法，这个问题至今也没搞懂是为什么。</p>
 <h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>邮件也读不到，很难受。于是再换一个思路，去读取GAL（全局地址列表），这次倒是成功的，通过autodiscover接口读到oaburl，然后再通过lzx地址下载lzx，最后通过工具解密，具体步骤见前面的文章。</p>
@@ -257,6 +257,7 @@
 <p>这里显示了一个和之前两台长得完全不一样的机器名，于是我就顺手尝试了一下他</p>
 <p><img src="/img/article2/image-20210401193423797.png" srcset="/img/loading.gif" alt="image-20210401193423797"></p>
 <p>！！！！他居然没有删掉ecp的接口！！！，内心狂喜，感觉上天眷顾了我这个努力的打工人</p>
+<p>后来才知道，这是后端处理的端点，mbx后端邮箱服务。</p>
 <h2 id="一波三折"><a href="#一波三折" class="headerlink" title="一波三折"></a>一波三折</h2><p>但是这台机器在外网是访问不到的，直接写webshell肯定不行，于是我想着通过unc路径，把webshell写到外面能访问的机器上。</p>
 <p><code>\\\x.x.local\c$\Program File\exchange\xxx\v15\http\owa\auth\1.aspx</code></p>
 <p>然而事实又和我开起玩笑，对方把<code>DDI</code> 类给禁掉了。</p>
@@ -269,6 +270,12 @@
 <p>然后通过这个session直接生成0688的payload（前提是<code>generator</code> 的值是默认值），然后通过ssrf直接梭哈。</p>
 <p><img src="/img/article2/image-20210401194714081.png" srcset="/img/loading.gif" alt="image-20210401194714081"></p>
 <p><img src="/img/article2/image-20210401195145084.png" srcset="/img/loading.gif" alt="image-20210401195145084"></p>
+<p>注意：</p>
+<ul>
+<li>仍需要添加的 <code>msExchLogonMailbox</code> 的头</li>
+<li>需要放在请求头的最下方，不知道为啥</li>
+<li>请求需要用get哦</li>
+</ul>
 <p>好家伙，收到请求的时候眼泪都要流出来了。</p>
 <p>后面的操作就很常规了，没啥好说的。</p>
 <p>这个故事就是 告诉大家不要轻言放弃。</p>
