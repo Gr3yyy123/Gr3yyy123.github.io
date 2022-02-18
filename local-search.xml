@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>一个exchange小实战</title>
+    <link href="/2022/02/16/WriteSPN%E6%BB%A5%E7%94%A8/"/>
+    <url>/2022/02/16/WriteSPN%E6%BB%A5%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="WriteSPN滥用"><a href="#WriteSPN滥用" class="headerlink" title="WriteSPN滥用"></a>WriteSPN滥用</h1><p>今天逛推看到的一篇大佬的研究，感觉很有意思，所以记录一下，顺便复习一下委派</p><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>域内的信息收集工具 BloodHound 升级到版本4.1，添加了对 <code>WriteSPN</code> 的检测。众所周知，当攻击者控制了一台配置了约束委派的机器，可以攻击其锁配置的允许委派的服务账户与机器，该属性为 <code>msDS-AllowedToDelegateTo</code> （<code>SeEnableDelegation</code> 权限）该权限的更改权限默认赋予域管理员用户，但是如果攻击者拥有了对SPN关联用户的 `WriteSPN 权限，则有机会同样可以获取该机器的权限。</p><h2 id="委派回顾"><a href="#委派回顾" class="headerlink" title="委派回顾"></a>委派回顾</h2><p>具体的可以参见前文</p><h3 id="无约束委派"><a href="#无约束委派" class="headerlink" title="无约束委派"></a>无约束委派</h3><p>无约束委派直接将用户的 <code>tgt</code> 发送给服务A，A使用 <code>tgt</code> 可以A的身份访问服务B</p><h3 id="约束委派"><a href="#约束委派" class="headerlink" title="约束委派"></a>约束委派</h3><p>约束委派设置了服务A允许委派的服务，服务A获取用户的 <code>ST</code> 去访问服务B</p><p><em>约束委派允许服务凭空模拟用户，无论他们是否通过服务验证。即当拥有服务A的ntlm，可模拟任意用户访问服务B</em></p><h3 id="基于资源的约束委派"><a href="#基于资源的约束委派" class="headerlink" title="基于资源的约束委派"></a>基于资源的约束委派</h3><p>基于资源的约束委派与约束委派过程相似，方向相反。他将允许委派对象的<em>被设置权</em> 由域控授予了被委派者自己。当攻击者对该服务有可写权限，则可通过设置该机器允许被攻击者自己创建的机器委派而攻击该机器。</p><h2 id="Abuse-WriteSPN"><a href="#Abuse-WriteSPN" class="headerlink" title="Abuse WriteSPN"></a>Abuse WriteSPN</h2><h3 id="Ghost-SPN"><a href="#Ghost-SPN" class="headerlink" title="Ghost SPN"></a>Ghost SPN</h3><p>当委派机器A 被委派到一个不存在的或过期的计算机或服务的SPN时，可能是已删除或者改名。此时，该机器被设置了一个GhostSPN。</p><p>此时，攻击者可将此SPN添加到目标机器B ，当A运行完整S4U攻击时，即可获得针对该SPN的服务票证，此时该服务票证指向的是B，因为该SPN设置给了B。</p><p>然而该票据B并不能使用，因为服务与机器名与B都不匹配。但该票据是使用B的hash加密的，而前面的服务名并不在加密部分，攻击者可以更改为 <code>想要攻击的服务/B</code></p><p><img src="https://www.semperis.com/wp-content/uploads/image6.png" alt="img"></p><p><img src="https://www.semperis.com/wp-content/uploads/image7.png" alt="img"></p><h3 id="临时SPN"><a href="#临时SPN" class="headerlink" title="临时SPN"></a>临时SPN</h3><p>若 A 配置了指向 C 的SPN，而攻击者同时拥有对B、C的 <code>WriteSPN</code> 权限。则可以进行临时SPN攻击</p><p>域内并不允许非管理员用户配置冲突的SPN，即相同的SPN，因此像之前给 B 配置SPN会提示失败，因为该SPN并非失效，已经关联C。此时可将C的SPN临时删除，在配置给B，然后重复上面的攻击步骤。</p><p><img src="https://www.semperis.com/wp-content/uploads/image9.png" alt="img"></p><h3 id="HOST-SPN"><a href="#HOST-SPN" class="headerlink" title="HOST SPN"></a>HOST SPN</h3><p>这感觉是一种特性。默认情况下，计算机帐户具有与服务类 TERMSRV、RestrictedKrbHost 和 HOST 关联的 SPN。</p><p>HOST默认映射到:</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">alerter, appmgmt, cisvc, clipsrv, <span class="hljs-keyword">browser, </span>dhcp, dnscache, replicator, eventlog, eventsystem, policyagent, oakley, dmserver, dns, mcsvc, fax, msiserver, ias, messenger, netlogon, netman, netdde, netddedsm, nmagent, plugplay, protectedstorage, rasman, rpclocator, rpc, rpcss, remoteaccess, rsvp, samss, <span class="hljs-keyword">scardsvr, </span><span class="hljs-keyword">scesrv, </span>seclogon, <span class="hljs-keyword">scm, </span>dcom, cifs, spooler, snmp, <span class="hljs-keyword">schedule, </span>tapisrv, trksvr, trkwks, ups, time, wins, www, http, w3svc, iisadmin, msdtc<br></code></pre></td></tr></table></figure><p>如果攻击者试图攻击映射到 HOST 的服务类，域控将拒绝将该服务类添加到 B，即使它与 C 没有直接关联。攻击者首先必须从 C 中删除 HOST SPN，然后将目标 SPN 显式添加到 B。然而，在将目标 SPN 添加到 B 后，攻击者可以将 HOST SPN 添加回 C 而不会遇到任何验证错误，尽管已经有与 B 关联的映射 SPN</p><p><img src="https://www.semperis.com/wp-content/uploads/image10.png" alt="img"></p><p>攻击链为</p><p><img src="https://www.semperis.com/wp-content/uploads/image11-1.png" alt="img"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>AD</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>AD</tag>
+      
+      <tag>Exchange</tag>
+      
+      <tag>Real</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>今天，没有星星</title>
     <link href="/2021/11/29/%E4%BB%8A%E5%A4%9C%EF%BC%8C%E6%B2%A1%E6%9C%89%E6%98%9F%E6%98%9F/"/>
     <url>/2021/11/29/%E4%BB%8A%E5%A4%9C%EF%BC%8C%E6%B2%A1%E6%9C%89%E6%98%9F%E6%98%9F/</url>
@@ -113,35 +142,6 @@
     <url>/2021/04/01/%E4%B8%80%E4%B8%AAexch%E5%B0%8F%E5%AE%9E%E6%88%98/</url>
     
     <content type="html"><![CDATA[<h1 id="一个exchange小实战"><a href="#一个exchange小实战" class="headerlink" title="一个exchange小实战"></a>一个exchange小实战</h1><p>这个目标打的有点意思，记录一下</p><h2 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h2><p>信息收集以后发现目标开了exchange，一看版本，还挺低的。还觉得运气不错，指不定proxyLogon一发入魂。</p><p><img src="/img/article2/image-20210401191331298.png" alt="image-20210401191331298"></p><h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>先测了一手poc，dnslog收到了请求，漏洞存在，内心狂喜。</p><p><img src="/img/article2/image-20210401192029585.png" alt="image-20210401192029585"></p><p><img src="/img/article2/image-20210401192056920.png" alt="image-20210401192056920"></p><p>但是后来才发现事情没有那么简单，访问/ecp/proxyLogon.ecp这个接口直接404…</p><p>当时在现场并不知道为什么会404，后来才知道是cas与mbx的分离部署。</p><h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>当下有点头疼，只能先换个思路，尝试从ews去读取邮件信息，看看能不能从邮件里发现些什么</p><p>然后更诡异的事情发生了，读数量的地方没什么问题，可读取邮件itemid的时候，死活不能识别邮箱地址，明明用<code>&lt;t:EmailAddress&gt;&lt;/t:EmailAddress&gt;</code> 标签制定了，怎么试都不行，无奈放弃了这个想法，这个问题至今也没搞懂是为什么。</p><h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>邮件也读不到，很难受。于是再换一个思路，去读取GAL（全局地址列表），这次倒是成功的，通过autodiscover接口读到oaburl，然后再通过lzx地址下载lzx，最后通过工具解密，具体步骤见前面的文章。</p><p><img src="/img/article2/image-20210401192949824.png" alt="image-20210401192949824"></p><p> 导出来三千个邮箱账户，就想着说不定爆破进去一个呢，0688直接起飞。于是用ebruster喷了两天，因为担心用户锁定，一天只敢喷三次，从未中奖的我结果当然也没成功。</p><h2 id="柳暗花明"><a href="#柳暗花明" class="headerlink" title="柳暗花明"></a>柳暗花明</h2><p>就在我已经快要放弃这个点的时候，因为实在是不甘心就又看了看ews的返回包，突然发现了华点</p><p><img src="/img/article2/image-20210401193347266.png" alt="image-20210401193347266"></p><p>这里显示了一个和之前两台长得完全不一样的机器名，于是我就顺手尝试了一下他</p><p><img src="/img/article2/image-20210401193423797.png" alt="image-20210401193423797"></p><p>！！！！他居然没有删掉ecp的接口！！！，内心狂喜，感觉上天眷顾了我这个努力的打工人</p><p>后来才知道，这是后端处理的端点，mbx后端邮箱服务。</p><h2 id="一波三折"><a href="#一波三折" class="headerlink" title="一波三折"></a>一波三折</h2><p>但是这台机器在外网是访问不到的，直接写webshell肯定不行，于是我想着通过unc路径，把webshell写到外面能访问的机器上。</p><p><code>\\\x.x.local\c$\Program File\exchange\xxx\v15\http\owa\auth\1.aspx</code></p><p>然而事实又和我开起玩笑，对方把<code>DDI</code> 类给禁掉了。</p><p><img src="/img/article2/image-20210401193903734.png" alt="image-20210401193903734"></p><p>当场人就傻了，这啥机器啊，也太灵性了。</p><h2 id="有志者，事竟成"><a href="#有志者，事竟成" class="headerlink" title="有志者，事竟成"></a>有志者，事竟成</h2><p>就在我又一次陷入自闭的时候，我突然想到了他之前的版本号。15.08，这个版本应该连cve-2020-0688也没修掉。而0688的利用条件是有一个普通用户的凭证。虽然我没有用户的凭证，但是我有proxyLogon呀！！！！</p><p>通过proxyLogon我可以直接拿到asp.net_session。</p><p>说干就干，首先通过/ecp/proxyLogon.ecp接口通过ecp的认证，获得.net的session。</p><p><img src="/img/article2/image-20210401194405162.png" alt="image-20210401194405162"></p><p>然后通过这个session直接生成0688的payload（前提是<code>generator</code> 的值是默认值），然后通过ssrf直接梭哈。</p><p><img src="/img/article2/image-20210401194714081.png" alt="image-20210401194714081"></p><p><img src="/img/article2/image-20210401195145084.png" alt="image-20210401195145084"></p><p>注意：</p><ul><li>仍需要添加的 <code>msExchLogonMailbox</code> 的头</li><li>需要放在请求头的最下方，不知道为啥</li><li>请求需要用get哦</li></ul><p>好家伙，收到请求的时候眼泪都要流出来了。</p><p>后面的操作就很常规了，没啥好说的。</p><p>这个故事就是 告诉大家不要轻言放弃。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>AD</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>AD</tag>
-      
-      <tag>Exchange</tag>
-      
-      <tag>Real</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>一个exchange小实战</title>
-    <link href="/2021/04/01/WriteSPN%E6%BB%A5%E7%94%A8/"/>
-    <url>/2021/04/01/WriteSPN%E6%BB%A5%E7%94%A8/</url>
-    
-    <content type="html"><![CDATA[<h1 id="WriteSPN滥用"><a href="#WriteSPN滥用" class="headerlink" title="WriteSPN滥用"></a>WriteSPN滥用</h1><p>今天逛推看到的一篇大佬的研究，感觉很有意思，所以记录一下，顺便复习一下委派</p><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>域内的信息收集工具 BloodHound 升级到版本4.1，添加了对 <code>WriteSPN</code> 的检测。众所周知，当攻击者控制了一台配置了约束委派的机器，可以攻击其锁配置的允许委派的服务账户与机器，该属性为 <code>msDS-AllowedToDelegateTo</code> （<code>SeEnableDelegation</code> 权限）该权限的更改权限默认赋予域管理员用户，但是如果攻击者拥有了对SPN关联用户的 `WriteSPN 权限，则有机会同样可以获取该机器的权限。</p><h2 id="委派回顾"><a href="#委派回顾" class="headerlink" title="委派回顾"></a>委派回顾</h2><p>具体的可以参见前文</p><h3 id="无约束委派"><a href="#无约束委派" class="headerlink" title="无约束委派"></a>无约束委派</h3><p>无约束委派直接将用户的 <code>tgt</code> 发送给服务A，A使用 <code>tgt</code> 可以A的身份访问服务B</p><h3 id="约束委派"><a href="#约束委派" class="headerlink" title="约束委派"></a>约束委派</h3><p>约束委派设置了服务A允许委派的服务，服务A获取用户的 <code>ST</code> 去访问服务B</p><p><em>约束委派允许服务凭空模拟用户，无论他们是否通过服务验证。即当拥有服务A的ntlm，可模拟任意用户访问服务B</em></p><h3 id="基于资源的约束委派"><a href="#基于资源的约束委派" class="headerlink" title="基于资源的约束委派"></a>基于资源的约束委派</h3><p>基于资源的约束委派与约束委派过程相似，方向相反。他将允许委派对象的<em>被设置权</em> 由域控授予了被委派者自己。当攻击者对该服务有可写权限，则可通过设置该机器允许被攻击者自己创建的机器委派而攻击该机器。</p><h2 id="Abuse-WriteSPN"><a href="#Abuse-WriteSPN" class="headerlink" title="Abuse WriteSPN"></a>Abuse WriteSPN</h2><h3 id="Ghost-SPN"><a href="#Ghost-SPN" class="headerlink" title="Ghost SPN"></a>Ghost SPN</h3><p>当委派机器A 被委派到一个不存在的或过期的计算机或服务的SPN时，可能是已删除或者改名。此时，该机器被设置了一个GhostSPN。</p><p>此时，攻击者可将此SPN添加到目标机器B ，当A运行完整S4U攻击时，即可获得针对该SPN的服务票证，此时该服务票证指向的是B，因为该SPN设置给了B。</p><p>然而该票据B并不能使用，因为服务与机器名与B都不匹配。但该票据是使用B的hash加密的，而前面的服务名并不在加密部分，攻击者可以更改为 <code>想要攻击的服务/B</code></p><p><img src="https://www.semperis.com/wp-content/uploads/image6.png" alt="img"></p><p><img src="https://www.semperis.com/wp-content/uploads/image7.png" alt="img"></p><h3 id="临时SPN"><a href="#临时SPN" class="headerlink" title="临时SPN"></a>临时SPN</h3><p>若 A 配置了指向 C 的SPN，而攻击者同时拥有对B、C的 <code>WriteSPN</code> 权限。则可以进行临时SPN攻击</p><p>域内并不允许非管理员用户配置冲突的SPN，即相同的SPN，因此像之前给 B 配置SPN会提示失败，因为该SPN并非失效，已经关联C。此时可将C的SPN临时删除，在配置给B，然后重复上面的攻击步骤。</p><p><img src="https://www.semperis.com/wp-content/uploads/image9.png" alt="img"></p><h3 id="HOST-SPN"><a href="#HOST-SPN" class="headerlink" title="HOST SPN"></a>HOST SPN</h3><p>这感觉是一种特性。默认情况下，计算机帐户具有与服务类 TERMSRV、RestrictedKrbHost 和 HOST 关联的 SPN。</p><p>HOST默认映射到:</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">alerter, appmgmt, cisvc, clipsrv, <span class="hljs-keyword">browser, </span>dhcp, dnscache, replicator, eventlog, eventsystem, policyagent, oakley, dmserver, dns, mcsvc, fax, msiserver, ias, messenger, netlogon, netman, netdde, netddedsm, nmagent, plugplay, protectedstorage, rasman, rpclocator, rpc, rpcss, remoteaccess, rsvp, samss, <span class="hljs-keyword">scardsvr, </span><span class="hljs-keyword">scesrv, </span>seclogon, <span class="hljs-keyword">scm, </span>dcom, cifs, spooler, snmp, <span class="hljs-keyword">schedule, </span>tapisrv, trksvr, trkwks, ups, time, wins, www, http, w3svc, iisadmin, msdtc<br></code></pre></td></tr></table></figure><p>如果攻击者试图攻击映射到 HOST 的服务类，域控将拒绝将该服务类添加到 B，即使它与 C 没有直接关联。攻击者首先必须从 C 中删除 HOST SPN，然后将目标 SPN 显式添加到 B。然而，在将目标 SPN 添加到 B 后，攻击者可以将 HOST SPN 添加回 C 而不会遇到任何验证错误，尽管已经有与 B 关联的映射 SPN</p><p><img src="https://www.semperis.com/wp-content/uploads/image10.png" alt="img"></p><p>攻击链为</p><p><img src="https://www.semperis.com/wp-content/uploads/image11-1.png" alt="img"></p>]]></content>
     
     
     <categories>
