@@ -246,7 +246,9 @@
 <h3 id="ADCS"><a href="#ADCS" class="headerlink" title="ADCS"></a>ADCS</h3><p>还是简单介绍一下ADCS</p>
 <p><img src="https://miro.medium.com/max/1400/0*hnpRmQCVuKwsSfR6" srcset="/img/loading.gif" alt="img"></p>
 <p>引用白皮书中的描述：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">AD</span> <span class="hljs-variable">CS</span> 是一个服务器角色，用作 <span class="hljs-variable">Microsoft</span> 的公钥基础结构 <span class="hljs-variable">PKI</span> 实施。正如预期的那样，它与 <span class="hljs-built_in">Active</span> <span class="hljs-built_in">Directory</span> 紧密集成并支持颁发证书，这些证书是 <span class="hljs-variable">X</span><span class="hljs-number">.509</span> 格式的数字签名电子文档，可用于加密、消息签名和<span class="hljs-operator">/</span>或身份验证<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>AD CS 是一个服务器角色，用作 Microsoft 的公钥基础结构 PKI 实施。正如预期的那样，它与 Active Directory 紧密集成并支持颁发证书，这些证书是 X.509 格式的数字签名电子文档，可用于加密、消息签名和/或身份验证</p>
+</blockquote>
 <p>ADCS 是一套域内的证书服务，安装了ADCS服务的域内允许通过CA签发的证书进行身份认证。本质上来说ADCS同样遵循X.509协议，客户端将公钥与模板等信息发送给服务端，服务端检查客户端身份以及权限是否允许，并按照模板中约定的事项，使用自己的私钥进行签发证书。</p>
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>ADCS模板是证书注册策略与配置的集合，它同样是一个AD对象，在ldap中的存储为 <code>CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=cia,DC=local</code>，他存储了所有证书的配置，例如 证书的有效期、用途、主题等。当然并不是所有配置都可以用于注册，而大部分的ADCS攻击面也是针对模板的。</p>
 <p>用户可以根据预定义的证书模板请求证书并应用于不同场景，而本次漏洞所关注的用途依然是客户端身份验证。</p>
@@ -259,7 +261,7 @@
 <p><img src="https://miro.medium.com/max/1244/1*aG8taHpqQxaS2F8EpxbKrA.png" srcset="/img/loading.gif" alt="img"></p>
 <p>可以看到，模板中指定的是主机的dns值。</p>
 <p>而主机的dns命名，保存在主机用户的 <code>dNSHostName</code> 字段</p>
-<p><img src="C:\Users\36388\AppData\Roaming\Typora\typora-user-images\image-20220512050605329.png" srcset="/img/loading.gif" alt="image-20220512050605329"></p>
+<p><img src="/img/article2/image-20220512050605329.png" srcset="/img/loading.gif" alt="image-20220512050605329"></p>
 <p>然而值得注意的是，该字段与UPN和SPN不同，**<em>该字段并不具有强制唯一的原则**</em></p>
 <p>而根据微软的策略：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name%EF%BC%8C%E5%85%81%E8%AE%B8%E5%85%BC%E5%AE%B9%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84dns%E5%90%8D%E7%A7%B0%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%90%8D%E3%80%82%E4%BE%8B%E5%A6%82%EF%BC%8C%60samaccountname%60">https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name，允许兼容不相同的dns名称与主机名。例如，`samaccountname`</a> 为 <code>test$</code> 的机器，他的 <code>dNSHostName</code>  可以是 <code>qwe.cia.local</code></p>
 <p>这就意味着，我们可以拥有两个有相同 <code>dNSHostName</code>  值的不同机器，同样意味着，或许可以为不同机器申请相同映射的证书。这句话换一种表达就是，或许可以为某台机器申请映射到另一台机器身份的证书。</p>
@@ -274,7 +276,7 @@
 <p>于是我们可以将该机器包含dNSHostName的SPN删除，然后就可以成功更改机器的dNSHostName为dc的dNSHostName了！</p>
 <p><img src="/img/article2/image-20220512054645714.png" srcset="/img/loading.gif" alt="image-20220512054645714"></p>
 <p>当我们为b1uepc$申请Machine模板的身份认证证书时，成功获取了带有dc的dns名 <code>dc.cia.local</code> 的证书！</p>
-<p><img src="C:\Users\36388\AppData\Roaming\Typora\typora-user-images\image-20220512054951983.png" srcset="/img/loading.gif" alt="image-20220512054951983"></p>
+<p><img src="/img/article2/image-20220512054951983.png" srcset="/img/loading.gif" alt="image-20220512054951983"></p>
 <h3 id="证书映射"><a href="#证书映射" class="headerlink" title="证书映射"></a>证书映射</h3><p>这次的攻击并不需要像之前的漏洞那样，在申请了tgt后再次更改用户名为其他值，而证书在映射用户时却同样不会产生冲突，这是由于PKINIT 的证书<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-pkca/01c4acb8-c366-4d31-93a5-fbf2d59c8b27">映射机制</a>。</p>
 <p>KDC首先从AS-REQ中获取请求主体名，例如 <code>user@cia.local</code> ，根据主题名查找账户。然后根据 UAC ，KDC会根据证书主题中的UPNname或DNSname验证映射。KDC会根据samaccountname和域名验证DNSname，例如当 ‘cia.local\test$’ 的 DNSname 为 ‘test.cia.local’ 时，验证成功。而用户的dNSHostName并不被再次用于验证，该值只在申请证书时用于标明。</p>
 <p>因此，并不需要再次改变用户的dNSHostName。</p>
