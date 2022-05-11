@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/b6.png">
+  <link rel="icon" type="image/png" href="/img/b6.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Gr3yy">
+  <meta name="keywords" content="">
+  <title>CVE-2022-26923——又一个ADCS提权 - Gr3yy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"gr3yyy123.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Gr3yy's B1og</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CVE-2022-26923——又一个ADCS提权">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-12 06:40" pubdate>
+        May 12, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CVE-2022-26923——又一个ADCS提权</h1>
+            
+            <div class="markdown-body">
+              <h1 id="CVE-2022-26923"><a href="#CVE-2022-26923" class="headerlink" title="CVE-2022-26923"></a>CVE-2022-26923</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>周二的微软补丁日中发布了一个针对ADCS 模板滥用漏洞得补丁，相对应的CVE编号是CVE-2022-26923。在经历了spring、vmware、veeam backup和f5等诸多大型产品的漏洞洗礼后，AD终于也迎来了自己的漏洞。漏洞描述中，该漏洞允许拥有普通用户权限的攻击者，实现域内权限提升，获得域控权限。</p>
+<p>自从 2021年那篇针对ADCS的白皮书 <a target="_blank" rel="noopener" href="https://www.specterops.io/assets/resources/Certified_Pre-Owned.pdf">Certified_Pre-Owned</a> 发布以后，ADCS的安全问题就收到了广泛关注，之前的白皮书中一共总结了ECS 1-8 八种错误配置模板，都可以帮助攻击者轻松获得域控权限，而这次的 CVE-2022-26923 同样是利用了 ADCS 模板的某些配置问题和 AD的一些 “特性” 获得了权限提升。</p>
+<h2 id="ADCS身份认证"><a href="#ADCS身份认证" class="headerlink" title="ADCS身份认证"></a>ADCS身份认证</h2><p>简单来说，这次的漏洞允许一个拥有普通user权限的攻击者，通过adcs服务，在域内获得权限提升，得到域控的权限。</p>
+<p>其实我个人感觉这次的漏洞和之前爆出的 CVE-2021-42287 和 CVE-2021-42278 （通过更改与域控同名机器获取权限提升）也有相似之处，更像是在某些方面将二者组合。漏洞作者在文章中也说确实是受二者启发。</p>
+<h3 id="ADCS"><a href="#ADCS" class="headerlink" title="ADCS"></a>ADCS</h3><p>还是简单介绍一下ADCS</p>
+<p><img src="https://miro.medium.com/max/1400/0*hnpRmQCVuKwsSfR6" srcset="/img/loading.gif" alt="img"></p>
+<p>引用白皮书中的描述：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">AD</span> <span class="hljs-variable">CS</span> 是一个服务器角色，用作 <span class="hljs-variable">Microsoft</span> 的公钥基础结构 <span class="hljs-variable">PKI</span> 实施。正如预期的那样，它与 <span class="hljs-built_in">Active</span> <span class="hljs-built_in">Directory</span> 紧密集成并支持颁发证书，这些证书是 <span class="hljs-variable">X</span><span class="hljs-number">.509</span> 格式的数字签名电子文档，可用于加密、消息签名和<span class="hljs-operator">/</span>或身份验证<br></code></pre></td></tr></table></figure>
+<p>ADCS 是一套域内的证书服务，安装了ADCS服务的域内允许通过CA签发的证书进行身份认证。本质上来说ADCS同样遵循X.509协议，客户端将公钥与模板等信息发送给服务端，服务端检查客户端身份以及权限是否允许，并按照模板中约定的事项，使用自己的私钥进行签发证书。</p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>ADCS模板是证书注册策略与配置的集合，它同样是一个AD对象，在ldap中的存储为 <code>CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=cia,DC=local</code>，他存储了所有证书的配置，例如 证书的有效期、用途、主题等。当然并不是所有配置都可以用于注册，而大部分的ADCS攻击面也是针对模板的。</p>
+<p>用户可以根据预定义的证书模板请求证书并应用于不同场景，而本次漏洞所关注的用途依然是客户端身份验证。</p>
+<h3 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h3><p>ADCS允许利用于身份认证的场景，一个合法的场景中，用户可以通过正确的凭证向CA申请 <code>User</code> 模板的证书。而后在该证书的有效期内我们都可以通过kerberos中的PKI延展向域控请求有效的TGT票据。</p>
+<h2 id="CVE-2022-26923-1"><a href="#CVE-2022-26923-1" class="headerlink" title="CVE-2022-26923"></a>CVE-2022-26923</h2><p>值得注意的是，同样是用于身份认证，然而用户和机器拥有两套模板。这意味着用户和机器使用证书进行身份认证时肯定存在不同的配置，或许是不同的认证参数，或是不同的校验方式。</p>
+<h3 id="User模板"><a href="#User模板" class="headerlink" title="User模板"></a>User模板</h3><p>经过观察发现，用户证书模板中包含User的UPN属性，每一个User角色都包含User Principal Name (UPN)属性，正如服务账户包含SPN一样。而User模板将UPN用于识别用户，即将UPN用于将证书映射到用户本身。</p>
+<p><img src="/img/article2/DC-2022-05-12-04-54-59.png" srcset="/img/loading.gif" alt="DC-2022-05-12-04-54-59"></p>
+<p>根据微软的唯一性约束： <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c154285-454c-4353-9a99-fb586e806944">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c154285-454c-4353-9a99-fb586e806944</a>  ， UPN与SPN一样是强制唯一的，每一个用户拥有唯一的UPN，这意味着我们不可能获取具有两个相同UPN的用户，同理，我们也无法为不同用户申请相同身份映射的证书。</p>
+<h3 id="Machine模板"><a href="#Machine模板" class="headerlink" title="Machine模板"></a>Machine模板</h3><p>然而machine并没有UPN这个参数，那机器用户的证书模板使用什么表明用户身份呢，</p>
+<p><img src="https://miro.medium.com/max/1244/1*aG8taHpqQxaS2F8EpxbKrA.png" srcset="/img/loading.gif" alt="img"></p>
+<p>可以看到，模板中指定的是主机的dns值。</p>
+<p>而主机的dns命名，保存在主机用户的 <code>dNSHostName</code> 字段</p>
+<p><img src="C:\Users\36388\AppData\Roaming\Typora\typora-user-images\image-20220512050605329.png" srcset="/img/loading.gif" alt="image-20220512050605329"></p>
+<p>然而值得注意的是，该字段与UPN和SPN不同，**<em>该字段并不具有强制唯一的原则**</em></p>
+<p>而根据微软的策略：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name%EF%BC%8C%E5%85%81%E8%AE%B8%E5%85%BC%E5%AE%B9%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84dns%E5%90%8D%E7%A7%B0%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%90%8D%E3%80%82%E4%BE%8B%E5%A6%82%EF%BC%8C%60samaccountname%60">https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name，允许兼容不相同的dns名称与主机名。例如，`samaccountname`</a> 为 <code>test$</code> 的机器，他的 <code>dNSHostName</code>  可以是 <code>qwe.cia.local</code></p>
+<p>这就意味着，我们可以拥有两个有相同 <code>dNSHostName</code>  值的不同机器，同样意味着，或许可以为不同机器申请相同映射的证书。这句话换一种表达就是，或许可以为某台机器申请映射到另一台机器身份的证书。</p>
+<h3 id="漏洞探索"><a href="#漏洞探索" class="headerlink" title="漏洞探索"></a>漏洞探索</h3><p>于是我们可以联想到之前的CVE-2021-42287 和 CVE-2021-42278，或许同样可以将机器用户的<code>dNSHostName</code>  改为域控的值以获得映射到域控的证书。与CVE-2021-42287 和 CVE-2021-42278相同，用户对自己创建的机器的<code>dNSHostName</code> 同样具有写权限</p>
+<p><img src="https://miro.medium.com/max/782/1*06k7JjDjCE9vW7-FTg5KCw.png" srcset="/img/loading.gif" alt="img"></p>
+<p>这意味着我们或许可以将其改为与域控相同的值。</p>
+<p>然而此时我们会遇到问题。</p>
+<p><img src="/img/article2/image-20220512053457184.png" srcset="/img/loading.gif" alt="image-20220512053457184"></p>
+<p>可以看到机器账户的SPN其中有的是和<code>dNSHostName</code> 相关联的，当<code>dNSHostName</code> 改变时，SPN会相应的改变，而当改为和域控相同时，该SPN理论上会改为部分与域控相同，然而正如前面所说，SPN是唯一性的，并不可以有两个相同的SPN，因此直接更改dNSHostName会间接导致SPN冲突导致失败。</p>
+<p>又经过观察，SPN只有后两个值是包含dNSHostName，而前两个包含的是samaccountname,如果能把他们删掉的话，是不是就不会造成冲突了呢。同样，用户对创建的机器的SPN同样拥有写权限，之前的文章也讨论过针对滥用SPN写权限造成的危害。</p>
+<p><img src="https://miro.medium.com/max/786/1*PMTz0EIYhUNWV5owHu_FNA.png" srcset="/img/loading.gif" alt="img"></p>
+<p>于是我们可以将该机器包含dNSHostName的SPN删除，然后就可以成功更改机器的dNSHostName为dc的dNSHostName了！</p>
+<p><img src="/img/article2/image-20220512054645714.png" srcset="/img/loading.gif" alt="image-20220512054645714"></p>
+<p>当我们为b1uepc$申请Machine模板的身份认证证书时，成功获取了带有dc的dns名 <code>dc.cia.local</code> 的证书！</p>
+<p><img src="C:\Users\36388\AppData\Roaming\Typora\typora-user-images\image-20220512054951983.png" srcset="/img/loading.gif" alt="image-20220512054951983"></p>
+<h3 id="证书映射"><a href="#证书映射" class="headerlink" title="证书映射"></a>证书映射</h3><p>这次的攻击并不需要像之前的漏洞那样，在申请了tgt后再次更改用户名为其他值，而证书在映射用户时却同样不会产生冲突，这是由于PKINIT 的证书<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-pkca/01c4acb8-c366-4d31-93a5-fbf2d59c8b27">映射机制</a>。</p>
+<p>KDC首先从AS-REQ中获取请求主体名，例如 <code>user@cia.local</code> ，根据主题名查找账户。然后根据 UAC ，KDC会根据证书主题中的UPNname或DNSname验证映射。KDC会根据samaccountname和域名验证DNSname，例如当 ‘cia.local\test$’ 的 DNSname 为 ‘test.cia.local’ 时，验证成功。而用户的dNSHostName并不被再次用于验证，该值只在申请证书时用于标明。</p>
+<p>因此，并不需要再次改变用户的dNSHostName。</p>
+<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>针对ADCS的python工具<a target="_blank" rel="noopener" href="https://github.com/ly4k/Certipy">Certipy</a> 已经更新关于该漏洞的利用，通过Certipy，我们可以轻松利用CVE-2022-26923进行域内的提权操作</p>
+<ul>
+<li>新建机器账户</li>
+</ul>
+<p><img src="/img/article2/image-20220512060756455.png" srcset="/img/loading.gif" alt="新建用户"></p>
+<ul>
+<li>更改dNSHostName并申请证书与票据</li>
+</ul>
+<p><img src="/img/article2/image-20220512060819352.png" srcset="/img/loading.gif" alt="申请证书与证书"></p>
+<ul>
+<li>获取hash</li>
+</ul>
+<p><img src="/img/article2/image-20220512060835625.png" srcset="/img/loading.gif" alt="获取hash"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下这个漏洞的成因</p>
+<ol>
+<li>机器用户申请的ca证书，使用域信息里的 dNSHostName 参数进行认证</li>
+<li>域内成员的dNSHostName参数不强制唯一</li>
+<li>用户对自己创立的机器用户的dNSHostName与SPN具有写权限</li>
+<li>更改创建的机器用户的dNSHostName为域控同名，获得域控权限</li>
+</ol>
+<p>这也是一个很精彩的漏洞，而且感觉针对这种 “重名” 的利用方式应该还会有其他的姿势等待挖掘，慢慢期待一下。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/AD/">AD</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AD/">AD</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/27/exchange_backdoor/">
+                        <span class="hidden-mobile">从零到一开发一个exchange后门</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
