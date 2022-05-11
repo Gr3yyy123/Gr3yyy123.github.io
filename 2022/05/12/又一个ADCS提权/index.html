@@ -263,7 +263,8 @@
 <p>而主机的dns命名，保存在主机用户的 <code>dNSHostName</code> 字段</p>
 <p><img src="/img/article2/image-20220512050605329.png" srcset="/img/loading.gif" alt="image-20220512050605329"></p>
 <p>然而值得注意的是，该字段与UPN和SPN不同，**<em>该字段并不具有强制唯一的原则**</em></p>
-<p>而根据微软的策略：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name%EF%BC%8C%E5%85%81%E8%AE%B8%E5%85%BC%E5%AE%B9%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84dns%E5%90%8D%E7%A7%B0%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%90%8D%E3%80%82%E4%BE%8B%E5%A6%82%EF%BC%8C%60samaccountname%60">https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name，允许兼容不相同的dns名称与主机名。例如，`samaccountname`</a> 为 <code>test$</code> 的机器，他的 <code>dNSHostName</code>  可以是 <code>qwe.cia.local</code></p>
+<p>而根据微软的策略：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name">https://docs.microsoft.com/en-us/windows/win32/adschema/r-validated-dns-host-name</a></p>
+<p>允许兼容不相同的dns名称与主机名。例如，<code>samaccountname</code> 为 <code>test$</code> 的机器，他的 <code>dNSHostName</code>  可以是 <code>qwe.cia.local</code></p>
 <p>这就意味着，我们可以拥有两个有相同 <code>dNSHostName</code>  值的不同机器，同样意味着，或许可以为不同机器申请相同映射的证书。这句话换一种表达就是，或许可以为某台机器申请映射到另一台机器身份的证书。</p>
 <h3 id="漏洞探索"><a href="#漏洞探索" class="headerlink" title="漏洞探索"></a>漏洞探索</h3><p>于是我们可以联想到之前的CVE-2021-42287 和 CVE-2021-42278，或许同样可以将机器用户的<code>dNSHostName</code>  改为域控的值以获得映射到域控的证书。与CVE-2021-42287 和 CVE-2021-42278相同，用户对自己创建的机器的<code>dNSHostName</code> 同样具有写权限</p>
 <p><img src="https://miro.medium.com/max/782/1*06k7JjDjCE9vW7-FTg5KCw.png" srcset="/img/loading.gif" alt="img"></p>
